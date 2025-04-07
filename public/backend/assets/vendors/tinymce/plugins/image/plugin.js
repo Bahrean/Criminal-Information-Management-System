@@ -853,7 +853,7 @@
       findEntry
     };
 
-    const makeTab$2 = _info => ({
+    const makeTab$2 = _Information => ({
       title: 'Advanced',
       name: 'advanced',
       items: [{
@@ -978,14 +978,14 @@
       }));
     };
 
-    const makeItems = info => {
+    const makeItems = Information => {
       const imageUrl = {
         name: 'src',
         type: 'urlinput',
         filetype: 'image',
         label: 'Source'
       };
-      const imageList = info.imageList.map(items => ({
+      const imageList = Information.imageList.map(items => ({
         name: 'images',
         type: 'listbox',
         label: 'Image list',
@@ -995,7 +995,7 @@
         name: 'alt',
         type: 'input',
         label: 'Alternative description',
-        enabled: !(info.hasAccessibilityOptions && info.image.isDecorative)
+        enabled: !(Information.hasAccessibilityOptions && Information.image.isDecorative)
       };
       const imageTitle = {
         name: 'title',
@@ -1015,7 +1015,7 @@
             label: 'Image is decorative'
           }]
       };
-      const classList = info.classList.map(items => ({
+      const classList = Information.classList.map(items => ({
         name: 'classes',
         type: 'listbox',
         label: 'Class',
@@ -1037,30 +1037,30 @@
       return flatten([
         [imageUrl],
         imageList.toArray(),
-        info.hasAccessibilityOptions && info.hasDescription ? [isDecorative] : [],
-        info.hasDescription ? [imageDescription] : [],
-        info.hasImageTitle ? [imageTitle] : [],
-        info.hasDimensions ? [imageDimensions] : [],
+        Information.hasAccessibilityOptions && Information.hasDescription ? [isDecorative] : [],
+        Information.hasDescription ? [imageDescription] : [],
+        Information.hasImageTitle ? [imageTitle] : [],
+        Information.hasDimensions ? [imageDimensions] : [],
         [{
-            ...getDialogContainerType(info.classList.isSome() && info.hasImageCaption),
+            ...getDialogContainerType(Information.classList.isSome() && Information.hasImageCaption),
             items: flatten([
               classList.toArray(),
-              info.hasImageCaption ? [caption] : []
+              Information.hasImageCaption ? [caption] : []
             ])
           }]
       ]);
     };
-    const makeTab$1 = info => ({
+    const makeTab$1 = Information => ({
       title: 'General',
       name: 'general',
-      items: makeItems(info)
+      items: makeItems(Information)
     });
     const MainTab = {
       makeTab: makeTab$1,
       makeItems
     };
 
-    const makeTab = _info => {
+    const makeTab = _Information => {
       const items = [{
           type: 'dropzone',
           name: 'fileinput'
@@ -1073,9 +1073,9 @@
     };
     const UploadTab = { makeTab };
 
-    const createState = info => ({
-      prevImage: ListUtils.findEntry(info.imageList, info.image.src),
-      prevAlt: info.image.alt,
+    const createState = Information => ({
+      prevImage: ListUtils.findEntry(Information.imageList, Information.image.src),
+      prevAlt: Information.image.alt,
       open: true
     });
     const fromImageData = image => ({
@@ -1115,9 +1115,9 @@
       borderStyle: data.borderstyle,
       isDecorative: data.isDecorative
     });
-    const addPrependUrl2 = (info, srcURL) => {
+    const addPrependUrl2 = (Information, srcURL) => {
       if (!/^(?:[a-zA-Z]+:)?\/\//.test(srcURL)) {
-        return info.prependURL.bind(prependUrl => {
+        return Information.prependURL.bind(prependUrl => {
           if (srcURL.substring(0, prependUrl.length) !== prependUrl) {
             return Optional.some(prependUrl + srcURL);
           }
@@ -1126,9 +1126,9 @@
       }
       return Optional.none();
     };
-    const addPrependUrl = (info, api) => {
+    const addPrependUrl = (Information, api) => {
       const data = api.getData();
-      addPrependUrl2(info, data.src.value).each(srcURL => {
+      addPrependUrl2(Information, data.src.value).each(srcURL => {
         api.setData({
           src: {
             value: srcURL,
@@ -1137,17 +1137,17 @@
         });
       });
     };
-    const formFillFromMeta2 = (info, data, meta) => {
-      if (info.hasDescription && isString(meta.alt)) {
+    const formFillFromMeta2 = (Information, data, meta) => {
+      if (Information.hasDescription && isString(meta.alt)) {
         data.alt = meta.alt;
       }
-      if (info.hasAccessibilityOptions) {
+      if (Information.hasAccessibilityOptions) {
         data.isDecorative = meta.isDecorative || data.isDecorative || false;
       }
-      if (info.hasImageTitle && isString(meta.title)) {
+      if (Information.hasImageTitle && isString(meta.title)) {
         data.title = meta.title;
       }
-      if (info.hasDimensions) {
+      if (Information.hasDimensions) {
         if (isString(meta.width)) {
           data.dimensions.width = meta.width;
         }
@@ -1156,16 +1156,16 @@
         }
       }
       if (isString(meta.class)) {
-        ListUtils.findEntry(info.classList, meta.class).each(entry => {
+        ListUtils.findEntry(Information.classList, meta.class).each(entry => {
           data.classes = entry.value;
         });
       }
-      if (info.hasImageCaption) {
+      if (Information.hasImageCaption) {
         if (isBoolean(meta.caption)) {
           data.caption = meta.caption;
         }
       }
-      if (info.hasAdvTab) {
+      if (Information.hasAdvTab) {
         if (isString(meta.style)) {
           data.style = meta.style;
         }
@@ -1183,20 +1183,20 @@
         }
       }
     };
-    const formFillFromMeta = (info, api) => {
+    const formFillFromMeta = (Information, api) => {
       const data = api.getData();
       const meta = data.src.meta;
       if (meta !== undefined) {
         const newData = deepMerge({}, data);
-        formFillFromMeta2(info, newData, meta);
+        formFillFromMeta2(Information, newData, meta);
         api.setData(newData);
       }
     };
-    const calculateImageSize = (helpers, info, state, api) => {
+    const calculateImageSize = (helpers, Information, state, api) => {
       const data = api.getData();
       const url = data.src.value;
       const meta = data.src.meta || {};
-      if (!meta.width && !meta.height && info.hasDimensions) {
+      if (!meta.width && !meta.height && Information.hasDimensions) {
         if (isNotEmpty(url)) {
           helpers.imageSize(url).then(size => {
             if (state.open) {
@@ -1213,21 +1213,21 @@
         }
       }
     };
-    const updateImagesDropdown = (info, state, api) => {
+    const updateImagesDropdown = (Information, state, api) => {
       const data = api.getData();
-      const image = ListUtils.findEntry(info.imageList, data.src.value);
+      const image = ListUtils.findEntry(Information.imageList, data.src.value);
       state.prevImage = image;
       api.setData({ images: image.map(entry => entry.value).getOr('') });
     };
-    const changeSrc = (helpers, info, state, api) => {
-      addPrependUrl(info, api);
-      formFillFromMeta(info, api);
-      calculateImageSize(helpers, info, state, api);
-      updateImagesDropdown(info, state, api);
+    const changeSrc = (helpers, Information, state, api) => {
+      addPrependUrl(Information, api);
+      formFillFromMeta(Information, api);
+      calculateImageSize(helpers, Information, state, api);
+      updateImagesDropdown(Information, state, api);
     };
-    const changeImages = (helpers, info, state, api) => {
+    const changeImages = (helpers, Information, state, api) => {
       const data = api.getData();
-      const image = ListUtils.findEntry(info.imageList, data.images);
+      const image = ListUtils.findEntry(Information.imageList, data.images);
       image.each(img => {
         const updateAlt = data.alt === '' || state.prevImage.map(image => image.text === data.alt).getOr(false);
         if (updateAlt) {
@@ -1247,9 +1247,9 @@
         }
       });
       state.prevImage = image;
-      changeSrc(helpers, info, state, api);
+      changeSrc(helpers, Information, state, api);
     };
-    const changeFileInput = (helpers, info, state, api) => {
+    const changeFileInput = (helpers, Information, state, api) => {
       const data = api.getData();
       api.block('Uploading image');
       head(data.fileinput).fold(() => {
@@ -1268,12 +1268,12 @@
             }
           });
           api.showTab('general');
-          changeSrc(helpers, info, state, api);
+          changeSrc(helpers, Information, state, api);
         };
         blobToDataUri(file).then(dataUrl => {
-          const blobInfo = helpers.createBlobCache(file, blobUri, dataUrl);
-          if (info.automaticUploads) {
-            helpers.uploadImage(blobInfo).then(result => {
+          const blobInformation = helpers.createBlobCache(file, blobUri, dataUrl);
+          if (Information.automaticUploads) {
+            helpers.uploadImage(blobInformation).then(result => {
               updateSrcAndSwitchTab(result.url);
               finalize();
             }).catch(err => {
@@ -1281,22 +1281,22 @@
               helpers.alertErr(err);
             });
           } else {
-            helpers.addToBlobCache(blobInfo);
-            updateSrcAndSwitchTab(blobInfo.blobUri());
+            helpers.addToBlobCache(blobInformation);
+            updateSrcAndSwitchTab(blobInformation.blobUri());
             api.unblock();
           }
         });
       });
     };
-    const changeHandler = (helpers, info, state) => (api, evt) => {
+    const changeHandler = (helpers, Information, state) => (api, evt) => {
       if (evt.name === 'src') {
-        changeSrc(helpers, info, state, api);
+        changeSrc(helpers, Information, state, api);
       } else if (evt.name === 'images') {
-        changeImages(helpers, info, state, api);
+        changeImages(helpers, Information, state, api);
       } else if (evt.name === 'alt') {
         state.prevAlt = api.getData().alt;
       } else if (evt.name === 'fileinput') {
-        changeFileInput(helpers, info, state, api);
+        changeFileInput(helpers, Information, state, api);
       } else if (evt.name === 'isDecorative') {
         api.setEnabled('alt', !api.getData().isDecorative);
       }
@@ -1304,32 +1304,32 @@
     const closeHandler = state => () => {
       state.open = false;
     };
-    const makeDialogBody = info => {
-      if (info.hasAdvTab || info.hasUploadUrl || info.hasUploadHandler) {
+    const makeDialogBody = Information => {
+      if (Information.hasAdvTab || Information.hasUploadUrl || Information.hasUploadHandler) {
         const tabPanel = {
           type: 'tabpanel',
           tabs: flatten([
-            [MainTab.makeTab(info)],
-            info.hasAdvTab ? [AdvTab.makeTab(info)] : [],
-            info.hasUploadTab && (info.hasUploadUrl || info.hasUploadHandler) ? [UploadTab.makeTab(info)] : []
+            [MainTab.makeTab(Information)],
+            Information.hasAdvTab ? [AdvTab.makeTab(Information)] : [],
+            Information.hasUploadTab && (Information.hasUploadUrl || Information.hasUploadHandler) ? [UploadTab.makeTab(Information)] : []
           ])
         };
         return tabPanel;
       } else {
         const panel = {
           type: 'panel',
-          items: MainTab.makeItems(info)
+          items: MainTab.makeItems(Information)
         };
         return panel;
       }
     };
-    const submitHandler = (editor, info, helpers) => api => {
-      const data = deepMerge(fromImageData(info.image), api.getData());
+    const submitHandler = (editor, Information, helpers) => api => {
+      const data = deepMerge(fromImageData(Information.image), api.getData());
       const finalData = {
         ...data,
         style: getStyleValue(helpers.normalizeCss, toImageData(data, false))
       };
-      editor.execCommand('mceUpdateImage', false, toImageData(finalData, info.hasAccessibilityOptions));
+      editor.execCommand('mceUpdateImage', false, toImageData(finalData, Information.hasAccessibilityOptions));
       editor.editorUpload.uploadImagesAuto();
       api.close();
     };
@@ -1353,8 +1353,8 @@
       filename: file.name,
       base64: dataUrl.split(',')[1]
     });
-    const addToBlobCache = editor => blobInfo => {
-      editor.editorUpload.blobCache.add(blobInfo);
+    const addToBlobCache = editor => blobInformation => {
+      editor.editorUpload.blobCache.add(blobInformation);
     };
     const alertErr = editor => message => {
       editor.windowManager.alert(message);
@@ -1362,7 +1362,7 @@
     const normalizeCss = editor => cssText => normalizeCss$1(editor, cssText);
     const parseStyle = editor => cssText => editor.dom.parseStyle(cssText);
     const serializeStyle = editor => (stylesArg, name) => editor.dom.serializeStyle(stylesArg, name);
-    const uploadImage = editor => blobInfo => global$1(editor).upload([blobInfo], false).then(results => {
+    const uploadImage = editor => blobInformation => global$1(editor).upload([blobInformation], false).then(results => {
       if (results.length === 0) {
         return Promise.reject('Failed to upload image');
       } else if (results[0].status === false) {
@@ -1383,12 +1383,12 @@
         uploadImage: uploadImage(editor)
       };
       const open = () => {
-        collect(editor).then(info => {
-          const state = createState(info);
+        collect(editor).then(Information => {
+          const state = createState(Information);
           return {
             title: 'Insert/Edit Image',
             size: 'normal',
-            body: makeDialogBody(info),
+            body: makeDialogBody(Information),
             buttons: [
               {
                 type: 'cancel',
@@ -1402,9 +1402,9 @@
                 primary: true
               }
             ],
-            initialData: fromImageData(info.image),
-            onSubmit: submitHandler(editor, info, helpers),
-            onChange: changeHandler(helpers, info, state),
+            initialData: fromImageData(Information.image),
+            onSubmit: submitHandler(editor, Information, helpers),
+            onChange: changeHandler(helpers, Information, state),
             onClose: closeHandler(state)
           };
         }).then(editor.windowManager.open);

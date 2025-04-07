@@ -956,8 +956,8 @@
         return find$5(browsers, browser => {
           var _a;
           return lcBrand === ((_a = browser.brand) === null || _a === void 0 ? void 0 : _a.toLowerCase());
-        }).map(info => ({
-          current: info.name,
+        }).map(Information => ({
+          current: Information.name,
           version: Version.nu(parseInt(uaBrand.version, 10), 0)
         }));
       });
@@ -1095,7 +1095,7 @@
         versionRegexes: [/.*?chrome\/([0-9]+)\.([0-9]+).*/]
       }
     ];
-    const PlatformInfo = {
+    const PlatformInformation = {
       browsers: constant$1(browsers),
       oses: constant$1(oses)
     };
@@ -1112,9 +1112,9 @@
         version: Version.unknown()
       });
     };
-    const nu$c = info => {
-      const current = info.current;
-      const version = info.version;
+    const nu$c = Information => {
+      const current = Information.current;
+      const version = Information.version;
       const isBrowser = name => () => current === name;
       return {
         current,
@@ -1152,9 +1152,9 @@
         version: Version.unknown()
       });
     };
-    const nu$b = info => {
-      const current = info.current;
-      const version = info.version;
+    const nu$b = Information => {
+      const current = Information.current;
+      const version = Information.version;
       const isOS = name => () => current === name;
       return {
         current,
@@ -1183,8 +1183,8 @@
     };
 
     const detect$2 = (userAgent, userAgentDataOpt, mediaMatch) => {
-      const browsers = PlatformInfo.browsers();
-      const oses = PlatformInfo.oses();
+      const browsers = PlatformInformation.browsers();
+      const oses = PlatformInformation.oses();
       const browser = userAgentDataOpt.bind(userAgentData => detectBrowser$1(browsers, userAgentData)).orThunk(() => detectBrowser(browsers, userAgent)).fold(Browser.unknown, Browser.nu);
       const os = detectOs(oses, userAgent).fold(OperatingSystem.unknown, OperatingSystem.nu);
       const deviceType = DeviceType(os, browser, userAgent, mediaMatch);
@@ -1630,17 +1630,17 @@
     const formatErrors = errors => {
       const es = errors.length > 10 ? errors.slice(0, 10).concat([{
           path: [],
-          getErrorInfo: constant$1('... (only showing first ten failures)')
+          getErrorInformation: constant$1('... (only showing first ten failures)')
         }]) : errors;
       return map$2(es, e => {
-        return 'Failed path: (' + e.path.join(' > ') + ')\n' + e.getErrorInfo();
+        return 'Failed path: (' + e.path.join(' > ') + ')\n' + e.getErrorInformation();
       });
     };
 
-    const nu$a = (path, getErrorInfo) => {
+    const nu$a = (path, getErrorInformation) => {
       return SimpleResult.serror([{
           path,
-          getErrorInfo
+          getErrorInformation
         }]);
     };
     const missingRequired = (path, key, obj) => nu$a(path, () => 'Could not find valid *required* value for "' + key + '" in ' + formatObj(obj));
@@ -1872,13 +1872,13 @@
     };
     const asRaw = (label, prop, obj) => SimpleResult.toResult(extractValue(label, prop, obj));
     const getOrDie = extraction => {
-      return extraction.fold(errInfo => {
-        throw new Error(formatError(errInfo));
+      return extraction.fold(errInformation => {
+        throw new Error(formatError(errInformation));
       }, identity);
     };
     const asRawOrDie$1 = (label, prop, obj) => getOrDie(asRaw(label, prop, obj));
-    const formatError = errInfo => {
-      return 'Errors: \n' + formatErrors(errInfo.errors).join('\n') + '\n\nInput object: ' + formatObj(errInfo.input);
+    const formatError = errInformation => {
+      return 'Errors: \n' + formatErrors(errInformation.errors).join('\n') + '\n\nInput object: ' + formatObj(errInformation.input);
     };
     const choose$1 = (key, branches) => choose$2(key, map$1(branches, objOf));
     const thunkOf = (desc, schema) => thunk(desc, schema);
@@ -2396,7 +2396,7 @@
         console.warn(getMessage(event));
       };
       return {
-        debugInfo: constant$1('fake'),
+        debugInformation: constant$1('fake'),
         triggerEvent: warn('triggerEvent'),
         triggerFocus: warn('triggerFocus'),
         triggerEscape: warn('triggerEscape'),
@@ -2471,8 +2471,8 @@
         required$1('config'),
         defaulted('state', NoState)
       ]));
-      const validated = asRaw('component.behaviours', objOf(schema), spec.behaviours).fold(errInfo => {
-        throw new Error(formatError(errInfo) + '\nComplete spec:\n' + JSON.stringify(spec, null, 2));
+      const validated = asRaw('component.behaviours', objOf(schema), spec.behaviours).fold(errInformation => {
+        throw new Error(formatError(errInformation) + '\nComplete spec:\n' + JSON.stringify(spec, null, 2));
       }, identity);
       return {
         list: all,
@@ -2517,10 +2517,10 @@
       classes: defnA.classes.concat(mod.classes)
     });
 
-    const combine$2 = (info, baseMod, behaviours, base) => {
+    const combine$2 = (Information, baseMod, behaviours, base) => {
       const modsByBehaviour = { ...baseMod };
       each$1(behaviours, behaviour => {
-        modsByBehaviour[behaviour.name()] = behaviour.exhibit(info, base);
+        modsByBehaviour[behaviour.name()] = behaviour.exhibit(Information, base);
       });
       const byAspect = byInnerKey(modsByBehaviour, (name, modification) => ({
         name,
@@ -2582,22 +2582,22 @@
       name,
       handler
     });
-    const nameToHandlers = (behaviours, info) => {
+    const nameToHandlers = (behaviours, Information) => {
       const r = {};
       each$1(behaviours, behaviour => {
-        r[behaviour.name()] = behaviour.handlers(info);
+        r[behaviour.name()] = behaviour.handlers(Information);
       });
       return r;
     };
-    const groupByEvents = (info, behaviours, base) => {
+    const groupByEvents = (Information, behaviours, base) => {
       const behaviourEvents = {
         ...base,
-        ...nameToHandlers(behaviours, info)
+        ...nameToHandlers(behaviours, Information)
       };
       return byInnerKey(behaviourEvents, behaviourTuple);
     };
-    const combine$1 = (info, eventOrder, behaviours, base) => {
-      const byEventName = groupByEvents(info, behaviours, base);
+    const combine$1 = (Information, eventOrder, behaviours, base) => {
+      const byEventName = groupByEvents(Information, behaviours, base);
       return combineGroups(byEventName, eventOrder);
     };
     const assemble = rawHandler => {
@@ -2704,14 +2704,14 @@
       }), anyValue()),
       option$3('domModification')
     ]);
-    const toInfo = spec => asRaw('custom.definition', schema$z, spec);
+    const toInformation = spec => asRaw('custom.definition', schema$z, spec);
     const toDefinition = detail => ({
       ...detail.dom,
       uid: detail.uid,
       domChildren: map$2(detail.components, comp => comp.element)
     });
     const toModification = detail => detail.domModification.fold(() => nu$7({}), nu$7);
-    const toEvents = info => info.events;
+    const toEvents = Information => Information.events;
 
     const read = (element, attr) => {
       const value = get$f(element, attr);
@@ -2942,28 +2942,28 @@
       return generateFrom(spec, all);
     };
 
-    const getDomDefinition = (info, bList, bData) => {
-      const definition = toDefinition(info);
-      const infoModification = toModification(info);
-      const baseModification = { 'alloy.base.modification': infoModification };
-      const modification = bList.length > 0 ? combine$2(bData, baseModification, bList, definition) : infoModification;
+    const getDomDefinition = (Information, bList, bData) => {
+      const definition = toDefinition(Information);
+      const InformationModification = toModification(Information);
+      const baseModification = { 'alloy.base.modification': InformationModification };
+      const modification = bList.length > 0 ? combine$2(bData, baseModification, bList, definition) : InformationModification;
       return merge(definition, modification);
     };
-    const getEvents = (info, bList, bData) => {
-      const baseEvents = { 'alloy.base.behaviour': toEvents(info) };
-      return combine$1(bData, info.eventOrder, bList, baseEvents).getOrDie();
+    const getEvents = (Information, bList, bData) => {
+      const baseEvents = { 'alloy.base.behaviour': toEvents(Information) };
+      return combine$1(bData, Information.eventOrder, bList, baseEvents).getOrDie();
     };
     const build$2 = (spec, obsoleted) => {
       const getMe = () => me;
       const systemApi = Cell(singleton$1);
-      const info = getOrDie(toInfo(spec));
+      const Information = getOrDie(toInformation(spec));
       const bBlob = generate$4(spec);
       const bList = getBehaviours$3(bBlob);
       const bData = getData$2(bBlob);
-      const modDefinition = getDomDefinition(info, bList, bData);
+      const modDefinition = getDomDefinition(Information, bList, bData);
       const item = renderToDom(modDefinition, obsoleted);
-      const events = getEvents(info, bList, bData);
-      const subcomponents = Cell(info.components);
+      const events = getEvents(Information, bList, bData);
+      const subcomponents = Cell(Information.components);
       const connect = newApi => {
         systemApi.set(newApi);
       };
@@ -2983,7 +2983,7 @@
         return f();
       };
       const hasConfigured = behaviour => isFunction(bData[behaviour.name()]);
-      const getApis = () => info.apis;
+      const getApis = () => Information.apis;
       const readState = behaviourName => bData[behaviourName]().map(b => b.state.readState()).getOr('not enabled');
       const me = {
         uid: spec.uid,
@@ -3481,10 +3481,10 @@
         const receivingData = message;
         const targetChannels = chooseChannels(channels, receivingData);
         each$1(targetChannels, ch => {
-          const channelInfo = channelMap[ch];
-          const channelSchema = channelInfo.schema;
+          const channelInformation = channelMap[ch];
+          const channelSchema = channelInformation.schema;
           const data = asRawOrDie$1('channel[' + ch + '] data\nReceiver: ' + element(component.element), channelSchema, receivingData.data);
-          channelInfo.onReceive(component, data);
+          channelInformation.onReceive(component, data);
         });
       })]);
 
@@ -3519,12 +3519,12 @@
         const args = [component].concat(rest);
         return component.config({ name: constant$1(bName) }).fold(() => {
           throw new Error('We could not find any behaviour configuration for: ' + bName + '. Using API: ' + apiName);
-        }, info => {
+        }, Information => {
           const rest = Array.prototype.slice.call(args, 1);
           return apiFunction.apply(undefined, [
             component,
-            info.config,
-            info.state
+            Information.config,
+            Information.state
           ].concat(rest));
         });
       };
@@ -3535,7 +3535,7 @@
       value: undefined
     });
     const doCreate = (configSchema, schemaSchema, name, active, apis, extra, state) => {
-      const getConfig = info => hasNonNullableKey(info, name) ? info[name]() : Optional.none();
+      const getConfig = Information => hasNonNullableKey(Information, name) ? Information[name]() : Optional.none();
       const wrappedApis = map$1(apis, (apiF, apiName) => wrapApi(name, apiF, apiName));
       const wrappedExtra = map$1(extra, (extraF, extraName) => markAsExtraApi(extraF, extraName));
       const me = {
@@ -3556,16 +3556,16 @@
           };
         },
         schema: constant$1(schemaSchema),
-        exhibit: (info, base) => {
-          return lift2(getConfig(info), get$g(active, 'exhibit'), (behaviourInfo, exhibitor) => {
-            return exhibitor(base, behaviourInfo.config, behaviourInfo.state);
+        exhibit: (Information, base) => {
+          return lift2(getConfig(Information), get$g(active, 'exhibit'), (behaviourInformation, exhibitor) => {
+            return exhibitor(base, behaviourInformation.config, behaviourInformation.state);
           }).getOrThunk(() => nu$7({}));
         },
         name: constant$1(name),
-        handlers: info => {
-          return getConfig(info).map(behaviourInfo => {
+        handlers: Information => {
+          return getConfig(Information).map(behaviourInformation => {
             const getEvents = get$g(active, 'events').getOr(() => ({}));
-            return getEvents(behaviourInfo.config, behaviourInfo.state);
+            return getEvents(behaviourInformation.config, behaviourInformation.state);
           }).getOr({});
         }
       };
@@ -4014,9 +4014,9 @@
       return attempts(element, options.preference, anchorBox, elementBox, bubbles, options.bounds);
     };
     const setClasses = (element, decision) => {
-      const classInfo = decision.classes;
-      remove$1(element, classInfo.off);
-      add$1(element, classInfo.on);
+      const classInformation = decision.classes;
+      remove$1(element, classInformation.off);
+      add$1(element, classInformation.on);
     };
     const setHeight = (element, decision, options) => {
       const maxHeightFunction = options.maxHeightFunction;
@@ -4200,24 +4200,24 @@
       option$3('onBottomLtr'),
       option$3('onBottomRtl')
     ]);
-    const get$5 = (elem, info, defaultLtr, defaultRtl, defaultBottomLtr, defaultBottomRtl, dirElement) => {
+    const get$5 = (elem, Information, defaultLtr, defaultRtl, defaultBottomLtr, defaultBottomRtl, dirElement) => {
       const isBottomToTop = dirElement.map(isBottomToTopDir).getOr(false);
-      const customLtr = info.layouts.map(ls => ls.onLtr(elem));
-      const customRtl = info.layouts.map(ls => ls.onRtl(elem));
-      const ltr = isBottomToTop ? info.layouts.bind(ls => ls.onBottomLtr.map(f => f(elem))).or(customLtr).getOr(defaultBottomLtr) : customLtr.getOr(defaultLtr);
-      const rtl = isBottomToTop ? info.layouts.bind(ls => ls.onBottomRtl.map(f => f(elem))).or(customRtl).getOr(defaultBottomRtl) : customRtl.getOr(defaultRtl);
+      const customLtr = Information.layouts.map(ls => ls.onLtr(elem));
+      const customRtl = Information.layouts.map(ls => ls.onRtl(elem));
+      const ltr = isBottomToTop ? Information.layouts.bind(ls => ls.onBottomLtr.map(f => f(elem))).or(customLtr).getOr(defaultBottomLtr) : customLtr.getOr(defaultLtr);
+      const rtl = isBottomToTop ? Information.layouts.bind(ls => ls.onBottomRtl.map(f => f(elem))).or(customRtl).getOr(defaultBottomRtl) : customRtl.getOr(defaultRtl);
       const f = onDirection(ltr, rtl);
       return f(elem);
     };
 
-    const placement$4 = (component, anchorInfo, origin) => {
-      const hotspot = anchorInfo.hotspot;
+    const placement$4 = (component, anchorInformation, origin) => {
+      const hotspot = anchorInformation.hotspot;
       const anchorBox = toBox(origin, hotspot.element);
-      const layouts = get$5(component.element, anchorInfo, belowOrAbove(), belowOrAboveRtl(), aboveOrBelow(), aboveOrBelowRtl(), Optional.some(anchorInfo.hotspot.element));
+      const layouts = get$5(component.element, anchorInformation, belowOrAbove(), belowOrAboveRtl(), aboveOrBelow(), aboveOrBelowRtl(), Optional.some(anchorInformation.hotspot.element));
       return Optional.some(nu$4({
         anchorBox,
-        bubble: anchorInfo.bubble.getOr(fallback()),
-        overrides: anchorInfo.overrides,
+        bubble: anchorInformation.bubble.getOr(fallback()),
+        overrides: anchorInformation.overrides,
         layouts,
         placer: Optional.none()
       }));
@@ -4230,14 +4230,14 @@
       output$1('placement', placement$4)
     ];
 
-    const placement$3 = (component, anchorInfo, origin) => {
-      const pos = translate$2(origin, anchorInfo.x, anchorInfo.y);
-      const anchorBox = bounds(pos.left, pos.top, anchorInfo.width, anchorInfo.height);
-      const layouts = get$5(component.element, anchorInfo, all$1(), allRtl$1(), all$1(), allRtl$1(), Optional.none());
+    const placement$3 = (component, anchorInformation, origin) => {
+      const pos = translate$2(origin, anchorInformation.x, anchorInformation.y);
+      const anchorBox = bounds(pos.left, pos.top, anchorInformation.width, anchorInformation.height);
+      const layouts = get$5(component.element, anchorInformation, all$1(), allRtl$1(), all$1(), allRtl$1(), Optional.none());
       return Optional.some(nu$4({
         anchorBox,
-        bubble: anchorInfo.bubble,
-        overrides: anchorInfo.overrides,
+        bubble: anchorInformation.bubble,
+        overrides: anchorInformation.overrides,
         layouts,
         placer: Optional.none()
       }));
@@ -4277,8 +4277,8 @@
     const screen = adt$7.screen;
     const absolute$1 = adt$7.absolute;
 
-    const getOffset = (component, origin, anchorInfo) => {
-      const win = defaultView(anchorInfo.root).dom;
+    const getOffset = (component, origin, anchorInformation) => {
+      const win = defaultView(anchorInformation.root).dom;
       const hasSameOwner = frame => {
         const frameOwner = owner$4(frame);
         const compOwner = owner$4(component.element);
@@ -4286,10 +4286,10 @@
       };
       return Optional.from(win.frameElement).map(SugarElement.fromDom).filter(hasSameOwner).map(absolute$3);
     };
-    const getRootPoint = (component, origin, anchorInfo) => {
+    const getRootPoint = (component, origin, anchorInformation) => {
       const doc = owner$4(component.element);
       const outerScroll = get$b(doc);
-      const offset = getOffset(component, origin, anchorInfo).getOr(outerScroll);
+      const offset = getOffset(component, origin, anchorInformation).getOr(outerScroll);
       return absolute$1(offset, outerScroll.left, outerScroll.top);
     };
 
@@ -4297,32 +4297,32 @@
       const point = screen(SugarPosition(left, top));
       return Optional.some(pointed(point, width, height));
     };
-    const calcNewAnchor = (optBox, rootPoint, anchorInfo, origin, elem) => optBox.map(box => {
+    const calcNewAnchor = (optBox, rootPoint, anchorInformation, origin, elem) => optBox.map(box => {
       const points = [
         rootPoint,
         box.point
       ];
       const topLeft = cata$1(origin, () => sumAsAbsolute(points), () => sumAsAbsolute(points), () => sumAsFixed(points));
       const anchorBox = rect(topLeft.left, topLeft.top, box.width, box.height);
-      const layoutsLtr = anchorInfo.showAbove ? aboveOrBelow() : belowOrAbove();
-      const layoutsRtl = anchorInfo.showAbove ? aboveOrBelowRtl() : belowOrAboveRtl();
-      const layouts = get$5(elem, anchorInfo, layoutsLtr, layoutsRtl, layoutsLtr, layoutsRtl, Optional.none());
+      const layoutsLtr = anchorInformation.showAbove ? aboveOrBelow() : belowOrAbove();
+      const layoutsRtl = anchorInformation.showAbove ? aboveOrBelowRtl() : belowOrAboveRtl();
+      const layouts = get$5(elem, anchorInformation, layoutsLtr, layoutsRtl, layoutsLtr, layoutsRtl, Optional.none());
       return nu$4({
         anchorBox,
-        bubble: anchorInfo.bubble.getOr(fallback()),
-        overrides: anchorInfo.overrides,
+        bubble: anchorInformation.bubble.getOr(fallback()),
+        overrides: anchorInformation.overrides,
         layouts,
         placer: Optional.none()
       });
     });
 
-    const placement$2 = (component, anchorInfo, origin) => {
-      const rootPoint = getRootPoint(component, origin, anchorInfo);
-      return anchorInfo.node.filter(inBody).bind(target => {
+    const placement$2 = (component, anchorInformation, origin) => {
+      const rootPoint = getRootPoint(component, origin, anchorInformation);
+      return anchorInformation.node.filter(inBody).bind(target => {
         const rect = target.dom.getBoundingClientRect();
         const nodeBox = getBox(rect.left, rect.top, rect.width, rect.height);
-        const elem = anchorInfo.node.getOr(component.element);
-        return calcNewAnchor(nodeBox, rootPoint, anchorInfo, origin, elem);
+        const elem = anchorInformation.node.getOr(component.element);
+        return calcNewAnchor(nodeBox, rootPoint, anchorInformation, origin, elem);
       });
     };
     var NodeAnchor = [
@@ -4615,18 +4615,18 @@
     };
 
     const descendOnce = (element, offset) => isText(element) ? point(element, offset) : descendOnce$1(element, offset);
-    const getAnchorSelection = (win, anchorInfo) => {
-      const getSelection = anchorInfo.getSelection.getOrThunk(() => () => getExact(win));
+    const getAnchorSelection = (win, anchorInformation) => {
+      const getSelection = anchorInformation.getSelection.getOrThunk(() => () => getExact(win));
       return getSelection().map(sel => {
         const modStart = descendOnce(sel.start, sel.soffset);
         const modFinish = descendOnce(sel.finish, sel.foffset);
         return SimSelection.range(modStart.element, modStart.offset, modFinish.element, modFinish.offset);
       });
     };
-    const placement$1 = (component, anchorInfo, origin) => {
-      const win = defaultView(anchorInfo.root).dom;
-      const rootPoint = getRootPoint(component, origin, anchorInfo);
-      const selectionBox = getAnchorSelection(win, anchorInfo).bind(sel => {
+    const placement$1 = (component, anchorInformation, origin) => {
+      const win = defaultView(anchorInformation.root).dom;
+      const rootPoint = getRootPoint(component, origin, anchorInformation);
+      const selectionBox = getAnchorSelection(win, anchorInformation).bind(sel => {
         const optRect = getBounds$1(win, SimSelection.exactFromRange(sel)).orThunk(() => {
           const x = SugarElement.fromText(zeroWidth);
           before$1(sel.start, x);
@@ -4636,9 +4636,9 @@
         });
         return optRect.bind(rawRect => getBox(rawRect.left, rawRect.top, rawRect.width, rawRect.height));
       });
-      const targetElement = getAnchorSelection(win, anchorInfo).bind(sel => isElement$1(sel.start) ? Optional.some(sel.start) : parentElement(sel.start));
+      const targetElement = getAnchorSelection(win, anchorInformation).bind(sel => isElement$1(sel.start) ? Optional.some(sel.start) : parentElement(sel.start));
       const elem = targetElement.getOr(component.element);
-      return calcNewAnchor(selectionBox, rootPoint, anchorInfo, origin, elem);
+      return calcNewAnchor(selectionBox, rootPoint, anchorInformation, origin, elem);
     };
     var SelectionAnchor = [
       option$3('getSelection'),
@@ -4684,13 +4684,13 @@
       northeast$1
     ];
 
-    const placement = (component, submenuInfo, origin) => {
-      const anchorBox = toBox(origin, submenuInfo.item.element);
-      const layouts = get$5(component.element, submenuInfo, all(), allRtl(), all(), allRtl(), Optional.none());
+    const placement = (component, submenuInformation, origin) => {
+      const anchorBox = toBox(origin, submenuInformation.item.element);
+      const layouts = get$5(component.element, submenuInformation, all(), allRtl(), all(), allRtl(), Optional.none());
       return Optional.some(nu$4({
         anchorBox,
         bubble: fallback(),
-        overrides: submenuInfo.overrides,
+        overrides: submenuInformation.overrides,
         layouts,
         placer: Optional.none()
       }));
@@ -4748,7 +4748,7 @@
       return positionWithinBounds(component, posConfig, posState, placee, placementSpec, boundsBox);
     };
     const positionWithinBounds = (component, posConfig, posState, placee, placementSpec, bounds) => {
-      const placeeDetail = asRawOrDie$1('placement.info', objOf(PlacementSchema), placementSpec);
+      const placeeDetail = asRawOrDie$1('placement.Information', objOf(PlacementSchema), placementSpec);
       const anchorage = placeeDetail.anchor;
       const element = placee.element;
       const placeeState = posState.get(placee.uid);
@@ -6013,8 +6013,8 @@
       FocusInsideModes['OnApiMode'] = 'onApi';
     }(FocusInsideModes || (FocusInsideModes = {})));
 
-    const typical = (infoSchema, stateInit, getKeydownRules, getKeyupRules, optFocusIn) => {
-      const schema = () => infoSchema.concat([
+    const typical = (InformationSchema, stateInit, getKeydownRules, getKeyupRules, optFocusIn) => {
+      const schema = () => InformationSchema.concat([
         defaulted('focusManager', dom$2()),
         defaultedOf('focusInside', 'onFocus', valueOf(val => contains$2([
           'onFocus',
@@ -6340,8 +6340,8 @@
         flowConfig.focusManager.set(component, first);
       });
     };
-    const moveLeft$2 = (element, focused, info) => horizontal(element, info.selector, focused, -1);
-    const moveRight$2 = (element, focused, info) => horizontal(element, info.selector, focused, +1);
+    const moveLeft$2 = (element, focused, Information) => horizontal(element, Information.selector, focused, -1);
+    const moveRight$2 = (element, focused, Information) => horizontal(element, Information.selector, focused, +1);
     const doMove$1 = movement => (component, simulatedEvent, flowConfig, flowState) => movement(component, simulatedEvent, flowConfig, flowState).bind(() => flowConfig.executeOnMove ? execute$2(component, simulatedEvent, flowConfig) : Optional.some(true));
     const doEscape = (component, simulatedEvent, flowConfig) => flowConfig.onEscape(component, simulatedEvent);
     const getKeydownRules$3 = (_component, _se, flowConfig, _flowState) => {
@@ -6456,8 +6456,8 @@
         menuConfig.focusManager.set(component, first);
       });
     };
-    const moveUp = (element, focused, info) => horizontal(element, info.selector, focused, -1);
-    const moveDown = (element, focused, info) => horizontal(element, info.selector, focused, +1);
+    const moveUp = (element, focused, Information) => horizontal(element, Information.selector, focused, -1);
+    const moveDown = (element, focused, Information) => horizontal(element, Information.selector, focused, +1);
     const fireShiftTab = (component, simulatedEvent, menuConfig, menuState) => menuConfig.moveOnTab ? move$1(moveUp)(component, simulatedEvent, menuConfig, menuState) : Optional.none();
     const fireTab = (component, simulatedEvent, menuConfig, menuState) => menuConfig.moveOnTab ? move$1(moveDown)(component, simulatedEvent, menuConfig, menuState) : Optional.none();
     const getKeydownRules$1 = constant$1([
@@ -6491,35 +6491,35 @@
       defaulted('stopSpaceKeyup', false),
       option$3('focusIn')
     ];
-    const getKeydownRules = (component, simulatedEvent, specialInfo) => [
-      rule(inSet(SPACE), specialInfo.onSpace),
+    const getKeydownRules = (component, simulatedEvent, specialInformation) => [
+      rule(inSet(SPACE), specialInformation.onSpace),
       rule(and([
         isNotShift,
         inSet(ENTER)
-      ]), specialInfo.onEnter),
+      ]), specialInformation.onEnter),
       rule(and([
         isShift,
         inSet(ENTER)
-      ]), specialInfo.onShiftEnter),
+      ]), specialInformation.onShiftEnter),
       rule(and([
         isShift,
         inSet(TAB)
-      ]), specialInfo.onShiftTab),
+      ]), specialInformation.onShiftTab),
       rule(and([
         isNotShift,
         inSet(TAB)
-      ]), specialInfo.onTab),
-      rule(inSet(UP), specialInfo.onUp),
-      rule(inSet(DOWN), specialInfo.onDown),
-      rule(inSet(LEFT), specialInfo.onLeft),
-      rule(inSet(RIGHT), specialInfo.onRight),
-      rule(inSet(SPACE), specialInfo.onSpace)
+      ]), specialInformation.onTab),
+      rule(inSet(UP), specialInformation.onUp),
+      rule(inSet(DOWN), specialInformation.onDown),
+      rule(inSet(LEFT), specialInformation.onLeft),
+      rule(inSet(RIGHT), specialInformation.onRight),
+      rule(inSet(SPACE), specialInformation.onSpace)
     ];
-    const getKeyupRules = (component, simulatedEvent, specialInfo) => [
-      ...specialInfo.stopSpaceKeyup ? [rule(inSet(SPACE), stopEventForFirefox)] : [],
-      rule(inSet(ESCAPE), specialInfo.onEscape)
+    const getKeyupRules = (component, simulatedEvent, specialInformation) => [
+      ...specialInformation.stopSpaceKeyup ? [rule(inSet(SPACE), stopEventForFirefox)] : [],
+      rule(inSet(ESCAPE), specialInformation.onEscape)
     ];
-    var SpecialType = typical(schema$q, NoState.init, getKeydownRules, getKeyupRules, specialInfo => specialInfo.focusIn);
+    var SpecialType = typical(schema$q, NoState.init, getKeydownRules, getKeyupRules, specialInformation => specialInformation.focusIn);
 
     const acyclic = AcyclicType.schema();
     const cyclic = CyclicType.schema();
@@ -6737,8 +6737,8 @@
     };
 
     const updateAriaState = (component, toggleConfig, toggleState) => {
-      const ariaInfo = toggleConfig.aria;
-      ariaInfo.update(component, ariaInfo, toggleState.get());
+      const ariaInformation = toggleConfig.aria;
+      ariaInformation.update(component, ariaInformation, toggleState.get());
     };
     const updateClass = (component, toggleConfig, toggleState) => {
       toggleConfig.toggleClass.each(toggleClass => {
@@ -6798,19 +6798,19 @@
         events: events$b
     });
 
-    const updatePressed = (component, ariaInfo, status) => {
+    const updatePressed = (component, ariaInformation, status) => {
       set$9(component.element, 'aria-pressed', status);
-      if (ariaInfo.syncWithExpanded) {
-        updateExpanded(component, ariaInfo, status);
+      if (ariaInformation.syncWithExpanded) {
+        updateExpanded(component, ariaInformation, status);
       }
     };
-    const updateSelected = (component, ariaInfo, status) => {
+    const updateSelected = (component, ariaInformation, status) => {
       set$9(component.element, 'aria-selected', status);
     };
-    const updateChecked = (component, ariaInfo, status) => {
+    const updateChecked = (component, ariaInformation, status) => {
       set$9(component.element, 'aria-checked', status);
     };
-    const updateExpanded = (component, ariaInfo, status) => {
+    const updateExpanded = (component, ariaInformation, status) => {
       set$9(component.element, 'aria-expanded', status);
     };
 
@@ -7071,34 +7071,34 @@
       item: schema$p,
       separator: schema$o
     });
-    const configureGrid = (detail, movementInfo) => ({
+    const configureGrid = (detail, movementInformation) => ({
       mode: 'flatgrid',
       selector: '.' + detail.markers.item,
       initSize: {
-        numColumns: movementInfo.initSize.numColumns,
-        numRows: movementInfo.initSize.numRows
+        numColumns: movementInformation.initSize.numColumns,
+        numRows: movementInformation.initSize.numRows
       },
       focusManager: detail.focusManager
     });
-    const configureMatrix = (detail, movementInfo) => ({
+    const configureMatrix = (detail, movementInformation) => ({
       mode: 'matrix',
       selectors: {
-        row: movementInfo.rowSelector,
+        row: movementInformation.rowSelector,
         cell: '.' + detail.markers.item
       },
       focusManager: detail.focusManager
     });
-    const configureMenu = (detail, movementInfo) => ({
+    const configureMenu = (detail, movementInformation) => ({
       mode: 'menu',
       selector: '.' + detail.markers.item,
-      moveOnTab: movementInfo.moveOnTab,
+      moveOnTab: movementInformation.moveOnTab,
       focusManager: detail.focusManager
     });
     const parts$g = constant$1([group({
         factory: {
           sketch: spec => {
-            const itemInfo = asRawOrDie$1('menu.spec item', itemSchema$2, spec);
-            return itemInfo.builder(itemInfo);
+            const itemInformation = asRawOrDie$1('menu.spec item', itemSchema$2, spec);
+            return itemInformation.builder(itemInformation);
           }
         },
         name: 'items',
@@ -7550,7 +7550,7 @@
             onRight: keyOnItem(onRight),
             onLeft: keyOnItem(onLeft),
             onEscape: keyOnItem(onEscape),
-            focusIn: (container, _keyInfo) => {
+            focusIn: (container, _keyInformation) => {
               layeredState.getPrimary().each(primary => {
                 dispatch(container, primary.element, focusItem());
               });
@@ -7984,7 +7984,7 @@
       err: 'error',
       warning: 'warning',
       warn: 'warning',
-      info: 'info'
+      Information: 'Information'
     };
     const factory$k = detail => {
       const memBannerText = record({
@@ -8164,7 +8164,7 @@
             'error',
             'warning',
             'warn',
-            'info'
+            'Information'
           ], settings.type) ? settings.type : undefined,
           progress: settings.progressBar === true,
           icon: Optional.from(settings.icon),
@@ -9337,16 +9337,16 @@
       toolbarButton
     };
 
-    const runWithApi = (info, comp) => {
-      const api = info.getApi(comp);
+    const runWithApi = (Information, comp) => {
+      const api = Information.getApi(comp);
       return f => {
         f(api);
       };
     };
-    const onControlAttached = (info, editorOffCell) => runOnAttached(comp => {
-      const run = runWithApi(info, comp);
+    const onControlAttached = (Information, editorOffCell) => runOnAttached(comp => {
+      const run = runWithApi(Information, comp);
       run(api => {
-        const onDestroy = info.onSetup(api);
+        const onDestroy = Information.onSetup(api);
         if (isFunction(onDestroy)) {
           editorOffCell.set(onDestroy);
         }
@@ -9354,9 +9354,9 @@
     });
     const onControlDetached = (getApi, editorOffCell) => runOnDetached(comp => runWithApi(getApi, comp)(editorOffCell.get()));
 
-    const onMenuItemExecute = (info, itemResponse) => runOnExecute$1((comp, simulatedEvent) => {
-      runWithApi(info, comp)(info.onAction);
-      if (!info.triggersSubmenu && itemResponse === ItemResponse$1.CLOSE_ON_EXECUTE) {
+    const onMenuItemExecute = (Information, itemResponse) => runOnExecute$1((comp, simulatedEvent) => {
+      runWithApi(Information, comp)(Information.onAction);
+      if (!Information.triggersSubmenu && itemResponse === ItemResponse$1.CLOSE_ON_EXECUTE) {
         if (comp.getSystem().isConnected()) {
           emit(comp, sandboxClose());
         }
@@ -9563,34 +9563,34 @@
         ...domTitle
       };
     };
-    const renderNormalItemStructure = (info, providersBackstage, renderIcons, fallbackIcon) => {
+    const renderNormalItemStructure = (Information, providersBackstage, renderIcons, fallbackIcon) => {
       const iconSpec = {
         tag: 'div',
         classes: [iconClass]
       };
       const renderIcon = iconName => render$3(iconName, iconSpec, providersBackstage.icons, fallbackIcon);
       const renderEmptyIcon = () => Optional.some({ dom: iconSpec });
-      const leftIcon = renderIcons ? info.iconContent.map(renderIcon).orThunk(renderEmptyIcon) : Optional.none();
-      const checkmark = info.checkMark;
-      const textRender = Optional.from(info.meta).fold(() => renderText, meta => has$2(meta, 'style') ? curry(renderStyledText, meta.style) : renderText);
-      const content = info.htmlContent.fold(() => info.textContent.map(textRender), html => Optional.some(renderHtml(html, [textClass])));
+      const leftIcon = renderIcons ? Information.iconContent.map(renderIcon).orThunk(renderEmptyIcon) : Optional.none();
+      const checkmark = Information.checkMark;
+      const textRender = Optional.from(Information.meta).fold(() => renderText, meta => has$2(meta, 'style') ? curry(renderStyledText, meta.style) : renderText);
+      const content = Information.htmlContent.fold(() => Information.textContent.map(textRender), html => Optional.some(renderHtml(html, [textClass])));
       const menuItem = {
-        dom: renderItemDomStructure(info.ariaLabel),
+        dom: renderItemDomStructure(Information.ariaLabel),
         optComponents: [
           leftIcon,
           content,
-          info.shortcutContent.map(renderShortcut),
+          Information.shortcutContent.map(renderShortcut),
           checkmark,
-          info.caret
+          Information.caret
         ]
       };
       return menuItem;
     };
-    const renderItemStructure = (info, providersBackstage, renderIcons, fallbackIcon = Optional.none()) => {
-      if (info.presets === 'color') {
-        return renderColorStructure(info, providersBackstage, fallbackIcon);
+    const renderItemStructure = (Information, providersBackstage, renderIcons, fallbackIcon = Optional.none()) => {
+      if (Information.presets === 'color') {
+        return renderColorStructure(Information, providersBackstage, fallbackIcon);
       } else {
-        return renderNormalItemStructure(info, providersBackstage, renderIcons, fallbackIcon);
+        return renderNormalItemStructure(Information, providersBackstage, renderIcons, fallbackIcon);
       }
     };
 
@@ -11019,22 +11019,22 @@
       return handler.fold(() => {
         logger.logEventNoHandlers(eventType, target);
         return adt$1.complete();
-      }, handlerInfo => {
-        const descHandler = handlerInfo.descHandler;
+      }, handlerInformation => {
+        const descHandler = handlerInformation.descHandler;
         const eventHandler = getCurried(descHandler);
         eventHandler(simulatedEvent);
         if (simulatedEvent.isStopped()) {
-          logger.logEventStopped(eventType, handlerInfo.element, descHandler.purpose);
+          logger.logEventStopped(eventType, handlerInformation.element, descHandler.purpose);
           return adt$1.stopped();
         } else if (simulatedEvent.isCut()) {
-          logger.logEventCut(eventType, handlerInfo.element, descHandler.purpose);
+          logger.logEventCut(eventType, handlerInformation.element, descHandler.purpose);
           return adt$1.complete();
         } else {
-          return parent(handlerInfo.element).fold(() => {
-            logger.logNoParent(eventType, handlerInfo.element, descHandler.purpose);
+          return parent(handlerInformation.element).fold(() => {
+            logger.logNoParent(eventType, handlerInformation.element, descHandler.purpose);
             return adt$1.complete();
           }, parent => {
-            logger.logEventResponse(eventType, handlerInfo.element, descHandler.purpose);
+            logger.logEventResponse(eventType, handlerInformation.element, descHandler.purpose);
             return adt$1.resume(parent);
           });
         }
@@ -11178,7 +11178,7 @@
         }
       });
       const systemApi = {
-        debugInfo: constant$1('real'),
+        debugInformation: constant$1('real'),
         triggerEvent: (eventName, target, data) => {
           monitorEvent(eventName, target, logger => triggerOnUntilStopped(lookup, eventName, data, target, logger));
         },
@@ -11764,33 +11764,33 @@
     const markValid = (component, invalidConfig) => {
       const elem = invalidConfig.getRoot(component).getOr(component.element);
       remove$2(elem, invalidConfig.invalidClass);
-      invalidConfig.notify.each(notifyInfo => {
+      invalidConfig.notify.each(notifyInformation => {
         if (isAriaElement(component.element)) {
           set$9(component.element, 'aria-invalid', false);
         }
-        notifyInfo.getContainer(component).each(container => {
-          set$6(container, notifyInfo.validHtml);
+        notifyInformation.getContainer(component).each(container => {
+          set$6(container, notifyInformation.validHtml);
         });
-        notifyInfo.onValid(component);
+        notifyInformation.onValid(component);
       });
     };
     const markInvalid = (component, invalidConfig, invalidState, text) => {
       const elem = invalidConfig.getRoot(component).getOr(component.element);
       add$2(elem, invalidConfig.invalidClass);
-      invalidConfig.notify.each(notifyInfo => {
+      invalidConfig.notify.each(notifyInformation => {
         if (isAriaElement(component.element)) {
           set$9(component.element, 'aria-invalid', true);
         }
-        notifyInfo.getContainer(component).each(container => {
+        notifyInformation.getContainer(component).each(container => {
           set$6(container, text);
         });
-        notifyInfo.onInvalid(component, text);
+        notifyInformation.onInvalid(component, text);
       });
     };
-    const query = (component, invalidConfig, _invalidState) => invalidConfig.validator.fold(() => Future.pure(Result.value(true)), validatorInfo => validatorInfo.validate(component));
+    const query = (component, invalidConfig, _invalidState) => invalidConfig.validator.fold(() => Future.pure(Result.value(true)), validatorInformation => validatorInformation.validate(component));
     const run = (component, invalidConfig, invalidState) => {
-      invalidConfig.notify.each(notifyInfo => {
-        notifyInfo.onValidate(component);
+      invalidConfig.notify.each(notifyInformation => {
+        notifyInformation.onValidate(component);
       });
       return query(component, invalidConfig).map(valid => {
         if (component.getSystem().isConnected()) {
@@ -11820,9 +11820,9 @@
         isInvalid: isInvalid
     });
 
-    const events$8 = (invalidConfig, invalidState) => invalidConfig.validator.map(validatorInfo => derive$2([run$1(validatorInfo.onEvent, component => {
+    const events$8 = (invalidConfig, invalidState) => invalidConfig.validator.map(validatorInformation => derive$2([run$1(validatorInformation.onEvent, component => {
         run(component, invalidConfig, invalidState).get(identity);
-      })].concat(validatorInfo.validateOnLoad ? [runOnAttached(component => {
+      })].concat(validatorInformation.validateOnLoad ? [runOnAttached(component => {
         run(component, invalidConfig, invalidState).get(noop);
       })] : []))).getOr({});
 
@@ -11881,7 +11881,7 @@
           throw new Error('Cannot find coupled component: ' + name + '. Known coupled components: ' + JSON.stringify(available, null, 2));
         } else {
           return get$g(coupled, name).getOrThunk(() => {
-            const builder = get$g(coupleConfig.others, name).getOrDie('No information found for coupled component: ' + name);
+            const builder = get$g(coupleConfig.others, name).getOrDie('No Information found for coupled component: ' + name);
             const spec = builder(component);
             const built = component.getSystem().build(spec);
             coupled[name] = built;
@@ -14222,10 +14222,10 @@
     };
 
     const internalToolbarButtonExecute = generate$6('toolbar.button.execute');
-    const onToolbarButtonExecute = info => runOnExecute$1((comp, _simulatedEvent) => {
-      runWithApi(info, comp)(itemApi => {
+    const onToolbarButtonExecute = Information => runOnExecute$1((comp, _simulatedEvent) => {
+      runWithApi(Information, comp)(itemApi => {
         emitWith(comp, internalToolbarButtonExecute, { buttonApi: itemApi });
-        info.onAction(itemApi);
+        Information.onAction(itemApi);
       });
     });
     const toolbarButtonEventOrder = {
@@ -15206,13 +15206,13 @@
         init: init$9
     });
 
-    const setup$c = (streamInfo, streamState) => {
-      const sInfo = streamInfo.stream;
-      const throttler = last(streamInfo.onStream, sInfo.delay);
+    const setup$c = (streamInformation, streamState) => {
+      const sInformation = streamInformation.stream;
+      const throttler = last(streamInformation.onStream, sInformation.delay);
       streamState.setTimer(throttler);
       return (component, simulatedEvent) => {
         throttler.throttle(component, simulatedEvent);
-        if (sInfo.stopEvent) {
+        if (sInformation.stopEvent) {
           simulatedEvent.stop();
         }
       };
@@ -15818,10 +15818,10 @@
     const toMenuItems = targets => map$2(targets, toMenuItem);
     const filterLinkTargets = (type, targets) => filter$2(targets, target => target.type === type);
     const filteredTargets = (type, targets) => toMenuItems(filterLinkTargets(type, targets));
-    const headerTargets = linkInfo => filteredTargets('header', linkInfo.targets);
-    const anchorTargets = linkInfo => filteredTargets('anchor', linkInfo.targets);
-    const anchorTargetTop = linkInfo => Optional.from(linkInfo.anchorTop).map(url => staticMenuItem('<top>', url)).toArray();
-    const anchorTargetBottom = linkInfo => Optional.from(linkInfo.anchorBottom).map(url => staticMenuItem('<bottom>', url)).toArray();
+    const headerTargets = linkInformation => filteredTargets('header', linkInformation.targets);
+    const anchorTargets = linkInformation => filteredTargets('anchor', linkInformation.targets);
+    const anchorTargetTop = linkInformation => Optional.from(linkInformation.anchorTop).map(url => staticMenuItem('<top>', url)).toArray();
+    const anchorTargetBottom = linkInformation => Optional.from(linkInformation.anchorBottom).map(url => staticMenuItem('<bottom>', url)).toArray();
     const historyTargets = history => map$2(history, url => staticMenuItem(url, url));
     const joinMenuLists = items => {
       return foldl(items, (a, b) => {
@@ -15840,16 +15840,16 @@
     const getItems = (fileType, input, urlBackstage) => {
       const urlInputValue = Representing.getValue(input);
       const term = urlInputValue.meta.text !== undefined ? urlInputValue.meta.text : urlInputValue.value;
-      const info = urlBackstage.getLinkInformation();
-      return info.fold(() => [], linkInfo => {
+      const Information = urlBackstage.getLinkInformation();
+      return Information.fold(() => [], linkInformation => {
         const history = filterByQuery(term, historyTargets(urlBackstage.getHistory(fileType)));
         return fileType === 'file' ? joinMenuLists([
           history,
-          filterByQuery(term, headerTargets(linkInfo)),
+          filterByQuery(term, headerTargets(linkInformation)),
           filterByQuery(term, flatten([
-            anchorTargetTop(linkInfo),
-            anchorTargets(linkInfo),
-            anchorTargetBottom(linkInfo)
+            anchorTargetTop(linkInformation),
+            anchorTargets(linkInformation),
+            anchorTargetBottom(linkInformation)
           ]))
         ]) : history;
       });
@@ -16243,7 +16243,7 @@
       field: (_name, spec) => spec,
       record: constant$1([])
     };
-    const interpretInForm = (parts, spec, dialogData, oldBackstage) => {
+    const interpretInformationrm = (parts, spec, dialogData, oldBackstage) => {
       const newBackstage = deepMerge(oldBackstage, { shared: { interpreter: childSpec => interpretParts(parts, childSpec, dialogData, newBackstage) } });
       return interpretParts(parts, spec, dialogData, newBackstage);
     };
@@ -17152,19 +17152,19 @@
       { absolute: ['positionCss'] },
       { fixed: ['positionCss'] }
     ]);
-    const appear = (component, contextualInfo) => {
+    const appear = (component, contextualInformation) => {
       const elem = component.element;
-      add$2(elem, contextualInfo.transitionClass);
-      remove$2(elem, contextualInfo.fadeOutClass);
-      add$2(elem, contextualInfo.fadeInClass);
-      contextualInfo.onShow(component);
+      add$2(elem, contextualInformation.transitionClass);
+      remove$2(elem, contextualInformation.fadeOutClass);
+      add$2(elem, contextualInformation.fadeInClass);
+      contextualInformation.onShow(component);
     };
-    const disappear = (component, contextualInfo) => {
+    const disappear = (component, contextualInformation) => {
       const elem = component.element;
-      add$2(elem, contextualInfo.transitionClass);
-      remove$2(elem, contextualInfo.fadeInClass);
-      add$2(elem, contextualInfo.fadeOutClass);
-      contextualInfo.onHide(component);
+      add$2(elem, contextualInformation.transitionClass);
+      remove$2(elem, contextualInformation.fadeInClass);
+      add$2(elem, contextualInformation.fadeOutClass);
+      contextualInformation.onHide(component);
     };
     const isPartiallyVisible = (box, viewport) => box.y < viewport.bottom && box.bottom > viewport.y;
     const isTopCompletelyVisible = (box, viewport) => box.y >= viewport.y;
@@ -17241,17 +17241,17 @@
       method(component);
     };
     const updateVisibility = (component, config, state, viewport, morphToDocked = false) => {
-      config.contextual.each(contextInfo => {
-        contextInfo.lazyContext(component).each(box => {
+      config.contextual.each(contextInformation => {
+        contextInformation.lazyContext(component).each(box => {
           const isVisible = isPartiallyVisible(box, viewport);
           if (isVisible !== state.isVisible()) {
             state.setVisible(isVisible);
             if (morphToDocked && !isVisible) {
-              add$1(component.element, [contextInfo.fadeOutClass]);
-              contextInfo.onHide(component);
+              add$1(component.element, [contextInformation.fadeOutClass]);
+              contextInformation.onHide(component);
             } else {
               const method = isVisible ? appear : disappear;
-              method(component, contextInfo);
+              method(component, contextInformation);
             }
           }
         });
@@ -17277,13 +17277,13 @@
         morph.fold(() => morphToStatic(component, config, state), position => morphToCoord(component, config, state, position), noop);
       });
       state.setVisible(true);
-      config.contextual.each(contextInfo => {
+      config.contextual.each(contextInformation => {
         remove$1(elem, [
-          contextInfo.fadeInClass,
-          contextInfo.fadeOutClass,
-          contextInfo.transitionClass
+          contextInformation.fadeInClass,
+          contextInformation.fadeOutClass,
+          contextInformation.transitionClass
         ]);
-        contextInfo.onShow(component);
+        contextInformation.onShow(component);
       });
       refresh$4(component, config, state);
     };
@@ -17310,25 +17310,25 @@
         setModes: setModes
     });
 
-    const events$5 = (dockInfo, dockState) => derive$2([
+    const events$5 = (dockInformation, dockState) => derive$2([
       runOnSource(transitionend(), (component, simulatedEvent) => {
-        dockInfo.contextual.each(contextInfo => {
-          if (has(component.element, contextInfo.transitionClass)) {
+        dockInformation.contextual.each(contextInformation => {
+          if (has(component.element, contextInformation.transitionClass)) {
             remove$1(component.element, [
-              contextInfo.transitionClass,
-              contextInfo.fadeInClass
+              contextInformation.transitionClass,
+              contextInformation.fadeInClass
             ]);
-            const notify = dockState.isVisible() ? contextInfo.onShown : contextInfo.onHidden;
+            const notify = dockState.isVisible() ? contextInformation.onShown : contextInformation.onHidden;
             notify(component);
           }
           simulatedEvent.stop();
         });
       }),
       run$1(windowScroll(), (component, _) => {
-        refresh$4(component, dockInfo, dockState);
+        refresh$4(component, dockInformation, dockState);
       }),
       run$1(windowResize(), (component, _) => {
-        reset(component, dockInfo, dockState);
+        reset(component, dockInformation, dockState);
       })
     ]);
 
@@ -17638,7 +17638,7 @@
               callback(m.getItems());
             }
           };
-          const internal = createMenuButton(buttonSpec).mapError(errInfo => formatError(errInfo)).getOrDie();
+          const internal = createMenuButton(buttonSpec).mapError(errInformation => formatError(errInformation)).getOrDie();
           return renderMenuButton(internal, 'tox-mbtn', spec.backstage, Optional.some('menuitem'));
         });
         Replacing.set(comp, newMenus);
@@ -20514,7 +20514,7 @@
       }
     ];
     const renderFromBridge = (bridgeBuilder, render) => (spec, extras, editor) => {
-      const internal = bridgeBuilder(spec).mapError(errInfo => formatError(errInfo)).getOrDie();
+      const internal = bridgeBuilder(spec).mapError(errInformation => formatError(errInformation)).getOrDie();
       return render(internal, extras, editor);
     };
     const types = {
@@ -21668,8 +21668,8 @@
           launchContextToolbar.throttle();
         } else {
           const scopes = getScopes();
-          lookup$1(scopes, editor).fold(close, info => {
-            launchContext(info.toolbars, Optional.some(info.elem));
+          lookup$1(scopes, editor).fold(close, Information => {
+            launchContext(Information.toolbars, Optional.some(Information.elem));
           });
         }
       }, 17);
@@ -22744,29 +22744,29 @@
       const value = get$f(element, name);
       return isUndefined(value) ? NaN : parseInt(value, 10);
     };
-    const get = (component, snapsInfo) => {
+    const get = (component, snapsInformation) => {
       const element = component.element;
-      const x = parseAttrToInt(element, snapsInfo.leftAttr);
-      const y = parseAttrToInt(element, snapsInfo.topAttr);
+      const x = parseAttrToInt(element, snapsInformation.leftAttr);
+      const y = parseAttrToInt(element, snapsInformation.topAttr);
       return isNaN(x) || isNaN(y) ? Optional.none() : Optional.some(SugarPosition(x, y));
     };
-    const set = (component, snapsInfo, pt) => {
+    const set = (component, snapsInformation, pt) => {
       const element = component.element;
-      set$9(element, snapsInfo.leftAttr, pt.left + 'px');
-      set$9(element, snapsInfo.topAttr, pt.top + 'px');
+      set$9(element, snapsInformation.leftAttr, pt.left + 'px');
+      set$9(element, snapsInformation.topAttr, pt.top + 'px');
     };
-    const clear = (component, snapsInfo) => {
+    const clear = (component, snapsInformation) => {
       const element = component.element;
-      remove$7(element, snapsInfo.leftAttr);
-      remove$7(element, snapsInfo.topAttr);
+      remove$7(element, snapsInformation.leftAttr);
+      remove$7(element, snapsInformation.topAttr);
     };
 
-    const getCoords = (component, snapInfo, coord, delta) => get(component, snapInfo).fold(() => coord, fixed$1 => fixed(fixed$1.left + delta.left, fixed$1.top + delta.top));
-    const moveOrSnap = (component, snapInfo, coord, delta, scroll, origin) => {
-      const newCoord = getCoords(component, snapInfo, coord, delta);
-      const snap = snapInfo.mustSnap ? findClosestSnap(component, snapInfo, newCoord, scroll, origin) : findSnap(component, snapInfo, newCoord, scroll, origin);
+    const getCoords = (component, snapInformation, coord, delta) => get(component, snapInformation).fold(() => coord, fixed$1 => fixed(fixed$1.left + delta.left, fixed$1.top + delta.top));
+    const moveOrSnap = (component, snapInformation, coord, delta, scroll, origin) => {
+      const newCoord = getCoords(component, snapInformation, coord, delta);
+      const snap = snapInformation.mustSnap ? findClosestSnap(component, snapInformation, newCoord, scroll, origin) : findSnap(component, snapInformation, newCoord, scroll, origin);
       const fixedCoord = asFixed(newCoord, scroll, origin);
-      set(component, snapInfo, fixedCoord);
+      set(component, snapInformation, fixedCoord);
       return snap.fold(() => ({
         coord: fixed(fixedCoord.left, fixedCoord.top),
         extra: Optional.none()
@@ -22775,8 +22775,8 @@
         extra: spanned.extra
       }));
     };
-    const stopDrag = (component, snapInfo) => {
-      clear(component, snapInfo);
+    const stopDrag = (component, snapInformation) => {
+      clear(component, snapInformation);
     };
     const findMatchingSnap = (snaps, newCoord, scroll, origin) => findMap(snaps, snap => {
       const sensor = snap.sensor;
@@ -22786,8 +22786,8 @@
         extra: snap.extra
       }) : Optional.none();
     });
-    const findClosestSnap = (component, snapInfo, newCoord, scroll, origin) => {
-      const snaps = snapInfo.getSnapPoints(component);
+    const findClosestSnap = (component, snapInformation, newCoord, scroll, origin) => {
+      const snaps = snapInformation.getSnapPoints(component);
       const matchSnap = findMatchingSnap(snaps, newCoord, scroll, origin);
       return matchSnap.orThunk(() => {
         const bestSnap = foldl(snaps, (acc, snap) => {
@@ -22818,8 +22818,8 @@
         }));
       });
     };
-    const findSnap = (component, snapInfo, newCoord, scroll, origin) => {
-      const snaps = snapInfo.getSnapPoints(component);
+    const findSnap = (component, snapInformation, newCoord, scroll, origin) => {
+      const snaps = snapInformation.getSnapPoints(component);
       return findMatchingSnap(snaps, newCoord, scroll, origin);
     };
     const snapTo$1 = (snap, scroll, origin) => ({
@@ -22928,10 +22928,10 @@
         const translated = translate(currentCoord, delta.left, delta.top);
         const fixedCoord = asFixed(translated, scroll, origin);
         return fixed(fixedCoord.left, fixedCoord.top);
-      }, snapInfo => {
-        const snapping = moveOrSnap(component, snapInfo, currentCoord, delta, scroll, origin);
+      }, snapInformation => {
+        const snapping = moveOrSnap(component, snapInformation, currentCoord, delta, scroll, origin);
         snapping.extra.each(extra => {
-          snapInfo.onSensor(component, extra);
+          snapInformation.onSensor(component, extra);
         });
         return snapping.coord;
       });
@@ -22965,8 +22965,8 @@
     };
     const stop = (component, blocker, dragConfig, dragState) => {
       blocker.each(discard);
-      dragConfig.snaps.each(snapInfo => {
-        stopDrag(component, snapInfo);
+      dragConfig.snaps.each(snapInformation => {
+        stopDrag(component, snapInformation);
       });
       const target = dragConfig.getTarget(component.element);
       dragState.reset();
@@ -24135,7 +24135,7 @@
       type,
       text,
       requiredStringEnum('level', [
-        'info',
+        'Information',
         'warn',
         'error',
         'success'
@@ -24499,7 +24499,7 @@
           tag: 'div',
           classes: ['tox-form'].concat(spec.classes)
         },
-        components: map$2(spec.items, item => interpretInForm(parts, item, dialogData, backstage))
+        components: map$2(spec.items, item => interpretInformationrm(parts, item, dialogData, backstage))
       })));
       return {
         dom: {
@@ -24926,7 +24926,7 @@
                   tag: 'div',
                   classes: ['tox-form']
                 },
-                components: map$2(tab.items, item => interpretInForm(parts, item, dialogData, backstage)),
+                components: map$2(tab.items, item => interpretInformationrm(parts, item, dialogData, backstage)),
                 formBehaviours: derive$1([
                   Keying.config({
                     mode: 'acyclic',

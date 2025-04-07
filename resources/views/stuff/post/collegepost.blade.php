@@ -9,7 +9,7 @@
     <meta name="author" content="NobleUI">
     <meta name="keywords" content="Stuff, dashboard, responsive, bootstrap, template, html, css">
 
-    <title>Stuff Panel | Wollo University Inter-Office Communication</title>
+    <title>Stuff Panel | Criminal Information Inter-Office Communication</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,7 +42,7 @@
 
             <div class="posting-place" style="margin-top: 70px; width: 100%;">
                 @foreach($post as $key => $post)
-                @if ($profileData->collage == 'informatics')
+                @if ($profileData->collage == 'Informationrmatics')
                 <div class="post-container" style="display: flex; gap: 20px; margin-bottom: 20px;">
                     <div class="single-post">
                         <h5>{{ $post->heading }}</h5>
@@ -189,7 +189,7 @@
 
             // Toastr notifications
             @if(Session::has('message'))
-            toastr["{{ Session::get('alert-type', 'info') }}"]("{{ Session::get('message') }}");
+            toastr["{{ Session::get('alert-type', 'Information') }}"]("{{ Session::get('message') }}");
             @endif
         });
     </script>

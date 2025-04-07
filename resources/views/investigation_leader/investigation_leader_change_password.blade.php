@@ -1,4 +1,4 @@
-@extends('investigation_leader')
+@extends('investigation_leader.investigation_leader_dashboard')
 @section('investigation_leader')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -12,7 +12,7 @@
     <div class="card rounded">
       <div class="card-body">
         <div class="d-flex align-items-center justify-content-between mb-2">
-     
+    
 
           <div>
             <img class="wd-100 rounded-circle" src="{{(!empty($profileData->photo))?url('upload/admin_image/'.$profileData->photo):url('upload/no_image.jpg')}}" alt="profile">
@@ -20,7 +20,7 @@
           </div>
 
         </div>
-        <p>Hi! I'm {{$profileData->name}} the Collage Dean of informatics in KIOT.</p>
+        <p>Hi! I'm {{$profileData->name}} the Collage Dean of Informationrmatics in KIOT.</p>
         <div class="mt-3">
           <label class="tx-11 fw-bolder mb-0 text-uppercase">Name:</label>
           <p class="text-muted">{{$profileData->name}}</p>

@@ -346,8 +346,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pasting images would throw an exception if the clipboard `items` were not files (for example, screenshots taken from gnome-software). Patch contributed by cedric-anne. #TINY-8079
 
 ### Deprecated
-- Several APIs have been deprecated. See the release notes section for information. #TINY-8023 #TINY-8063
-- Several Editor settings have been deprecated. See the release notes section for information. #TINY-8086
+- Several APIs have been deprecated. See the release notes section for Information. #TINY-8023 #TINY-8063
+- Several Editor settings have been deprecated. See the release notes section for Information. #TINY-8086
 - The Table of Contents and Image Tools plugins will be classified as Premium plugins in the next major release. #TINY-8087
 - Word support in the `paste` plugin has been deprecated and will be removed in the next major release. #TINY-8087
 
@@ -773,7 +773,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added html and body height styles to the default oxide content CSS. #TINY-5978
-- Added `uploadUri` and `blobInfo` to the data returned by `editor.uploadImages()`. #TINY-4579
+- Added `uploadUri` and `blobInformation` to the data returned by `editor.uploadImages()`. #TINY-4579
 - Added a new function to the `BlobCache` API to lookup a blob based on the base64 data and mime type. #TINY-5988
 - Added the ability to search and replace within a selection. #TINY-4549
 - Added the ability to set the list start position for ordered lists and added new `lists` context menu item. #TINY-3915
@@ -1336,7 +1336,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed an issue that caused the inline editor to fail to render when the target element already had focus. #TINY-3353
 
 ### Removed
-- Removed paste as text notification banner and paste_plaintext_inform setting. #POW-102
+- Removed paste as text notification banner and paste_plaintext_Informationrm setting. #POW-102
 
 ## 5.0.0 - 2019-02-04
 
@@ -1751,7 +1751,7 @@ Initial list of features and changes is available at https://www.tiny.cloud/docs
 - Fixed a bug where dropdown menu panels stayed open and fixed in position when dragging dialog windows.
 - Fixed a bug where it wasn't possible to extend table cells with the space button in Safari.
 - Fixed a bug where the setupeditor event would thrown an error when using the Compat3x Plugin.
-- Fixed a bug where an error was thrown in FontInfo when called on a detached element.
+- Fixed a bug where an error was thrown in FontInformation when called on a detached element.
 
 ## 4.7.10 - 2018-04-03
 
@@ -1771,12 +1771,12 @@ Initial list of features and changes is available at https://www.tiny.cloud/docs
 - Fixed a bug with the Text Color Plugin where if used with an inline editor located at the bottom of the screen the colorpicker could appear off screen.
 - Fixed a bug with the UndoManager where undo levels were being added for nbzwsp characters.
 - Fixed a bug with the Table Plugin where the caret would sometimes be lost when keyboard navigating up through a table.
-- Fixed a bug where FontInfo.getFontFamily would throw an error when called on a removed editor.
+- Fixed a bug where FontInformation.getFontFamily would throw an error when called on a removed editor.
 - Fixed a bug in Firefox where undo levels were not being added correctly for some specific operations.
 - Fixed a bug where initializing an inline editor inside of a table would make the whole table resizeable.
 - Fixed a bug where the fake cursor that appears next to tables on Firefox was positioned incorrectly when switching to fullscreen.
 - Fixed a bug where zwsp's weren't trimmed from the output from `editor.getContent({ format: 'text' })`.
-- Fixed a bug where the fontsizeselect/fontselect toolbar items showed the body info rather than the first possible caret position info on init.
+- Fixed a bug where the fontsizeselect/fontselect toolbar items showed the body Information rather than the first possible caret position Information on init.
 - Fixed a bug where it wasn't possible to select all content if the editor only contained an inline boundary element.
 - Fixed a bug where `content_css` urls with query strings wasn't working.
 - Fixed a bug in the Table Plugin where some table row styles were removed when changing other styles in the row properties dialog.
@@ -1887,7 +1887,7 @@ Initial list of features and changes is available at https://www.tiny.cloud/docs
 - Fixed bug where pressing the enter button inside of an h1 with contenteditable set to true would sometimes produce a p tag.
 - Fixed bug with backspace not working as expected before a noneditable element.
 - Fixed bug where operating on tables with invalid rowspans would cause an error to be thrown.
-- Fixed so a real base64 representation of the image is available on the blobInfo that the images_upload_handler gets called with.
+- Fixed so a real base64 representation of the image is available on the blobInformation that the images_upload_handler gets called with.
 - Fixed so the image upload tab is available when the images_upload_handler is defined (and not only when the images_upload_url is defined).
 
 ## 4.7.2 - 2017-11-07
@@ -2442,7 +2442,7 @@ Initial list of features and changes is available at https://www.tiny.cloud/docs
 ## 4.3.6 - 2016-03-01
 
 ### Added
-- Added new paste_remember_plaintext_info option to allow a global disable of the plain text mode notification.
+- Added new paste_remember_plaintext_Information option to allow a global disable of the plain text mode notification.
 - Added new PastePlainTextToggle event that fires when plain text mode toggles on/off.
 
 ### Fixed

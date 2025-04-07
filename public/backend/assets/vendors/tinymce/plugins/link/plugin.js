@@ -825,16 +825,16 @@
         flags: { titleEnabled: shouldShowLinkTitle(editor) }
       };
     });
-    const DialogInfo = { collect };
+    const DialogInformation = { collect };
 
-    const handleSubmit = (editor, info) => api => {
+    const handleSubmit = (editor, Information) => api => {
       const data = api.getData();
       if (!data.url.value) {
         unlink(editor);
         api.close();
         return;
       }
-      const getChangedValue = key => Optional.from(data[key]).filter(value => !is(info.anchor[key], value));
+      const getChangedValue = key => Optional.from(data[key]).filter(value => !is(Information.anchor[key], value));
       const changedData = {
         href: data.url.value,
         text: getChangedValue('text'),
@@ -854,10 +854,10 @@
     };
     const collectData = editor => {
       const anchorNode = getAnchorElement(editor);
-      return DialogInfo.collect(editor, anchorNode);
+      return DialogInformation.collect(editor, anchorNode);
     };
-    const getInitialData = (info, defaultTarget) => {
-      const anchor = info.anchor;
+    const getInitialData = (Information, defaultTarget) => {
+      const anchor = Information.anchor;
       const url = anchor.url.getOr('');
       return {
         url: {
@@ -937,9 +937,9 @@
     };
     const open$1 = editor => {
       const data = collectData(editor);
-      data.then(info => {
-        const onSubmit = handleSubmit(editor, info);
-        return makeDialog(info, onSubmit, editor);
+      data.then(Information => {
+        const onSubmit = handleSubmit(editor, Information);
+        return makeDialog(Information, onSubmit, editor);
       }).then(spec => {
         editor.windowManager.open(spec);
       });

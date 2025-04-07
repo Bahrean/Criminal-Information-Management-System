@@ -9,7 +9,7 @@ $(function() {
     primary        : "#6571ff",
     secondary      : "#7987a1",
     success        : "#05a34a",
-    info           : "#66d1d1",
+    Information           : "#66d1d1",
     warning        : "#fbbc06",
     danger         : "#ff3366",
     light          : "#e9ecef",
@@ -34,7 +34,7 @@ $(function() {
         datasets: [
           {
             label: "Population",
-            backgroundColor: [colors.primary, colors.danger, colors.warning, colors.success, colors.info],
+            backgroundColor: [colors.primary, colors.danger, colors.warning, colors.success, colors.Information],
             data: [2478,5267,734,2084,1433],
           }
         ]
@@ -88,7 +88,7 @@ $(function() {
         datasets: [{ 
             data: [86,114,106,106,107,111,133,221,783,2478],
             label: "Africa",
-            borderColor: colors.info,
+            borderColor: colors.Information,
             backgroundColor: "transparent",
             fill: true,
             pointBackgroundColor: colors.cardBg,
@@ -166,7 +166,7 @@ $(function() {
         datasets: [
           {
             label: "Population (millions)",
-            backgroundColor: [colors.primary, colors.danger, colors.info],
+            backgroundColor: [colors.primary, colors.danger, colors.Information],
             borderColor: colors.cardBg,
             data: [2478,4267,1334],
           }
@@ -212,7 +212,7 @@ $(function() {
           }, { 
             data: [282,350,411,502,635,809,947,1402,3700,5267],
             label: "Asia",
-            borderColor: colors.info,
+            borderColor: colors.Information,
             backgroundColor: 'rgba(102,209,209,.3)',
             fill: true,
             pointBackgroundColor: colors.cardBg,
@@ -279,7 +279,7 @@ $(function() {
         labels: ["Africa", "Asia", "Europe"],
         datasets: [{
           label: "Population (millions)",
-          backgroundColor: [colors.primary, colors.danger, colors.info],
+          backgroundColor: [colors.primary, colors.danger, colors.Information],
           borderColor: colors.cardBg,
           data: [2478,4267,1334]
         }]
@@ -315,7 +315,7 @@ $(function() {
           {
             label: ["China"],
             backgroundColor: 'rgba(102,209,209,.3)',
-            borderColor: colors.info,
+            borderColor: colors.Information,
             data: [{
               x: 21269017,
               y: 5.245,
@@ -430,8 +430,8 @@ $(function() {
             label: "2050",
             fill: true,
             backgroundColor: "rgba(102,209,209,.3)",
-            borderColor: colors.info,
-            pointBorderColor: colors.info,
+            borderColor: colors.Information,
+            pointBorderColor: colors.Information,
             pointBackgroundColor: colors.cardBg,
             pointBorderWidth: 2,
             pointHoverBorderWidth: 3,
@@ -498,7 +498,7 @@ $(function() {
         datasets: [
           {
             label: "Population (millions)",
-            backgroundColor: [colors.primary, colors.danger, colors.success, colors.info],
+            backgroundColor: [colors.primary, colors.danger, colors.success, colors.Information],
             borderColor: colors.cardBg,
             data: [3578,5000,1034,2034]
           }

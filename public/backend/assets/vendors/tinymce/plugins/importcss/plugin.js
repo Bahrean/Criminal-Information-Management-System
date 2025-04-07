@@ -99,16 +99,16 @@
       const ungroupedOrder = [];
       const groupOrder = [];
       const groups = {};
-      const addItemToGroup = (groupTitle, itemInfo) => {
+      const addItemToGroup = (groupTitle, itemInformation) => {
         if (groups[groupTitle]) {
-          groups[groupTitle].push(itemInfo);
+          groups[groupTitle].push(itemInformation);
         } else {
           groupOrder.push(groupTitle);
-          groups[groupTitle] = [itemInfo];
+          groups[groupTitle] = [itemInformation];
         }
       };
-      const addItem = itemInfo => {
-        ungroupedOrder.push(itemInfo);
+      const addItem = itemInformation => {
+        ungroupedOrder.push(itemInformation);
       };
       const toFormats = () => {
         const groupItems = bind(groupOrder, g => {

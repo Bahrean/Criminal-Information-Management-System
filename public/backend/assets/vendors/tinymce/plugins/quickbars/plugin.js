@@ -96,9 +96,9 @@
     };
     const insertBlob = (editor, base64, blob) => {
       const blobCache = editor.editorUpload.blobCache;
-      const blobInfo = blobCache.create(generate('mceu'), blob, base64);
-      blobCache.add(blobInfo);
-      editor.insertContent(editor.dom.createHTML('img', { src: blobInfo.blobUri() }));
+      const blobInformation = blobCache.create(generate('mceu'), blob, base64);
+      blobCache.add(blobInformation);
+      editor.insertContent(editor.dom.createHTML('img', { src: blobInformation.blobUri() }));
     };
 
     const blobToBase64 = blob => {

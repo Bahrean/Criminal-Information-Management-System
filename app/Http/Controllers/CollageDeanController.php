@@ -11,7 +11,6 @@ class CollageDeanController extends Controller
 {
     public function CollageDeanDashboard()
     {
-        dd(resource_path('views/investigation_leader.index')); // Check if file exists
 
         return view('investigation_leader.index');
     }

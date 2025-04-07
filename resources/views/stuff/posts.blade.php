@@ -9,7 +9,7 @@
     <meta name="author" content="NobleUI">
     <meta name="keywords" content="stuff, dashboard, responsive, bootstrap, template, html, css">
 
-    <title>stuff Panel | Wollo University Inter-Office Communication</title>
+    <title>stuff Panel | Criminal Information Inter-Office Communication</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -220,11 +220,11 @@
 
         // Handling toastr notifications
         @if(Session::has('message'))
-            const type = "{{ Session::get('alert-type', 'info') }}";  // Getting the alert type
+            const type = "{{ Session::get('alert-type', 'Information') }}";  // Getting the alert type
             const message = "{{ Session::get('message') }}";  // Getting the message content
 
             // Displaying the toastr notification based on the type
-            if (type === 'info') toastr.info(message);
+            if (type === 'Information') toastr.Information(message);
             if (type === 'success') toastr.success(message);
             if (type === 'warning') toastr.warning(message);
             if (type === 'error') toastr.error(message);

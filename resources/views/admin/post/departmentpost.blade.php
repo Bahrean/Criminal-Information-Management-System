@@ -10,7 +10,7 @@
     <meta name="author" content="NobleUI">
     <meta name="keywords" content="admin, dashboard, responsive, bootstrap, template, html, css">
 
-    <title>Admin Panel | Wollo University Inter-Office Communication</title>
+    <title>Admin Panel | Criminal Information Inter-Office Communication</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
     <nav class="sidebar">
         <div class="sidebar-header">
             <a href="#" class="sidebar-brand">
-            Wollo <span style="color: rgb(255, 255, 0);font-size: 20px;">University</span>
+            Crime<span style="color: rgb(255, 255, 0);font-size: 20px;">Information</span>
             </a>
             <div class="sidebar-toggler not-active">
             <span></span>
@@ -303,11 +303,11 @@
 
         // Handling toastr notifications
         @if(Session::has('message'))
-            const type = "{{ Session::get('alert-type', 'info') }}";  // Getting the alert type
+            const type = "{{ Session::get('alert-type', 'Information') }}";  // Getting the alert type
             const message = "{{ Session::get('message') }}";  // Getting the message content
 
             // Displaying the toastr notification based on the type
-            if (type === 'info') toastr.info(message);
+            if (type === 'Information') toastr.Information(message);
             if (type === 'success') toastr.success(message);
             if (type === 'warning') toastr.warning(message);
             if (type === 'error') toastr.error(message);

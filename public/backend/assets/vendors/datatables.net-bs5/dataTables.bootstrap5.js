@@ -8,7 +8,7 @@
  *
  * This file sets the defaults and adds options to DataTables to style its
  * controls using Bootstrap. See http://datatables.net/manual/styling/bootstrap
- * for further information.
+ * for further Information.
  */
 (function( factory ){
 	if ( typeof define === 'function' && define.amd ) {

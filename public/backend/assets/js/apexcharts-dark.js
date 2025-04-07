@@ -8,7 +8,7 @@ $(function() {
     primary        : "#6571ff",
     secondary      : "#7987a1",
     success        : "#05a34a",
-    info           : "#66d1d1",
+    Information           : "#66d1d1",
     warning        : "#fbbc06",
     danger         : "#ff3366",
     light          : "#e9ecef",
@@ -201,7 +201,7 @@ $(function() {
       tooltip: {
         theme: 'dark'
       },
-      colors: [colors.danger, colors.info],
+      colors: [colors.danger, colors.Information],
       stroke: {
         curve: "smooth",
         width: 3
@@ -321,7 +321,7 @@ $(function() {
       tooltip: {
         theme: 'dark'
       },
-      colors: [colors.danger, colors.info],
+      colors: [colors.danger, colors.Information],
       grid: {
         borderColor: colors.gridBorder,
         padding: {
@@ -434,7 +434,7 @@ $(function() {
       stroke: {
         colors: ['rgba(0,0,0,0)']
       },
-      colors: [colors.primary,colors.warning,colors.danger, colors.info],
+      colors: [colors.primary,colors.warning,colors.danger, colors.Information],
       legend: {
         show: true,
         position: "top",
@@ -477,7 +477,7 @@ $(function() {
       tooltip: {
         theme: 'dark'
       },
-      colors: [colors.primary,colors.warning,colors.danger, colors.info],
+      colors: [colors.primary,colors.warning,colors.danger, colors.Information],
       legend: {
         show: true,
         position: "top",
@@ -554,7 +554,7 @@ $(function() {
       dataLabels: {
         enabled: false
       },
-      colors: [colors.info],
+      colors: [colors.Information],
       stroke: {
         colors: [colors.cardBg]
       },
@@ -861,7 +861,7 @@ $(function() {
       tooltip: {
         theme: 'dark'
       },
-      colors: [colors.primary, colors.warning, colors.danger, colors.info],
+      colors: [colors.primary, colors.warning, colors.danger, colors.Information],
       fill: {
         
       },

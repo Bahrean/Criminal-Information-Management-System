@@ -1,4 +1,4 @@
-@extends('investigation_leader')
+@extends('investigation_leader.investigation_leader_dashboard')
 @section('investigation_leader')
 
 <div class="page-content" style="padding: 25px 15px;">

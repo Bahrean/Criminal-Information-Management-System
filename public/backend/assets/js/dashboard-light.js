@@ -7,7 +7,7 @@ $(function() {
     primary        : "#6571ff",
     secondary      : "#7987a1",
     success        : "#05a34a",
-    info           : "#66d1d1",
+    Information           : "#66d1d1",
     warning        : "#fbbc06",
     danger         : "#ff3366",
     light          : "#e9ecef",

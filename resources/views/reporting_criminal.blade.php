@@ -150,17 +150,17 @@
             </div>
             
             <div class="form-group">
-                <label for="suspect_Info" class="lang-en">Suspect Information (if known)</label>
-                <label for="suspect_Info" class="lang-am" style="display:none;">ስለ ጥርጣሬ ያለው ሰው መረጃ (ካወቁ)</label>
-                <textarea id="suspect_Info" name="suspect_Info" placeholder="Physical description, clothing, vehicle information, etc." class="lang-en"></textarea>
-                <textarea id="suspect_Info" name="suspect_Info" placeholder="የሰውነት መግለጫ፣ አለባበስ፣ የተሽከርካሪ መረጃ ወዘተ" class="lang-am" style="display:none;"></textarea>
+                <label for="suspect_Information" class="lang-en">Suspect Information (if known)</label>
+                <label for="suspect_Information" class="lang-am" style="display:none;">ስለ ጥርጣሬ ያለው ሰው መረጃ (ካወቁ)</label>
+                <textarea id="suspect_Information" name="suspect_Information" placeholder="Physical description, clothing, vehicle Information, etc." class="lang-en"></textarea>
+                <textarea id="suspect_Information" name="suspect_Information" placeholder="የሰውነት መግለጫ፣ አለባበስ፣ የተሽከርካሪ መረጃ ወዘተ" class="lang-am" style="display:none;"></textarea>
             </div>
             
             <div class="form-group">
-                <label for="witness_Info" class="lang-en">Witness Information</label>
-                <label for="witness_Info" class="lang-am" style="display:none;">የምስክር መረጃ</label>
-                <textarea id="witness_Info" name="witness_Info" placeholder="Names and contact information of any witnesses" class="lang-en"></textarea>
-                <textarea id="witness_Info" name="witness_Info" placeholder="የምስክሮች ስም እና የማነጋገሪያ መረጃ" class="lang-am" style="display:none;"></textarea>
+                <label for="witness_Information" class="lang-en">Witness Information</label>
+                <label for="witness_Information" class="lang-am" style="display:none;">የምስክር መረጃ</label>
+                <textarea id="witness_Information" name="witness_Information" placeholder="Names and contact Information of any witnesses" class="lang-en"></textarea>
+                <textarea id="witness_Information" name="witness_Information" placeholder="የምስክሮች ስም እና የማነጋገሪያ መረጃ" class="lang-am" style="display:none;"></textarea>
             </div>
             
             <h3 class="lang-en">Your Information(Optional)</h3>
@@ -275,12 +275,12 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label"><i class="fas fa-university me-2"></i>College</label>
+                    <label class="form-label"><i class="fas fa-Information me-2"></i>College</label>
                     <select class="form-select @error('college') is-invalid @enderror" 
                             id="collegeSelect" name="collage" required>
                         <option value="" selected disabled>Select College</option>
-                        <option value="informatics" {{ old('college') == 'informatics' ? 'selected' : '' }}>
-                            Informatics
+                        <option value="Informationrmatics" {{ old('college') == 'Informationrmatics' ? 'selected' : '' }}>
+                            Informationrmatics
                         </option>
                         <option value="engineering" {{ old('college') == 'engineering' ? 'selected' : '' }}>
                             Engineering

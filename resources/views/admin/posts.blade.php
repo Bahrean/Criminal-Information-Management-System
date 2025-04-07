@@ -17,7 +17,7 @@ License: For each use you must have a valid license purchased only from above li
 	<meta name="author" content="NobleUI">
 	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-	<title>Admin Panel For Wollo University Inter-Office Communication</title>
+	<title>Admin Panel For Criminal Information Inter-Office Communication</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,7 +70,7 @@ License: For each use you must have a valid license purchased only from above li
             <div style="margin:15px 0px 0px 45px;padding:10px 0px 10px 40px " class="single_post">
             <h5 class="mb-2">Heading</h5>
             <div style="padding:10px">
-                <img src="{{ asset('upload/wollo_university.jpg')}}" class="wd-70" alt="...">
+                <img src="{{ asset('upload/wollo_Information.jpg')}}" class="wd-70" alt="...">
             </div>
             
             <div style="justify-content: center;align-items: center;text-align:center;margin:0px 0px 40px 0px ">
@@ -96,7 +96,7 @@ License: For each use you must have a valid license purchased only from above li
             <div style="margin:5px 0px 15px 00px;padding:10px 0px 30px 40px " class="single_post">
             <h5 class="mb-2">Heading</h5>
             <div style="padding:10px">
-            <img src="{{ asset('upload/wollo_university.jpg')}}" class="wd-70" alt="...">
+            <img src="{{ asset('upload/wollo_Information.jpg')}}" class="wd-70" alt="...">
             </div>
             
             <div style="justify-content: center; 
@@ -198,10 +198,10 @@ License: For each use you must have a valid license purchased only from above li
 
 <script>
  @if(Session::has('message'))
- var type = "{{ Session::get('alert-type','info') }}"
+ var type = "{{ Session::get('alert-type','Information') }}"
  switch(type){
-    case 'info':
-    toastr.info(" {{ Session::get('message') }} ");
+    case 'Information':
+    toastr.Information(" {{ Session::get('message') }} ");
     break;
 
     case 'success':

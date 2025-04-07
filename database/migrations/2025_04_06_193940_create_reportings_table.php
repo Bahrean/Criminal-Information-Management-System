@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('location', 255);
             $table->text('description');
             $table->string('file_path')->nullable()->comment('Stores path to uploaded evidence files');
-            $table->text('suspect_info')->nullable();
-            $table->text('witness_info')->nullable();
+            $table->text('suspect_Information')->nullable();
+            $table->text('witness_Information')->nullable();
             $table->string('reporter_name')->nullable();
             $table->string('reporter_email')->nullable();
             $table->string('reporter_phone', 20)->nullable();

@@ -12,7 +12,7 @@
     <meta name="description" content="Responsive Admin Dashboard Template based on Bootstrap 5">
     <meta name="author" content="NobleUI">
     <meta name="keywords" content="nobleui, admin, dashboard, responsive, html, css, bootstrap 5, ui kit, web">
-    <title>Admin Panel | Wollo University Communication</title>
+    <title>Admin Panel | Criminal Information Communication</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -192,10 +192,10 @@
     <!-- Toastr Notification -->
     <script>
         @if(Session::has('message'))
-            var type = "{{ Session::get('alert-type', 'info') }}";
+            var type = "{{ Session::get('alert-type', 'Information') }}";
             switch (type) {
-                case 'info':
-                    toastr.info("{{ Session::get('message') }}");
+                case 'Information':
+                    toastr.Information("{{ Session::get('message') }}");
                     break;
                 case 'success':
                     toastr.success("{{ Session::get('message') }}");

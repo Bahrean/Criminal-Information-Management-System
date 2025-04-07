@@ -1,5 +1,5 @@
 
-## Inter-Office-Communication-For-Wollo-University
+## Inter-Office-Communication-For-Wollo-Information
 
 ![./inter-office-login.PNG](/inter-office-login.PNG)
 

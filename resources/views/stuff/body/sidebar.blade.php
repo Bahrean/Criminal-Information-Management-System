@@ -1,7 +1,7 @@
 <nav class="sidebar">
         <div class="sidebar-header">
             <a href="#" class="sidebar-brand">
-            Wollo <span style="color: rgb(255, 255, 0);font-size: 20px;">University</span>
+            Crime<span style="color: rgb(255, 255, 0);font-size: 20px;">Information</span>
             </a>
             <div class="sidebar-toggler not-active">
             <span></span>

@@ -683,8 +683,8 @@
         return find$2(browsers, browser => {
           var _a;
           return lcBrand === ((_a = browser.brand) === null || _a === void 0 ? void 0 : _a.toLowerCase());
-        }).map(info => ({
-          current: info.name,
+        }).map(Information => ({
+          current: Information.name,
           version: Version.nu(parseInt(uaBrand.version, 10), 0)
         }));
       });
@@ -851,7 +851,7 @@
         versionRegexes: [/.*?chrome\/([0-9]+)\.([0-9]+).*/]
       }
     ];
-    const PlatformInfo = {
+    const PlatformInformation = {
       browsers: constant(browsers),
       oses: constant(oses)
     };
@@ -868,9 +868,9 @@
         version: Version.unknown()
       });
     };
-    const nu$2 = info => {
-      const current = info.current;
-      const version = info.version;
+    const nu$2 = Information => {
+      const current = Information.current;
+      const version = Information.version;
       const isBrowser = name => () => current === name;
       return {
         current,
@@ -908,9 +908,9 @@
         version: Version.unknown()
       });
     };
-    const nu$1 = info => {
-      const current = info.current;
-      const version = info.version;
+    const nu$1 = Information => {
+      const current = Information.current;
+      const version = Information.version;
       const isOS = name => () => current === name;
       return {
         current,
@@ -939,8 +939,8 @@
     };
 
     const detect$3 = (userAgent, userAgentDataOpt, mediaMatch) => {
-      const browsers = PlatformInfo.browsers();
-      const oses = PlatformInfo.oses();
+      const browsers = PlatformInformation.browsers();
+      const oses = PlatformInformation.oses();
       const browser = userAgentDataOpt.bind(userAgentData => detectBrowser$1(browsers, userAgentData)).orThunk(() => detectBrowser(browsers, userAgent)).fold(Browser.unknown, Browser.nu);
       const os = detectOs(oses, userAgent).fold(OperatingSystem.unknown, OperatingSystem.nu);
       const deviceType = DeviceType(os, browser, userAgent, mediaMatch);
@@ -9859,7 +9859,7 @@
         }
       }
     };
-    const markerInfo = (element, cleanupFun) => {
+    const markerInformation = (element, cleanupFun) => {
       const pos = absolute(element);
       const height = get$2(element);
       return {
@@ -9874,9 +9874,9 @@
       const startPoint = descend(element, offset);
       const span = SugarElement.fromHtml('<span data-mce-bogus="all" style="display: inline-block;">' + ZWSP$1 + '</span>');
       before$3(startPoint.element, span);
-      return markerInfo(span, () => remove$6(span));
+      return markerInformation(span, () => remove$6(span));
     };
-    const elementMarker = element => markerInfo(SugarElement.fromDom(element), noop);
+    const elementMarker = element => markerInformation(SugarElement.fromDom(element), noop);
     const withMarker = (editor, f, rng, alignToTop) => {
       preserveWith(editor, (_s, _e) => applyWithMarker(editor, f, rng, alignToTop), rng);
     };
@@ -15539,41 +15539,41 @@
     const uniqueId$1 = prefix => {
       return (prefix || 'blobid') + count$1++;
     };
-    const processDataUri = (dataUri, base64Only, generateBlobInfo) => {
+    const processDataUri = (dataUri, base64Only, generateBlobInformation) => {
       return parseDataUri(dataUri).bind(({data, type, base64Encoded}) => {
         if (base64Only && !base64Encoded) {
           return Optional.none();
         } else {
           const base64 = base64Encoded ? data : btoa(data);
-          return generateBlobInfo(base64, type);
+          return generateBlobInformation(base64, type);
         }
       });
     };
-    const createBlobInfo$1 = (blobCache, blob, base64) => {
-      const blobInfo = blobCache.create(uniqueId$1(), blob, base64);
-      blobCache.add(blobInfo);
-      return blobInfo;
+    const createBlobInformation$1 = (blobCache, blob, base64) => {
+      const blobInformation = blobCache.create(uniqueId$1(), blob, base64);
+      blobCache.add(blobInformation);
+      return blobInformation;
     };
-    const dataUriToBlobInfo = (blobCache, dataUri, base64Only = false) => {
-      return processDataUri(dataUri, base64Only, (base64, type) => Optional.from(blobCache.getByData(base64, type)).orThunk(() => buildBlob(type, base64).map(blob => createBlobInfo$1(blobCache, blob, base64))));
+    const dataUriToBlobInformation = (blobCache, dataUri, base64Only = false) => {
+      return processDataUri(dataUri, base64Only, (base64, type) => Optional.from(blobCache.getByData(base64, type)).orThunk(() => buildBlob(type, base64).map(blob => createBlobInformation$1(blobCache, blob, base64))));
     };
-    const imageToBlobInfo = (blobCache, imageSrc) => {
+    const imageToBlobInformation = (blobCache, imageSrc) => {
       const invalidDataUri = () => Promise.reject('Invalid data URI');
       if (startsWith(imageSrc, 'blob:')) {
-        const blobInfo = blobCache.getByUri(imageSrc);
-        if (isNonNullable(blobInfo)) {
-          return Promise.resolve(blobInfo);
+        const blobInformation = blobCache.getByUri(imageSrc);
+        if (isNonNullable(blobInformation)) {
+          return Promise.resolve(blobInformation);
         } else {
           return uriToBlob(imageSrc).then(blob => {
             return blobToDataUri(blob).then(dataUri => {
               return processDataUri(dataUri, false, base64 => {
-                return Optional.some(createBlobInfo$1(blobCache, blob, base64));
+                return Optional.some(createBlobInformation$1(blobCache, blob, base64));
               }).getOrThunk(invalidDataUri);
             });
           });
         }
       } else if (startsWith(imageSrc, 'data:')) {
-        return dataUriToBlobInfo(blobCache, imageSrc).fold(invalidDataUri, blobInfo => Promise.resolve(blobInfo));
+        return dataUriToBlobInformation(blobCache, imageSrc).fold(invalidDataUri, blobInformation => Promise.resolve(blobInformation));
       } else {
         return Promise.reject('Unknown image data format');
       }
@@ -15588,8 +15588,8 @@
         if (isInternalImageSource(img) || isBogusImage(img)) {
           return;
         }
-        dataUriToBlobInfo(blobCache, inputSrc, true).each(blobInfo => {
-          img.attr('src', blobInfo.blobUri());
+        dataUriToBlobInformation(blobCache, inputSrc, true).each(blobInformation => {
+          img.attr('src', blobInformation.blobUri());
         });
       };
       if (blobCache) {
@@ -15745,7 +15745,7 @@
     };
 
     const each$4 = Tools.each, trim = Tools.trim;
-    const queryParts = 'source protocol authority userInfo user password host port relative path directory file query anchor'.split(' ');
+    const queryParts = 'source protocol authority userInformation user password host port relative path directory file query anchor'.split(' ');
     const DEFAULT_PORTS = {
       ftp: 21,
       http: 80,
@@ -15820,8 +15820,8 @@
           if (!self.protocol) {
             self.protocol = baseUri.protocol;
           }
-          if (!self.userInfo) {
-            self.userInfo = baseUri.userInfo;
+          if (!self.userInformation) {
+            self.userInformation = baseUri.userInformation;
           }
           if (!self.port && self.host === 'mce_host') {
             self.port = baseUri.port;
@@ -16000,8 +16000,8 @@
             } else {
               s += '//';
             }
-            if (this.userInfo) {
-              s += this.userInfo + '@';
+            if (this.userInformation) {
+              s += this.userInformation + '@';
             }
             if (this.host) {
               s += this.host;
@@ -18081,7 +18081,7 @@
         const themesMessage = isLegacyMobileTheme ? `\n\nThemes:${ listJoiner }mobile` : '';
         const pluginsMessage = hasRemovedPlugins ? `\n\nPlugins:${ listJoiner }${ removedPlugins.join(listJoiner) }` : '';
         const optionsMessage = hasRemovedOptions ? `\n\nOptions:${ listJoiner }${ removedOptions.join(listJoiner) }` : '';
-        console.warn('The following deprecated features are currently enabled and have been removed in TinyMCE 6.0. These features will no longer work and should be removed from the TinyMCE configuration. ' + 'See https://www.tiny.cloud/docs/tinymce/6/migration-from-5x/ for more information.' + themesMessage + pluginsMessage + optionsMessage);
+        console.warn('The following deprecated features are currently enabled and have been removed in TinyMCE 6.0. These features will no longer work and should be removed from the TinyMCE configuration. ' + 'See https://www.tiny.cloud/docs/tinymce/6/migration-from-5x/ for more Information.' + themesMessage + pluginsMessage + optionsMessage);
       }
     };
     const logWarnings = (rawOptions, normalizedOptions) => {
@@ -18525,22 +18525,22 @@
         const promises = map$3(images, img => {
           const imageSrc = img.src;
           if (has$2(cachedPromises, imageSrc)) {
-            return cachedPromises[imageSrc].then(imageInfo => {
-              if (isString(imageInfo)) {
-                return imageInfo;
+            return cachedPromises[imageSrc].then(imageInformation => {
+              if (isString(imageInformation)) {
+                return imageInformation;
               } else {
                 return {
                   image: img,
-                  blobInfo: imageInfo.blobInfo
+                  blobInformation: imageInformation.blobInformation
                 };
               }
             });
           } else {
-            const newPromise = imageToBlobInfo(blobCache, imageSrc).then(blobInfo => {
+            const newPromise = imageToBlobInformation(blobCache, imageSrc).then(blobInformation => {
               delete cachedPromises[imageSrc];
               return {
                 image: img,
-                blobInfo
+                blobInformation
               };
             }).catch(error => {
               delete cachedPromises[imageSrc];
@@ -18633,7 +18633,7 @@
       const create = (o, blob, base64, name, filename) => {
         if (isString(o)) {
           const id = o;
-          return toBlobInfo({
+          return toBlobInformation({
             id,
             name,
             filename,
@@ -18641,14 +18641,14 @@
             base64
           });
         } else if (isObject(o)) {
-          return toBlobInfo(o);
+          return toBlobInformation(o);
         } else {
           throw new Error('Unknown input type');
         }
       };
-      const toBlobInfo = o => {
+      const toBlobInformation = o => {
         if (!o.blob || !o.base64) {
-          throw new Error('blob and base64 representations of the image are required for BlobInfo to be created');
+          throw new Error('blob and base64 representations of the image are required for BlobInformation to be created');
         }
         const id = o.id || uuid('blobid');
         const name = o.name || id;
@@ -18663,27 +18663,27 @@
           uri: constant(o.uri)
         };
       };
-      const add = blobInfo => {
-        if (!get(blobInfo.id())) {
-          cache.push(blobInfo);
+      const add = blobInformation => {
+        if (!get(blobInformation.id())) {
+          cache.push(blobInformation);
         }
       };
       const findFirst = predicate => find$2(cache, predicate).getOrUndefined();
-      const get = id => findFirst(cachedBlobInfo => cachedBlobInfo.id() === id);
-      const getByUri = blobUri => findFirst(blobInfo => blobInfo.blobUri() === blobUri);
-      const getByData = (base64, type) => findFirst(blobInfo => blobInfo.base64() === base64 && blobInfo.blob().type === type);
+      const get = id => findFirst(cachedBlobInformation => cachedBlobInformation.id() === id);
+      const getByUri = blobUri => findFirst(blobInformation => blobInformation.blobUri() === blobUri);
+      const getByData = (base64, type) => findFirst(blobInformation => blobInformation.base64() === base64 && blobInformation.blob().type === type);
       const removeByUri = blobUri => {
-        cache = filter$6(cache, blobInfo => {
-          if (blobInfo.blobUri() === blobUri) {
-            URL.revokeObjectURL(blobInfo.blobUri());
+        cache = filter$6(cache, blobInformation => {
+          if (blobInformation.blobUri() === blobUri) {
+            URL.revokeObjectURL(blobInformation.blobUri());
             return false;
           }
           return true;
         });
       };
       const destroy = () => {
-        each$f(cache, cachedBlobInfo => {
-          URL.revokeObjectURL(cachedBlobInfo.blobUri());
+        each$f(cache, cachedBlobInformation => {
+          URL.revokeObjectURL(cachedBlobInformation.blobUri());
         });
         cache = [];
       };
@@ -18707,7 +18707,7 @@
         }
         return path2;
       };
-      const defaultHandler = (blobInfo, progress) => new Promise((success, failure) => {
+      const defaultHandler = (blobInformation, progress) => new Promise((success, failure) => {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', settings.url);
         xhr.withCredentials = settings.credentials;
@@ -18730,20 +18730,20 @@
           success(pathJoin(settings.basePath, json.location));
         };
         const formData = new FormData();
-        formData.append('file', blobInfo.blob(), blobInfo.filename());
+        formData.append('file', blobInformation.blob(), blobInformation.filename());
         xhr.send(formData);
       });
       const noUpload = () => new Promise(resolve => {
         resolve([]);
       });
-      const handlerSuccess = (blobInfo, url) => ({
+      const handlerSuccess = (blobInformation, url) => ({
         url,
-        blobInfo,
+        blobInformation,
         status: true
       });
-      const handlerFailure = (blobInfo, error) => ({
+      const handlerFailure = (blobInformation, error) => ({
         url: '',
-        blobInfo,
+        blobInformation,
         status: false,
         error
       });
@@ -18753,8 +18753,8 @@
         });
         delete pendingPromises[blobUri];
       };
-      const uploadBlobInfo = (blobInfo, handler, openNotification) => {
-        uploadStatus.markPending(blobInfo.blobUri());
+      const uploadBlobInformation = (blobInformation, handler, openNotification) => {
+        uploadStatus.markPending(blobInformation.blobUri());
         return new Promise(resolve => {
           let notification;
           let progress;
@@ -18767,15 +18767,15 @@
             };
             const success = url => {
               closeNotification();
-              uploadStatus.markUploaded(blobInfo.blobUri(), url);
-              resolvePending(blobInfo.blobUri(), handlerSuccess(blobInfo, url));
-              resolve(handlerSuccess(blobInfo, url));
+              uploadStatus.markUploaded(blobInformation.blobUri(), url);
+              resolvePending(blobInformation.blobUri(), handlerSuccess(blobInformation, url));
+              resolve(handlerSuccess(blobInformation, url));
             };
             const failure = error => {
               closeNotification();
-              uploadStatus.removeFailed(blobInfo.blobUri());
-              resolvePending(blobInfo.blobUri(), handlerFailure(blobInfo, error));
-              resolve(handlerFailure(blobInfo, error));
+              uploadStatus.removeFailed(blobInformation.blobUri());
+              resolvePending(blobInformation.blobUri(), handlerFailure(blobInformation, error));
+              resolve(handlerFailure(blobInformation, error));
             };
             progress = percent => {
               if (percent < 0 || percent > 100) {
@@ -18786,27 +18786,27 @@
                 n.progressBar.value(percent);
               });
             };
-            handler(blobInfo, progress).then(success, err => {
+            handler(blobInformation, progress).then(success, err => {
               failure(isString(err) ? { message: err } : err);
             });
           } catch (ex) {
-            resolve(handlerFailure(blobInfo, ex));
+            resolve(handlerFailure(blobInformation, ex));
           }
         });
       };
       const isDefaultHandler = handler => handler === defaultHandler;
-      const pendingUploadBlobInfo = blobInfo => {
-        const blobUri = blobInfo.blobUri();
+      const pendingUploadBlobInformation = blobInformation => {
+        const blobUri = blobInformation.blobUri();
         return new Promise(resolve => {
           pendingPromises[blobUri] = pendingPromises[blobUri] || [];
           pendingPromises[blobUri].push(resolve);
         });
       };
-      const uploadBlobs = (blobInfos, openNotification) => {
-        blobInfos = Tools.grep(blobInfos, blobInfo => !uploadStatus.isUploaded(blobInfo.blobUri()));
-        return Promise.all(Tools.map(blobInfos, blobInfo => uploadStatus.isPending(blobInfo.blobUri()) ? pendingUploadBlobInfo(blobInfo) : uploadBlobInfo(blobInfo, settings.handler, openNotification)));
+      const uploadBlobs = (blobInformations, openNotification) => {
+        blobInformations = Tools.grep(blobInformations, blobInformation => !uploadStatus.isUploaded(blobInformation.blobUri()));
+        return Promise.all(Tools.map(blobInformations, blobInformation => uploadStatus.isPending(blobInformation.blobUri()) ? pendingUploadBlobInformation(blobInformation) : uploadBlobInformation(blobInformation, settings.handler, openNotification)));
       };
-      const upload = (blobInfos, openNotification) => !settings.url && isDefaultHandler(settings.handler) ? noUpload() : uploadBlobs(blobInfos, openNotification);
+      const upload = (blobInformations, openNotification) => !settings.url && isDefaultHandler(settings.handler) ? noUpload() : uploadBlobs(blobInformations, openNotification);
       if (isFunction(settings.handler) === false) {
         settings.handler = defaultHandler;
       }
@@ -18815,7 +18815,7 @@
 
     const openNotification = editor => () => editor.notificationManager.open({
       text: editor.translate('Image uploading...'),
-      type: 'info',
+      type: 'Information',
       timeout: -1,
       progressBar: true
     });
@@ -18828,7 +18828,7 @@
     const ImageUploader = editor => {
       const uploadStatus = UploadStatus();
       const uploader = createUploader(editor, uploadStatus);
-      return { upload: (blobInfos, showNotification = true) => uploader.upload(blobInfos, showNotification ? openNotification(editor) : undefined) };
+      return { upload: (blobInformations, showNotification = true) => uploader.upload(blobInformations, showNotification ? openNotification(editor) : undefined) };
     };
 
     const EditorUpload = editor => {
@@ -18883,36 +18883,36 @@
         if (!uploader) {
           uploader = createUploader(editor, uploadStatus);
         }
-        return scanForImages().then(aliveGuard(imageInfos => {
-          const blobInfos = map$3(imageInfos, imageInfo => imageInfo.blobInfo);
-          return uploader.upload(blobInfos, openNotification(editor)).then(aliveGuard(result => {
+        return scanForImages().then(aliveGuard(imageInformations => {
+          const blobInformations = map$3(imageInformations, imageInformation => imageInformation.blobInformation);
+          return uploader.upload(blobInformations, openNotification(editor)).then(aliveGuard(result => {
             const imagesToRemove = [];
             let shouldDispatchChange = false;
-            const filteredResult = map$3(result, (uploadInfo, index) => {
-              const blobInfo = imageInfos[index].blobInfo;
-              const image = imageInfos[index].image;
+            const filteredResult = map$3(result, (uploadInformation, index) => {
+              const blobInformation = imageInformations[index].blobInformation;
+              const image = imageInformations[index].image;
               let removed = false;
-              if (uploadInfo.status && shouldReplaceBlobUris(editor)) {
-                if (uploadInfo.url && !contains$1(image.src, uploadInfo.url)) {
+              if (uploadInformation.status && shouldReplaceBlobUris(editor)) {
+                if (uploadInformation.url && !contains$1(image.src, uploadInformation.url)) {
                   shouldDispatchChange = true;
                 }
                 blobCache.removeByUri(image.src);
                 if (isRtc(editor)) ; else {
-                  replaceImageUriInView(image, uploadInfo.url);
+                  replaceImageUriInView(image, uploadInformation.url);
                 }
-              } else if (uploadInfo.error) {
-                if (uploadInfo.error.remove) {
+              } else if (uploadInformation.error) {
+                if (uploadInformation.error.remove) {
                   replaceUrlInUndoStack(image.getAttribute('src'), Env.transparentSrc);
                   imagesToRemove.push(image);
                   removed = true;
                 }
-                uploadError(editor, uploadInfo.error.message);
+                uploadError(editor, uploadInformation.error.message);
               }
               return {
                 element: image,
-                status: uploadInfo.status,
-                uploadUri: uploadInfo.url,
-                blobInfo,
+                status: uploadInformation.status,
+                uploadUri: uploadInformation.url,
+                blobInformation,
                 removed
               };
             });
@@ -18950,8 +18950,8 @@
           });
           if (isRtc(editor)) ; else {
             each$f(filteredResult, resultItem => {
-              replaceUrlInUndoStack(resultItem.image.src, resultItem.blobInfo.blobUri());
-              resultItem.image.src = resultItem.blobInfo.blobUri();
+              replaceUrlInUndoStack(resultItem.image.src, resultItem.blobInformation.blobUri());
+              resultItem.image.src = resultItem.blobInformation.blobUri();
               resultItem.image.removeAttribute('data-mce-src');
             });
           }
@@ -18969,15 +18969,15 @@
           if (resultUri) {
             return 'src="' + resultUri + '"';
           }
-          let blobInfo = blobCache.getByUri(blobUri);
-          if (!blobInfo) {
-            blobInfo = foldl(editor.editorManager.get(), (result, editor) => {
+          let blobInformation = blobCache.getByUri(blobUri);
+          if (!blobInformation) {
+            blobInformation = foldl(editor.editorManager.get(), (result, editor) => {
               return result || editor.editorUpload && editor.editorUpload.blobCache.getByUri(blobUri);
             }, null);
           }
-          if (blobInfo) {
-            const blob = blobInfo.blob();
-            return 'src="data:' + blob.type + ';base64,' + blobInfo.base64() + '"';
+          if (blobInformation) {
+            const blob = blobInformation.blob();
+            return 'src="data:' + blob.type + ';base64,' + blobInformation.base64() + '"';
           }
           return match;
         });
@@ -20853,11 +20853,11 @@
       const from = forward ? CaretPosition.fromRangeEnd(rng) : CaretPosition.fromRangeStart(rng);
       const host = getEditingHost(from.container(), editor.getBody());
       if (forward) {
-        const lineInfo = getPositionsUntilNextLine(host, from);
-        return last$3(lineInfo.positions);
+        const lineInformation = getPositionsUntilNextLine(host, from);
+        return last$3(lineInformation.positions);
       } else {
-        const lineInfo = getPositionsUntilPreviousLine(host, from);
-        return head(lineInfo.positions);
+        const lineInformation = getPositionsUntilPreviousLine(host, from);
+        return head(lineInformation.positions);
       }
     };
     const moveToLineEndPoint$3 = (editor, forward, isElementPosition) => getLineEndPoint(editor, forward).filter(isElementPosition).exists(pos => {
@@ -21643,16 +21643,16 @@
       const detection = detect(current, isRoot);
       return detection.fold(() => {
         return CellLocation.none(current);
-      }, info => {
-        return walk(info.all, current, info.index, 1, isEligible);
+      }, Information => {
+        return walk(Information.all, current, Information.index, 1, isEligible);
       });
     };
     const prev = (current, isEligible, isRoot) => {
       const detection = detect(current, isRoot);
       return detection.fold(() => {
         return CellLocation.none();
-      }, info => {
-        return walk(info.all, current, info.index, -1, isEligible);
+      }, Information => {
+        return walk(Information.all, current, Information.index, -1, isEligible);
       });
     };
 
@@ -21708,15 +21708,15 @@
     const findClosestPositionInAboveCell = (table, pos) => head(pos.getClientRects()).bind(rect => getClosestCellAbove(table, rect.left, rect.top)).bind(cell => findClosestHorizontalPosition(getLastLinePositions(cell), pos));
     const findClosestPositionInBelowCell = (table, pos) => last$3(pos.getClientRects()).bind(rect => getClosestCellBelow(table, rect.left, rect.top)).bind(cell => findClosestHorizontalPosition(getFirstLinePositions(cell), pos));
 
-    const hasNextBreak = (getPositionsUntil, scope, lineInfo) => lineInfo.breakAt.exists(breakPos => getPositionsUntil(scope, breakPos).breakAt.isSome());
-    const startsWithWrapBreak = lineInfo => lineInfo.breakType === BreakType.Wrap && lineInfo.positions.length === 0;
-    const startsWithBrBreak = lineInfo => lineInfo.breakType === BreakType.Br && lineInfo.positions.length === 1;
+    const hasNextBreak = (getPositionsUntil, scope, lineInformation) => lineInformation.breakAt.exists(breakPos => getPositionsUntil(scope, breakPos).breakAt.isSome());
+    const startsWithWrapBreak = lineInformation => lineInformation.breakType === BreakType.Wrap && lineInformation.positions.length === 0;
+    const startsWithBrBreak = lineInformation => lineInformation.breakType === BreakType.Br && lineInformation.positions.length === 1;
     const isAtTableCellLine = (getPositionsUntil, scope, pos) => {
-      const lineInfo = getPositionsUntil(scope, pos);
-      if (startsWithWrapBreak(lineInfo) || !isBr$6(pos.getNode()) && startsWithBrBreak(lineInfo)) {
-        return !hasNextBreak(getPositionsUntil, scope, lineInfo);
+      const lineInformation = getPositionsUntil(scope, pos);
+      if (startsWithWrapBreak(lineInformation) || !isBr$6(pos.getNode()) && startsWithBrBreak(lineInformation)) {
+        return !hasNextBreak(getPositionsUntil, scope, lineInformation);
       } else {
-        return lineInfo.breakAt.isNone();
+        return lineInformation.breakAt.isNone();
       }
     };
     const isAtFirstTableCellLine = curry(isAtTableCellLine, getPositionsUntilPreviousLine);
@@ -22179,17 +22179,17 @@
     const formatErrors = errors => {
       const es = errors.length > 10 ? errors.slice(0, 10).concat([{
           path: [],
-          getErrorInfo: constant('... (only showing first ten failures)')
+          getErrorInformation: constant('... (only showing first ten failures)')
         }]) : errors;
       return map$3(es, e => {
-        return 'Failed path: (' + e.path.join(' > ') + ')\n' + e.getErrorInfo();
+        return 'Failed path: (' + e.path.join(' > ') + ')\n' + e.getErrorInformation();
       });
     };
 
-    const nu = (path, getErrorInfo) => {
+    const nu = (path, getErrorInformation) => {
       return SimpleResult.serror([{
           path,
-          getErrorInfo
+          getErrorInformation
         }]);
     };
     const missingRequired = (path, key, obj) => nu(path, () => 'Could not find valid *required* value for "' + key + '" in ' + formatObj(obj));
@@ -22384,8 +22384,8 @@
       }));
     };
     const asRaw = (label, prop, obj) => SimpleResult.toResult(extractValue(label, prop, obj));
-    const formatError = errInfo => {
-      return 'Errors: \n' + formatErrors(errInfo.errors).join('\n') + '\n\nInput object: ' + formatObj(errInfo.input);
+    const formatError = errInformation => {
+      return 'Errors: \n' + formatErrors(errInformation.errors).join('\n') + '\n\nInput object: ' + formatObj(errInformation.input);
     };
     const choose = (key, branches) => choose$1(key, map$2(branches, objOf));
 
@@ -22554,11 +22554,11 @@
       const getAutocompleters = cached(() => register$2(editor));
       const doLookup = fetchOptions => activeAutocompleter.get().map(ac => getContext(editor.dom, editor.selection.getRng(), ac.triggerChar).bind(newContext => lookupWithContext(editor, getAutocompleters, newContext, fetchOptions))).getOrThunk(() => lookup(editor, getAutocompleters));
       const load = fetchOptions => {
-        doLookup(fetchOptions).fold(cancelIfNecessary, lookupInfo => {
-          commenceIfNecessary(lookupInfo.context);
-          lookupInfo.lookupData.then(lookupData => {
+        doLookup(fetchOptions).fold(cancelIfNecessary, lookupInformation => {
+          commenceIfNecessary(lookupInformation.context);
+          lookupInformation.lookupData.then(lookupData => {
             activeAutocompleter.get().map(ac => {
-              const context = lookupInfo.context;
+              const context = lookupInformation.context;
               if (ac.triggerChar === context.triggerChar) {
                 if (context.text.length - ac.matchLength >= 10) {
                   cancelIfNecessary();
@@ -24138,23 +24138,23 @@
       const m = str.match(/([\s\S]+?)(?:\.[a-z0-9.]+)$/i);
       return isNonNullable(m) ? editor.dom.encode(m[1]) : null;
     };
-    const createBlobInfo = (editor, blobCache, file, base64) => {
+    const createBlobInformation = (editor, blobCache, file, base64) => {
       const id = uniqueId();
       const useFileName = shouldReuseFileName(editor) && isNonNullable(file.name);
       const name = useFileName ? extractFilename(editor, file.name) : id;
       const filename = useFileName ? file.name : undefined;
-      const blobInfo = blobCache.create(id, file, base64, name, filename);
-      blobCache.add(blobInfo);
-      return blobInfo;
+      const blobInformation = blobCache.create(id, file, base64, name, filename);
+      blobCache.add(blobInformation);
+      return blobInformation;
     };
     const pasteImage = (editor, imageItem) => {
       parseDataUri(imageItem.uri).each(({data, type, base64Encoded}) => {
         const base64 = base64Encoded ? data : btoa(data);
         const file = imageItem.file;
         const blobCache = editor.editorUpload.blobCache;
-        const existingBlobInfo = blobCache.getByData(base64, type);
-        const blobInfo = existingBlobInfo !== null && existingBlobInfo !== void 0 ? existingBlobInfo : createBlobInfo(editor, blobCache, file, base64);
-        pasteHtml(editor, `<img src="${ blobInfo.blobUri() }">`, false);
+        const existingBlobInformation = blobCache.getByData(base64, type);
+        const blobInformation = existingBlobInformation !== null && existingBlobInformation !== void 0 ? existingBlobInformation : createBlobInformation(editor, blobCache, file, base64);
+        pasteHtml(editor, `<img src="${ blobInformation.blobUri() }">`, false);
       });
     };
     const isClipboardEvent = event => event.type === 'paste';
@@ -24649,7 +24649,7 @@
         ];
       });
     };
-    const clientInfo = (rect, clientX) => {
+    const clientInformation = (rect, clientX) => {
       return {
         node: rect.node,
         position: distanceToRectLeft(rect, clientX) < distanceToRectRight(rect, clientX) ? FakeCaretPosition.Before : FakeCaretPosition.After
@@ -24711,7 +24711,7 @@
       const element = elementAtPoint.getOr(rootElm);
       return traverseUp(rootElm, element, clientX, clientY);
     };
-    const closestFakeCaretCandidate = (root, clientX, clientY) => closestCaretCandidateNodeRect(root, clientX, clientY).filter(rect => isFakeCaretTarget(rect.node)).map(rect => clientInfo(rect, clientX));
+    const closestFakeCaretCandidate = (root, clientX, clientY) => closestCaretCandidateNodeRect(root, clientX, clientY).filter(rect => isFakeCaretTarget(rect.node)).map(rect => clientInformation(rect, clientX));
 
     const getAbsolutePosition = elm => {
       const clientRect = elm.getBoundingClientRect();
@@ -25107,9 +25107,9 @@
             e.preventDefault();
             selectNode(editor, closestContentEditable).each(setElementSelection);
           } else {
-            closestFakeCaretCandidate(rootNode, e.clientX, e.clientY).each(caretInfo => {
+            closestFakeCaretCandidate(rootNode, e.clientX, e.clientY).each(caretInformation => {
               e.preventDefault();
-              const range = showCaret(1, caretInfo.node, caretInfo.position === FakeCaretPosition.Before, false);
+              const range = showCaret(1, caretInformation.node, caretInformation.position === FakeCaretPosition.Before, false);
               setRange(range);
               if (isElement$6(closestContentEditable)) {
                 closestContentEditable.focus();
@@ -26547,7 +26547,7 @@
       iframeHTML += '</head>' + `<body id="${ bodyId }" class="mce-content-body ${ bodyClass }" data-id="${ editor.id }" aria-label="${ translatedAriaText }">` + '<br>' + '</body></html>';
       return iframeHTML;
     };
-    const createIframe = (editor, boxInfo) => {
+    const createIframe = (editor, boxInformation) => {
       const iframeTitle = editor.translate('Rich Text Area');
       const tabindex = getOpt(SugarElement.fromDom(editor.getElement()), 'tabindex').bind(toInt);
       const ifr = createIframeElement(editor.id, iframeTitle, getIframeAttrs(editor), tabindex).dom;
@@ -26555,16 +26555,16 @@
         ifr.onload = null;
         editor.dispatch('load');
       };
-      editor.contentAreaContainer = boxInfo.iframeContainer;
+      editor.contentAreaContainer = boxInformation.iframeContainer;
       editor.iframeElement = ifr;
       editor.iframeHTML = getIframeHtml(editor);
-      DOM$5.add(boxInfo.iframeContainer, ifr);
+      DOM$5.add(boxInformation.iframeContainer, ifr);
     };
-    const init$1 = (editor, boxInfo) => {
-      createIframe(editor, boxInfo);
-      if (boxInfo.editorContainer) {
-        DOM$5.get(boxInfo.editorContainer).style.display = editor.orgDisplay;
-        editor.hidden = DOM$5.isHidden(boxInfo.editorContainer);
+    const init$1 = (editor, boxInformation) => {
+      createIframe(editor, boxInformation);
+      if (boxInformation.editorContainer) {
+        DOM$5.get(boxInformation.editorContainer).style.display = editor.orgDisplay;
+        editor.hidden = DOM$5.isHidden(boxInformation.editorContainer);
       }
       editor.getElement().style.display = 'none';
       DOM$5.setAttrib(editor.id, 'aria-hidden', 'true');
@@ -26637,15 +26637,15 @@
     const renderFromThemeFunc = editor => {
       const elm = editor.getElement();
       const theme = getTheme(editor);
-      const info = theme(editor, elm);
-      if (info.editorContainer.nodeType) {
-        info.editorContainer.id = info.editorContainer.id || editor.id + '_parent';
+      const Information = theme(editor, elm);
+      if (Information.editorContainer.nodeType) {
+        Information.editorContainer.id = Information.editorContainer.id || editor.id + '_parent';
       }
-      if (info.iframeContainer && info.iframeContainer.nodeType) {
-        info.iframeContainer.id = info.iframeContainer.id || editor.id + '_iframecontainer';
+      if (Information.iframeContainer && Information.iframeContainer.nodeType) {
+        Information.iframeContainer.id = Information.iframeContainer.id || editor.id + '_iframecontainer';
       }
-      info.height = info.iframeHeight ? info.iframeHeight : elm.offsetHeight;
-      return info;
+      Information.height = Information.iframeHeight ? Information.iframeHeight : elm.offsetHeight;
+      return Information;
     };
     const createThemeFalseResult = element => {
       return {
@@ -26696,18 +26696,18 @@
       initTheme(editor);
       initModel(editor);
       initPlugins(editor);
-      const renderInfo = renderThemeUi(editor);
-      augmentEditorUiApi(editor, Optional.from(renderInfo.api).getOr({}));
-      const boxInfo = {
-        editorContainer: renderInfo.editorContainer,
-        iframeContainer: renderInfo.iframeContainer
+      const renderInformation = renderThemeUi(editor);
+      augmentEditorUiApi(editor, Optional.from(renderInformation.api).getOr({}));
+      const boxInformation = {
+        editorContainer: renderInformation.editorContainer,
+        iframeContainer: renderInformation.iframeContainer
       };
-      editor.editorContainer = boxInfo.editorContainer ? boxInfo.editorContainer : null;
+      editor.editorContainer = boxInformation.editorContainer ? boxInformation.editorContainer : null;
       appendContentCssFromSettings(editor);
       if (editor.inline) {
         return initContentBody(editor);
       } else {
-        return init$1(editor, boxInfo);
+        return init$1(editor, boxInformation);
       }
     };
 

@@ -317,7 +317,7 @@
                 <td>NobleUI ReactJs</td>
                 <td>01/05/2022</td>
                 <td>10/09/2022</td>
-                <td><span class="badge bg-info">Pending</span></td>
+                <td><span class="badge bg-Information">Pending</span></td>
                 <td>Jensen Combs</td>
             </tr>
             <tr>
@@ -350,7 +350,7 @@
                 <td class="border-bottom">NobleUI EmberJs</td>
                 <td class="border-bottom">01/05/2022</td>
                 <td class="border-bottom">10/11/2022</td>
-                <td class="border-bottom"><span class="badge bg-info">Pending</span></td>
+                <td class="border-bottom"><span class="badge bg-Information">Pending</span></td>
                 <td class="border-bottom">Jensen Combs</td>
             </tr>
             </tbody>

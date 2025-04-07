@@ -275,7 +275,7 @@ Licensed under the MIT license.
 		return layer;
 	};
 
-	// Creates (if necessary) and returns a text info object.
+	// Creates (if necessary) and returns a text Information object.
 	//
 	// The object looks like this:
 	//
@@ -302,22 +302,22 @@ Licensed under the MIT license.
 	// text is constant no matter where it is placed; the placements are a
 	// secondary property.
 	//
-	// Canvas maintains a cache of recently-used text info objects; getTextInfo
+	// Canvas maintains a cache of recently-used text Information objects; getTextInformation
 	// either returns the cached element or creates a new entry.
 	//
 	// @param {string} layer A string of space-separated CSS classes uniquely
 	//     identifying the layer containing this text.
-	// @param {string} text Text string to retrieve info for.
+	// @param {string} text Text string to retrieve Information for.
 	// @param {(string|object)=} font Either a string of space-separated CSS
 	//     classes or a font-spec object, defining the text's font and style.
 	// @param {number=} angle Angle at which to rotate the text, in degrees.
 	//     Angle is currently unused, it will be implemented in the future.
 	// @param {number=} width Maximum width of the text before it wraps.
-	// @return {object} a text info object.
+	// @return {object} a text Information object.
 
-	Canvas.prototype.getTextInfo = function(layer, text, font, angle, width) {
+	Canvas.prototype.getTextInformation = function(layer, text, font, angle, width) {
 
-		var textStyle, layerCache, styleCache, info;
+		var textStyle, layerCache, styleCache, Information;
 
 		// Cast the value to a string, in case we were given a number or such
 
@@ -345,11 +345,11 @@ Licensed under the MIT license.
 			styleCache = layerCache[textStyle] = {};
 		}
 
-		info = styleCache[text];
+		Information = styleCache[text];
 
 		// If we can't find a matching element in our cache, create a new one
 
-		if (info == null) {
+		if (Information == null) {
 
 			var element = $("<div></div>").html(text)
 				.css({
@@ -368,7 +368,7 @@ Licensed under the MIT license.
 				element.addClass(font);
 			}
 
-			info = styleCache[text] = {
+			Information = styleCache[text] = {
 				width: element.outerWidth(true),
 				height: element.outerHeight(true),
 				element: element,
@@ -378,7 +378,7 @@ Licensed under the MIT license.
 			element.detach();
 		}
 
-		return info;
+		return Information;
 	};
 
 	// Adds a text string to the canvas text overlay.
@@ -403,21 +403,21 @@ Licensed under the MIT license.
 
 	Canvas.prototype.addText = function(layer, x, y, text, font, angle, width, halign, valign) {
 
-		var info = this.getTextInfo(layer, text, font, angle, width),
-			positions = info.positions;
+		var Information = this.getTextInformation(layer, text, font, angle, width),
+			positions = Information.positions;
 
 		// Tweak the div's position to match the text's alignment
 
 		if (halign == "center") {
-			x -= info.width / 2;
+			x -= Information.width / 2;
 		} else if (halign == "right") {
-			x -= info.width;
+			x -= Information.width;
 		}
 
 		if (valign == "middle") {
-			y -= info.height / 2;
+			y -= Information.height / 2;
 		} else if (valign == "bottom") {
-			y -= info.height;
+			y -= Information.height;
 		}
 
 		// Determine whether this text already exists at this position.
@@ -438,7 +438,7 @@ Licensed under the MIT license.
 		position = {
 			active: true,
 			rendered: false,
-			element: positions.length ? info.element.clone() : info.element,
+			element: positions.length ? Information.element.clone() : Information.element,
 			x: x,
 			y: y
 		};
@@ -493,7 +493,7 @@ Licensed under the MIT license.
 				}
 			}
 		} else {
-			var positions = this.getTextInfo(layer, text, font, angle).positions;
+			var positions = this.getTextInformation(layer, text, font, angle).positions;
 			for (var i = 0, position; position = positions[i]; i++) {
 				if (position.x == x && position.y == y) {
 					position.active = false;
@@ -539,7 +539,7 @@ Licensed under the MIT license.
                     min: null, // min. value to show, null means set automatically
                     max: null, // max. value to show, null means set automatically
                     autoscaleMargin: null, // margin in % to add if auto-setting min/max
-                    ticks: null, // either [1, 3] or [[1, "a"], 3] or (fn: axis info -> ticks) or app. number of ticks for auto-ticks
+                    ticks: null, // either [1, 3] or [[1, "a"], 3] or (fn: axis Information -> ticks) or app. number of ticks for auto-ticks
                     tickFormatter: null, // fn: number -> string
                     labelWidth: null, // size of tick labels in pixels
                     labelHeight: null,
@@ -1183,7 +1183,7 @@ Licensed under the MIT license.
                             val = points[k + m];
                             if (val != null) {
                                 f = format[m];
-                                // extract min/max info
+                                // extract min/max Information
                                 if (f.autoscale !== false) {
                                     if (f.x) {
                                         updateAxis(s.xaxis, val, val);
@@ -1414,10 +1414,10 @@ Licensed under the MIT license.
                 if (!t.label)
                     continue;
 
-                var info = surface.getTextInfo(layer, t.label, font, null, maxWidth);
+                var Information = surface.getTextInformation(layer, t.label, font, null, maxWidth);
 
-                labelWidth = Math.max(labelWidth, info.width);
-                labelHeight = Math.max(labelHeight, info.height);
+                labelWidth = Math.max(labelWidth, Information.width);
+                labelHeight = Math.max(labelHeight, Information.height);
             }
 
             axis.labelWidth = opts.labelWidth || labelWidth;

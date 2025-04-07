@@ -27,7 +27,7 @@ $(function() {
     } else if (type === 'custom-html') {
       Swal.fire({
         title: '<strong>HTML <u>example</u></strong>',
-        icon: 'info',
+        icon: 'Information',
         html:
           'You can use <b>bold text</b>, ' +
           '<a href="//github.com">links</a> ' +

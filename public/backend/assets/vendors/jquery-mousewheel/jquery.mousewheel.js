@@ -179,7 +179,7 @@
             offsetY = event.clientY - boundingRect.top;
         }
 
-        // Add information to the event object
+        // Add Information to the event object
         event.deltaX = deltaX;
         event.deltaY = deltaY;
         event.deltaFactor = lowestDelta;

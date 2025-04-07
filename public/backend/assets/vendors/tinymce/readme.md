@@ -62,10 +62,10 @@ Tiny also offers dedicated SLAs and support for professional development teams.
 
 ## Compiling and contributing
 
-In 2019 the decision was made to transition our codebase to a monorepo. For information on compiling and contributing, see: [contribution guidelines](https://github.com/tinymce/tinymce/blob/master/CONTRIBUTING.md).
+In 2019 the decision was made to transition our codebase to a monorepo. For Information on compiling and contributing, see: [contribution guidelines](https://github.com/tinymce/tinymce/blob/master/CONTRIBUTING.md).
 
 As an open source product, we encourage and support the active development of our software.
 
-## Want more information?
+## Want more Information?
 
 Visit the [TinyMCE website](https://tiny.cloud/) and check out the [TinyMCE documentation](https://www.tiny.cloud/docs/).

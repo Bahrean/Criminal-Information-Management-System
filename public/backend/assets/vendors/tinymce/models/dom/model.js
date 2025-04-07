@@ -1086,8 +1086,8 @@
         return find$1(browsers, browser => {
           var _a;
           return lcBrand === ((_a = browser.brand) === null || _a === void 0 ? void 0 : _a.toLowerCase());
-        }).map(info => ({
-          current: info.name,
+        }).map(Information => ({
+          current: Information.name,
           version: Version.nu(parseInt(uaBrand.version, 10), 0)
         }));
       });
@@ -1225,7 +1225,7 @@
         versionRegexes: [/.*?chrome\/([0-9]+)\.([0-9]+).*/]
       }
     ];
-    const PlatformInfo = {
+    const PlatformInformation = {
       browsers: constant(browsers),
       oses: constant(oses)
     };
@@ -1242,9 +1242,9 @@
         version: Version.unknown()
       });
     };
-    const nu$1 = info => {
-      const current = info.current;
-      const version = info.version;
+    const nu$1 = Information => {
+      const current = Information.current;
+      const version = Information.version;
       const isBrowser = name => () => current === name;
       return {
         current,
@@ -1282,9 +1282,9 @@
         version: Version.unknown()
       });
     };
-    const nu = info => {
-      const current = info.current;
-      const version = info.version;
+    const nu = Information => {
+      const current = Information.current;
+      const version = Information.version;
       const isOS = name => () => current === name;
       return {
         current,
@@ -1313,8 +1313,8 @@
     };
 
     const detect$3 = (userAgent, userAgentDataOpt, mediaMatch) => {
-      const browsers = PlatformInfo.browsers();
-      const oses = PlatformInfo.oses();
+      const browsers = PlatformInformation.browsers();
+      const oses = PlatformInformation.oses();
       const browser = userAgentDataOpt.bind(userAgentData => detectBrowser$1(browsers, userAgentData)).orThunk(() => detectBrowser(browsers, userAgent)).fold(Browser.unknown, Browser.nu);
       const os = detectOs(oses, userAgent).fold(OperatingSystem.unknown, OperatingSystem.nu);
       const deviceType = DeviceType(os, browser, userAgent, mediaMatch);
@@ -1663,11 +1663,11 @@
       return boxPosition(dom);
     };
 
-    const rowInfo = (row, y) => ({
+    const rowInformation = (row, y) => ({
       row,
       y
     });
-    const colInfo = (col, x) => ({
+    const colInformation = (col, x) => ({
       col,
       x
     });
@@ -1679,19 +1679,19 @@
       return absolute(cell).left;
     };
     const getLeftEdge = (index, cell) => {
-      return colInfo(index, ltrEdge(cell));
+      return colInformation(index, ltrEdge(cell));
     };
     const getRightEdge = (index, cell) => {
-      return colInfo(index, rtlEdge(cell));
+      return colInformation(index, rtlEdge(cell));
     };
     const getTop$1 = cell => {
       return absolute(cell).top;
     };
     const getTopEdge = (index, cell) => {
-      return rowInfo(index, getTop$1(cell));
+      return rowInformation(index, getTop$1(cell));
     };
     const getBottomEdge = (index, cell) => {
-      return rowInfo(index, getTop$1(cell) + getOuter$1(cell));
+      return rowInformation(index, getTop$1(cell) + getOuter$1(cell));
     };
     const findPositions = (getInnerEdge, getOuterEdge, array) => {
       if (array.length === 0) {
@@ -3349,13 +3349,13 @@
     const run = (operation, extract, adjustment, postAction, genWrappers) => (table, target, generators, behaviours) => {
       const warehouse = Warehouse.fromTable(table);
       const tableSection = Optional.from(behaviours === null || behaviours === void 0 ? void 0 : behaviours.section).getOrThunk(TableSection.fallback);
-      const output = extract(warehouse, target).map(info => {
+      const output = extract(warehouse, target).map(Information => {
         const model = fromWarehouse(warehouse, generators);
-        const result = operation(model, info, eq$1, genWrappers(generators), tableSection);
+        const result = operation(model, Information, eq$1, genWrappers(generators), tableSection);
         const lockedColumns = getLockedColumnsFromGrid(result.grid);
         const grid = toDetailList(result.grid);
         return {
-          info,
+          Information,
           grid,
           cursor: result.cursor,
           lockedColumns
@@ -3365,7 +3365,7 @@
         const newElements = render$1(table, out.grid);
         const tableSizing = Optional.from(behaviours === null || behaviours === void 0 ? void 0 : behaviours.sizing).getOrThunk(() => TableSize.getTableSize(table));
         const resizing = Optional.from(behaviours === null || behaviours === void 0 ? void 0 : behaviours.resize).getOrThunk(preserveTable);
-        adjustment(table, out.grid, out.info, {
+        adjustment(table, out.grid, out.Information, {
           sizing: tableSizing,
           resize: resizing,
           section: tableSection
@@ -4053,7 +4053,7 @@
       recalculateAndApply(warehouse, newSizes, tableSize);
       tableSize.adjustTableWidth(delta);
     };
-    const adjustWidthTo = (_table, list, _info, tableSize) => {
+    const adjustWidthTo = (_table, list, _Information, tableSize) => {
       const warehouse = Warehouse.generate(list);
       const widths = tableSize.getWidths(warehouse, tableSize);
       recalculateAndApply(warehouse, widths, tableSize);
@@ -5034,7 +5034,7 @@
         return values;
       }
       const scan = foldr(values, (rest, value) => {
-        const info = Size.from(value).fold(() => ({
+        const Information = Size.from(value).fold(() => ({
           value,
           remainder: 0
         }), num => roundDown(num, 'px'), num => ({
@@ -5042,8 +5042,8 @@
           remainder: 0
         }));
         return {
-          output: [info.value].concat(rest.output),
-          remainder: rest.remainder + info.remainder
+          output: [Information.value].concat(rest.output),
+          remainder: rest.remainder + Information.remainder
         };
       }, {
         output: [],
@@ -5879,8 +5879,8 @@
         return direction.traverse(br).fold(() => {
           return gatherer(br, direction.gather, isRoot).map(direction.relative);
         }, adjacent => {
-          return indexInParent(adjacent).map(info => {
-            return Situ.on(info.parent, info.index);
+          return indexInParent(adjacent).map(Information => {
+            return Situ.on(Information.parent, Information.index);
           });
         });
       });
@@ -6166,8 +6166,8 @@
     };
     const navigate = (bridge, isRoot, direction, initial, anchor, precheck) => {
       return precheck(initial, isRoot).orThunk(() => {
-        return simulate(bridge, isRoot, direction, initial, anchor).map(info => {
-          const range = info.range;
+        return simulate(bridge, isRoot, direction, initial, anchor).map(Information => {
+          const range = Information.range;
           return Response.create(Optional.some(makeSitus(range.start, range.soffset, range.finish, range.foffset)), true);
         });
       });
@@ -6206,8 +6206,8 @@
       });
     };
     const select = (bridge, container, isRoot, direction, initial, anchor, selectRange) => {
-      return simulate(bridge, isRoot, direction, initial, anchor).bind(info => {
-        return detect(container, isRoot, info.start, info.finish, selectRange);
+      return simulate(bridge, isRoot, direction, initial, anchor).bind(Information => {
+        return detect(container, isRoot, Information.start, Information.finish, selectRange);
       });
     };
 
@@ -7254,7 +7254,7 @@
           });
         });
       };
-      const events = create$1({ move: Event(['info']) });
+      const events = create$1({ move: Event(['Information']) });
       return {
         onEvent,
         reset,
@@ -7263,7 +7263,7 @@
     };
 
     const NoDrag = () => {
-      const events = create$1({ move: Event(['info']) });
+      const events = create$1({ move: Event(['Information']) });
       return {
         onEvent: noop,
         reset: noop,
@@ -7323,7 +7323,7 @@
         movement.onEvent(event, mode);
       };
       movement.events.move.bind(event => {
-        mode.mutate(mutation, event.info);
+        mode.mutate(mutation, event.Information);
       });
       const on = () => {
         active = true;
@@ -7400,8 +7400,8 @@
     const extract = event => {
       return Optional.some(SugarPosition(event.x, event.y));
     };
-    const mutate = (mutation, info) => {
-      mutation.mutate(info.left, info.top);
+    const mutate = (mutation, Information) => {
+      mutation.mutate(Information.left, Information.top);
     };
     const sink = (dragApi, settings) => {
       const blocker = Blocker(settings);

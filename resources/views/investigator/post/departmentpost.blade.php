@@ -10,7 +10,7 @@
     <meta name="author" content="NobleUI">
     <meta name="keywords" content="department head, dashboard, responsive, bootstrap, template, html, css">
 
-    <title>Department Head Panel | Wollo University Inter-Office Communication</title>
+    <title>Department Head Panel | Criminal Information Inter-Office Communication</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,7 +42,7 @@
                 @foreach($post as $key=>$post)
                 @if ($profileData->department == 'IT')
 <div class="card mb-4 shadow-sm post-container">
-    <!-- Post Header with Author Info -->
+    <!-- Post Header with Author Information -->
     <div class="card-header bg-transparent d-flex align-items-center">
         <a href="{{ route('departmenthead.profile') }}" class="d-flex align-items-center text-decoration-none">
             <img class="rounded-circle me-3 shadow-sm" 
@@ -278,11 +278,11 @@ document.querySelectorAll('.toggle-comments').forEach(button => {
 
         // Handling toastr notifications
         @if(Session::has('message'))
-            const type = "{{ Session::get('alert-type', 'info') }}";  // Getting the alert type
+            const type = "{{ Session::get('alert-type', 'Information') }}";  // Getting the alert type
             const message = "{{ Session::get('message') }}";  // Getting the message content
 
             // Displaying the toastr notification based on the type
-            if (type === 'info') toastr.info(message);
+            if (type === 'Information') toastr.Information(message);
             if (type === 'success') toastr.success(message);
             if (type === 'warning') toastr.warning(message);
             if (type === 'error') toastr.error(message);

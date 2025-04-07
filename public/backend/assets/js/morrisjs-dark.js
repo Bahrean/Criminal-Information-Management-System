@@ -9,7 +9,7 @@ $(function() {
     primary        : "#6571ff",
     secondary      : "#7987a1",
     success        : "#05a34a",
-    info           : "#66d1d1",
+    Information           : "#66d1d1",
     warning        : "#fbbc06",
     danger         : "#ff3366",
     light          : "#e9ecef",
@@ -61,7 +61,7 @@ $(function() {
     xkey: 'y',
     ykeys: ['a', 'b'],
     labels: ['Series A', 'Series B'],
-    lineColors: [colors.danger, colors.info],
+    lineColors: [colors.danger, colors.Information],
     fillOpacity: 0.1,
     gridLineColor: [colors.gridBorder],
     gridTextColor: colors.bodyColor,
@@ -85,7 +85,7 @@ $(function() {
     xkey: 'y',
     ykeys: ['a', 'b'],
     labels: ['Series A', 'Series B'],
-    barColors: [colors.danger, colors.info],
+    barColors: [colors.danger, colors.Information],
     gridLineColor: [colors.gridBorder],
     gridTextColor: colors.bodyColor,
     gridTextFamily: fontFamily,
@@ -101,7 +101,7 @@ $(function() {
       {label: "In-Store Sales", value: 30},
       {label: "Mail-Order Sales", value: 20}
     ],
-    colors: [colors.danger, colors.info, colors.primary],
+    colors: [colors.danger, colors.Information, colors.primary],
     labelColor: colors.bodyColor,
   });
 

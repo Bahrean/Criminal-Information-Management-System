@@ -371,7 +371,7 @@
           const message = editor.translate('No templates defined.');
           editor.notificationManager.open({
             text: message,
-            type: 'info'
+            type: 'Information'
           });
           return Optional.none();
         }

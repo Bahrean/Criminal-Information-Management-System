@@ -31,7 +31,7 @@
   --bs-primary: #6571ff;
   --bs-secondary: #7987a1;
   --bs-success: #05a34a;
-  --bs-info: #66d1d1;
+  --bs-Information: #66d1d1;
   --bs-warning: #fbbc06;
   --bs-danger: #ff3366;
   --bs-light: #e9ecef;
@@ -39,7 +39,7 @@
   --bs-primary-rgb: 101, 113, 255;
   --bs-secondary-rgb: 121, 135, 161;
   --bs-success-rgb: 5, 163, 74;
-  --bs-info-rgb: 102, 209, 209;
+  --bs-Information-rgb: 102, 209, 209;
   --bs-warning-rgb: 251, 188, 6;
   --bs-danger-rgb: 255, 51, 102;
   --bs-light-rgb: 233, 236, 239;
@@ -1942,7 +1942,7 @@ progress {
   border-color: var(--bs-table-border-color);
 }
 
-.table-info {
+.table-Information {
   --bs-table-color: #000;
   --bs-table-bg: #e0f6f6;
   --bs-table-border-color: #cadddd;
@@ -3007,7 +3007,7 @@ textarea.is-invalid.typeahead.tt-hint, .select2-container--default .select2-sear
   --bs-btn-disabled-border-color: #05a34a;
 }
 
-.btn-info {
+.btn-Information {
   --bs-btn-color: #000;
   --bs-btn-bg: #66d1d1;
   --bs-btn-border-color: #66d1d1;
@@ -3143,7 +3143,7 @@ textarea.is-invalid.typeahead.tt-hint, .select2-container--default .select2-sear
   --bs-gradient: none;
 }
 
-.btn-outline-info {
+.btn-outline-Information {
   --bs-btn-color: #66d1d1;
   --bs-btn-border-color: #66d1d1;
   --bs-btn-hover-color: #000;
@@ -4862,12 +4862,12 @@ div.tox .btn-group-vertical > .btn-group:not(:first-child) > .tox-button,
   color: #024e23;
 }
 
-.alert-info {
+.alert-Information {
   --bs-alert-color: #3d7d7d;
   --bs-alert-bg: #e0f6f6;
   --bs-alert-border-color: #d1f1f1;
 }
-.alert-info .alert-link {
+.alert-Information .alert-link {
   color: #316464;
 }
 
@@ -5240,15 +5240,15 @@ div.tox .btn-group-vertical > .btn-group:not(:first-child) > .tox-button,
   border-color: #03622c;
 }
 
-.list-group-item-info {
+.list-group-item-Information {
   color: #3d7d7d;
   background-color: #e0f6f6;
 }
-.list-group-item-info.list-group-item-action:hover, .list-group-item-info.list-group-item-action:focus {
+.list-group-item-Information.list-group-item-action:hover, .list-group-item-Information.list-group-item-action:focus {
   color: #3d7d7d;
   background-color: #cadddd;
 }
-.list-group-item-info.list-group-item-action.active {
+.list-group-item-Information.list-group-item-action.active {
   color: #fff;
   background-color: #3d7d7d;
   border-color: #3d7d7d;
@@ -6246,7 +6246,7 @@ div.tox .btn-group-vertical > .btn-group:not(:first-child) > .tox-button,
   background-color: RGBA(5, 163, 74, var(--bs-bg-opacity, 1)) !important;
 }
 
-.text-bg-info {
+.text-bg-Information {
   color: #000 !important;
   background-color: RGBA(102, 209, 209, var(--bs-bg-opacity, 1)) !important;
 }
@@ -6292,10 +6292,10 @@ div.tox .btn-group-vertical > .btn-group:not(:first-child) > .tox-button,
   color: #04823b !important;
 }
 
-.link-info {
+.link-Information {
   color: #66d1d1 !important;
 }
-.link-info:hover, .link-info:focus {
+.link-Information:hover, .link-Information:focus {
   color: #85dada !important;
 }
 
@@ -6923,9 +6923,9 @@ div.tox .btn-group-vertical > .btn-group:not(:first-child) > .tox-button,
   border-color: rgba(var(--bs-success-rgb), var(--bs-border-opacity)) !important;
 }
 
-.border-info {
+.border-Information {
   --bs-border-opacity: 1;
-  border-color: rgba(var(--bs-info-rgb), var(--bs-border-opacity)) !important;
+  border-color: rgba(var(--bs-Information-rgb), var(--bs-border-opacity)) !important;
 }
 
 .border-warning {
@@ -8123,9 +8123,9 @@ div.tox .btn-group-vertical > .btn-group:not(:first-child) > .tox-button,
   color: rgba(var(--bs-success-rgb), var(--bs-text-opacity)) !important;
 }
 
-.text-info {
+.text-Information {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-info-rgb), var(--bs-text-opacity)) !important;
+  color: rgba(var(--bs-Information-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-warning {
@@ -8214,9 +8214,9 @@ div.tox .btn-group-vertical > .btn-group:not(:first-child) > .tox-button,
   background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
 }
 
-.bg-info {
+.bg-Information {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-info-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgba(var(--bs-Information-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-warning {
@@ -20035,33 +20035,33 @@ a.badge:hover {
   color: #7987a1;
 }
 
-.alert-info {
+.alert-Information {
   background-color: rgba(102, 209, 209, 0.1);
   color: #52cbcb;
   border-color: rgba(102, 209, 209, 0.2);
 }
-.alert-info .alert-link {
+.alert-Information .alert-link {
   color: #52cbcb;
 }
-.alert-info svg {
+.alert-Information svg {
   width: 19px;
   height: 19px;
   margin-right: 0.5rem;
 }
-.alert-info i {
+.alert-Information i {
   font-size: 19px;
   margin-right: 0.5rem;
 }
 
-.alert-fill-info {
+.alert-fill-Information {
   --bs-alert-color: #fff;
   --bs-alert-bg: #66d1d1;
   --bs-alert-border-color: #66d1d1;
 }
-.alert-fill-info .alert-link {
+.alert-fill-Information .alert-link {
   color: #cccccc;
 }
-.alert-fill-info.alert-fill-light {
+.alert-fill-Information.alert-fill-light {
   color: #7987a1;
 }
 
@@ -20691,23 +20691,23 @@ div.tox .btn-group-lg > .btn-icon-text.tox-button .btn-icon-append,
   background-color: transparent;
 }
 
-.btn-inverse-info {
+.btn-inverse-Information {
   background-color: rgba(102, 209, 209, 0.2);
   background-image: none;
   border-color: rgba(102, 209, 209, 0);
 }
-.btn-inverse-info:not(.btn-inverse-light) {
+.btn-inverse-Information:not(.btn-inverse-light) {
   color: #66d1d1;
 }
-.btn-inverse-info:hover, .btn-inverse-info.active, .btn-inverse-info:active, .show > .btn-inverse-info.dropdown-toggle {
+.btn-inverse-Information:hover, .btn-inverse-Information.active, .btn-inverse-Information:active, .show > .btn-inverse-Information.dropdown-toggle {
   background-color: rgba(102, 209, 209, 0.3);
   border-color: rgba(102, 209, 209, 0);
 }
-.btn-inverse-info.focus, .btn-inverse-info:focus {
+.btn-inverse-Information.focus, .btn-inverse-Information:focus {
   background-color: rgba(102, 209, 209, 0.3);
   border-color: transparent;
 }
-.btn-inverse-info.disabled, .btn-inverse-info:disabled {
+.btn-inverse-Information.disabled, .btn-inverse-Information:disabled {
   color: #66d1d1;
   background-color: transparent;
 }

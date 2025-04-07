@@ -604,8 +604,8 @@
         return find$1(browsers, browser => {
           var _a;
           return lcBrand === ((_a = browser.brand) === null || _a === void 0 ? void 0 : _a.toLowerCase());
-        }).map(info => ({
-          current: info.name,
+        }).map(Information => ({
+          current: Information.name,
           version: Version.nu(parseInt(uaBrand.version, 10), 0)
         }));
       });
@@ -743,7 +743,7 @@
         versionRegexes: [/.*?chrome\/([0-9]+)\.([0-9]+).*/]
       }
     ];
-    const PlatformInfo = {
+    const PlatformInformation = {
       browsers: constant(browsers),
       oses: constant(oses)
     };
@@ -760,9 +760,9 @@
         version: Version.unknown()
       });
     };
-    const nu$1 = info => {
-      const current = info.current;
-      const version = info.version;
+    const nu$1 = Information => {
+      const current = Information.current;
+      const version = Information.version;
       const isBrowser = name => () => current === name;
       return {
         current,
@@ -800,9 +800,9 @@
         version: Version.unknown()
       });
     };
-    const nu = info => {
-      const current = info.current;
-      const version = info.version;
+    const nu = Information => {
+      const current = Information.current;
+      const version = Information.version;
       const isOS = name => () => current === name;
       return {
         current,
@@ -831,8 +831,8 @@
     };
 
     const detect$1 = (userAgent, userAgentDataOpt, mediaMatch) => {
-      const browsers = PlatformInfo.browsers();
-      const oses = PlatformInfo.oses();
+      const browsers = PlatformInformation.browsers();
+      const oses = PlatformInformation.oses();
       const browser = userAgentDataOpt.bind(userAgentData => detectBrowser$1(browsers, userAgentData)).orThunk(() => detectBrowser(browsers, userAgent)).fold(Browser.unknown, Browser.nu);
       const os = detectOs(oses, userAgent).fold(OperatingSystem.unknown, OperatingSystem.nu);
       const deviceType = DeviceType(os, browser, userAgent, mediaMatch);
@@ -1069,7 +1069,7 @@
       const editorContainer = editor.getContainer();
       const editorContainerS = SugarElement.fromDom(editorContainer);
       const fullscreenRoot = getFullscreenRoot(editor);
-      const fullscreenInfo = fullscreenState.get();
+      const fullscreenInformation = fullscreenState.get();
       const editorBody = SugarElement.fromDom(editor.getBody());
       const isTouch = global.deviceType.isTouch();
       const editorContainerStyle = editorContainer.style;
@@ -1090,9 +1090,9 @@
         }
         handleClasses(DOM.removeClass);
         viewportUpdate.unbind();
-        Optional.from(fullscreenState.get()).each(info => info.fullscreenChangeHandler.unbind());
+        Optional.from(fullscreenState.get()).each(Information => Information.fullscreenChangeHandler.unbind());
       };
-      if (!fullscreenInfo) {
+      if (!fullscreenInformation) {
         const fullscreenChangeHandler = bind$1(owner(fullscreenRoot), getFullscreenchangeEventName(), _evt => {
           if (getFullscreenNative(editor)) {
             if (!isFullscreenElement(fullscreenRoot) && fullscreenState.get() !== null) {
@@ -1100,7 +1100,7 @@
             }
           }
         });
-        const newFullScreenInfo = {
+        const newFullScreenInformation = {
           scrollPos: getScrollPos(),
           containerWidth: editorContainerStyle.width,
           containerHeight: editorContainerStyle.height,
@@ -1118,24 +1118,24 @@
         handleClasses(DOM.addClass);
         viewportUpdate.bind(editorContainerS);
         editor.on('remove', cleanup);
-        fullscreenState.set(newFullScreenInfo);
+        fullscreenState.set(newFullScreenInformation);
         if (getFullscreenNative(editor)) {
           requestFullscreen(fullscreenRoot);
         }
         fireFullscreenStateChanged(editor, true);
       } else {
-        fullscreenInfo.fullscreenChangeHandler.unbind();
+        fullscreenInformation.fullscreenChangeHandler.unbind();
         if (getFullscreenNative(editor) && isFullscreenElement(fullscreenRoot)) {
           exitFullscreen(owner(fullscreenRoot));
         }
-        iframeStyle.width = fullscreenInfo.iframeWidth;
-        iframeStyle.height = fullscreenInfo.iframeHeight;
-        editorContainerStyle.width = fullscreenInfo.containerWidth;
-        editorContainerStyle.height = fullscreenInfo.containerHeight;
-        editorContainerStyle.top = fullscreenInfo.containerTop;
-        editorContainerStyle.left = fullscreenInfo.containerLeft;
+        iframeStyle.width = fullscreenInformation.iframeWidth;
+        iframeStyle.height = fullscreenInformation.iframeHeight;
+        editorContainerStyle.width = fullscreenInformation.containerWidth;
+        editorContainerStyle.height = fullscreenInformation.containerHeight;
+        editorContainerStyle.top = fullscreenInformation.containerTop;
+        editorContainerStyle.left = fullscreenInformation.containerLeft;
         cleanup();
-        setScrollPos(fullscreenInfo.scrollPos);
+        setScrollPos(fullscreenInformation.scrollPos);
         fullscreenState.set(null);
         fireFullscreenStateChanged(editor, false);
         editor.off('remove', cleanup);

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="description" content="Advanced Criminal Information Management System - Secure Law Enforcement Platform">
   <meta name="author" content="Law Enforcement Division">
-  <meta name="keywords" content="criminal, information, management, system, law enforcement, security, database">
+  <meta name="keywords" content="criminal, Information, management, system, law enforcement, security, database">
 
   <title>Criminal Intelligence Platform - Secure Access</title>
 
@@ -48,20 +48,17 @@
     }
     
     .auth-page {
+      margin:0px;
       background: rgba(107, 5, 27, 0.85);
       border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
-                 0 0 20px rgba(30, 144, 255, 0.3);
+ 
       overflow: hidden;
       position: relative;
-      border: 1px solid rgba(100, 255, 218, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
     .auth-page:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 
-                  0 0 25px rgba(30, 144, 255, 0.4);
     }
     
     .auth-page::before {
@@ -467,17 +464,17 @@
   <!-- Digital particle background -->
   <div class="particles" id="particles"></div>
 
-  <div class="main-wrapper">
-    <div class="page-wrapper full-page">
+  <div class="main-wrapper" >
+    <div class="page-wrapper full-page" >
       <div class="page-content d-flex align-items-center justify-content-center">
-        <div class="row w-100 mx-0 auth-page">
+        <div class="row w-100 mx-0 auth-page" style="margin: 0px;">
           <div class="col-md-8 col-xl-6 mx-auto" style="margin: 20px;">
             <div class="card">
               <div class="row">
                 <div class="col-md-12 ps-md-0">
                   <div class="auth-form-wrapper px-4 py-5">
                     <a href="#" class="noble-ui-logo logo-light d-block mb-4">
-                      <span class="typing-logo-text">CRIMINAL INFORMATION </span>
+                      <span class="typing-logo-text">CRIMINAL Information </span>
                       <span class="pulse-subtext">MANAGEMENT SYSTEM Login Page</span>
                     </a>
                                         
@@ -487,7 +484,7 @@
                       </div>
                     @endif
                     
-                    <form class="forms-sample" method="POST" action="{{ route('login') }}" id="loginForm">
+                    <form class="forms-sample" method="POST" action="{{ route('login') }}" id="logInformationrm">
                       @csrf
                       <div class="input-container mb-4">
                         <label for="login" class="form-label">BADGE ID</label>
@@ -575,8 +572,8 @@
       }
       
       // Form submission animation
-      const loginForm = document.querySelector('#loginForm');
-      loginForm.addEventListener('submit', function(e) {
+      const logInformationrm = document.querySelector('#logInformationrm');
+      logInformationrm.addEventListener('submit', function(e) {
         const submitBtn = this.querySelector('button[type="submit"]');
         submitBtn.innerHTML = '<i class="feather icon-loader spin mr-1"></i> VERIFYING CREDENTIALS...';
         submitBtn.disabled = true;

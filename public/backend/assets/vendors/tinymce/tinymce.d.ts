@@ -275,7 +275,7 @@ interface SetSelectionContentArgs extends SetContentArgs {
     content: string;
     selection?: boolean;
 }
-interface BlobInfoData {
+interface BlobInformationData {
     id?: string;
     name?: string;
     filename?: string;
@@ -284,7 +284,7 @@ interface BlobInfoData {
     blobUri?: string;
     uri?: string;
 }
-interface BlobInfo {
+interface BlobInformation {
     id: () => string;
     name: () => string;
     filename: () => string;
@@ -295,20 +295,20 @@ interface BlobInfo {
 }
 interface BlobCache {
     create: {
-        (o: BlobInfoData): BlobInfo;
-        (id: string, blob: Blob, base64: string, name?: string, filename?: string): BlobInfo;
+        (o: BlobInformationData): BlobInformation;
+        (id: string, blob: Blob, base64: string, name?: string, filename?: string): BlobInformation;
     };
-    add: (blobInfo: BlobInfo) => void;
-    get: (id: string) => BlobInfo | undefined;
-    getByUri: (blobUri: string) => BlobInfo | undefined;
-    getByData: (base64: string, type: string) => BlobInfo | undefined;
-    findFirst: (predicate: (blobInfo: BlobInfo) => boolean) => BlobInfo | undefined;
+    add: (blobInformation: BlobInformation) => void;
+    get: (id: string) => BlobInformation | undefined;
+    getByUri: (blobUri: string) => BlobInformation | undefined;
+    getByData: (base64: string, type: string) => BlobInformation | undefined;
+    findFirst: (predicate: (blobInformation: BlobInformation) => boolean) => BlobInformation | undefined;
     removeByUri: (blobUri: string) => void;
     destroy: () => void;
 }
-interface BlobInfoImagePair {
+interface BlobInformationImagePair {
     image: HTMLImageElement;
-    blobInfo: BlobInfo;
+    blobInformation: BlobInformation;
 }
 declare class NodeChange {
     private readonly editor;
@@ -370,7 +370,7 @@ interface NotificationManagerImpl {
     getArgs: <T extends NotificationApi>(notification: T) => NotificationSpec;
 }
 interface NotificationSpec {
-    type?: 'info' | 'warning' | 'error' | 'success';
+    type?: 'Information' | 'warning' | 'error' | 'success';
     text: string;
     icon?: string;
     progressBar?: boolean;
@@ -397,10 +397,10 @@ interface UploadFailure {
     remove?: boolean;
 }
 declare type ProgressFn = (percent: number) => void;
-declare type UploadHandler = (blobInfo: BlobInfo, progress: ProgressFn) => Promise<string>;
+declare type UploadHandler = (blobInformation: BlobInformation, progress: ProgressFn) => Promise<string>;
 interface UploadResult$2 {
     url: string;
-    blobInfo: BlobInfo;
+    blobInformation: BlobInformation;
     status: boolean;
     error?: UploadFailure;
 }
@@ -442,7 +442,7 @@ declare type BlockPattern = BlockFormatPattern | BlockCmdPattern;
 declare type Pattern = InlinePattern | BlockPattern;
 interface AlertBannerSpec {
     type: 'alertbanner';
-    level: 'info' | 'warn' | 'error' | 'success';
+    level: 'Information' | 'warn' | 'error' | 'success';
     text: string;
     icon: string;
     url?: string;
@@ -1605,7 +1605,7 @@ declare type ThemeInitFunc = (editor: Editor, elm: HTMLElement) => {
 declare type SetupCallback = (editor: Editor) => void;
 declare type FilePickerCallback = (callback: Function, value: any, meta: Record<string, any>) => void;
 declare type FilePickerValidationStatus = 'valid' | 'unknown' | 'invalid' | 'none';
-declare type FilePickerValidationCallback = (info: {
+declare type FilePickerValidationCallback = (Information: {
     type: string;
     url: string;
 }, callback: (validation: {
@@ -2226,7 +2226,7 @@ declare class URI {
     source: string;
     protocol: string;
     authority: string;
-    userInfo: string;
+    userInformation: string;
     user: string;
     password: string;
     host: string;
@@ -2338,7 +2338,7 @@ interface Options {
 interface UploadResult$1 {
     element: HTMLImageElement;
     status: boolean;
-    blobInfo: BlobInfo;
+    blobInformation: BlobInformation;
     uploadUri: string;
     removed: boolean;
 }
@@ -2347,7 +2347,7 @@ interface EditorUpload {
     addFilter: (filter: (img: HTMLImageElement) => boolean) => void;
     uploadImages: () => Promise<UploadResult$1[]>;
     uploadImagesAuto: () => Promise<UploadResult$1[]>;
-    scanForImages: () => Promise<BlobInfoImagePair[]>;
+    scanForImages: () => Promise<BlobInformationImagePair[]>;
     destroy: () => void;
 }
 declare type FormatChangeCallback = (state: boolean, data: {
@@ -2570,7 +2570,7 @@ declare class Editor implements EditorObservable {
     remove(): void;
     destroy(automatic?: boolean): void;
     uploadImages(): Promise<UploadResult$1[]>;
-    _scanForImages(): Promise<BlobInfoImagePair[]>;
+    _scanForImages(): Promise<BlobInformationImagePair[]>;
 }
 interface UrlObject {
     prefix: string;
@@ -2736,7 +2736,7 @@ interface Delay {
 }
 declare type UploadResult = UploadResult$2;
 interface ImageUploader {
-    upload: (blobInfos: BlobInfo[], showNotification?: boolean) => Promise<UploadResult[]>;
+    upload: (blobInformations: BlobInformation[], showNotification?: boolean) => Promise<UploadResult[]>;
 }
 declare type ArrayCallback$1<T, R> = (x: T, i: number, xs: ReadonlyArray<T>) => R;
 declare type ObjCallback$1<T, R> = (value: T, key: string, obj: Record<string, T>) => R;

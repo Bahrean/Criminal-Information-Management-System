@@ -202,21 +202,21 @@ $(function() {
     dayMaxEvents: 2,
     events: [],
     eventSources: [calendarEvents, birthdayEvents, holidayEvents, discoveredEvents, meetupEvents, otherEvents],
-    drop: function(info) {
+    drop: function(Information) {
         // remove the element from the "Draggable Events" list
-        // info.draggedEl.parentNode.removeChild(info.draggedEl);
+        // Information.draggedEl.parentNode.removeChild(Information.draggedEl);
     },
-    eventClick: function(info) {
-      var eventObj = info.event;
-      console.log(info);
+    eventClick: function(Information) {
+      var eventObj = Information.event;
+      console.log(Information);
       $('#modalTitle1').html(eventObj.title);
       $('#modalBody1').html(eventObj._def.extendedProps.description);
       $('#eventUrl').attr('href',eventObj.url);
       $('#fullCalModal').modal("show");
     },
-    dateClick: function(info) {
+    dateClick: function(Information) {
       $("#createEventModal").modal("show");
-      console.log(info);
+      console.log(Information);
     },
   });
 

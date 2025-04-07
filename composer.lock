@@ -103,7 +103,7 @@
             "authors": [
                 {
                     "name": "Dragonfly Development Inc.",
-                    "email": "info@dflydev.com",
+                    "email": "Information@dflydev.com",
                     "homepage": "http://dflydev.com"
                 },
                 {
@@ -1099,7 +1099,7 @@
                 "brianium/paratest": "Required to run tests in parallel (^6.0).",
                 "doctrine/dbal": "Required to rename columns and drop SQLite columns (^3.5.1).",
                 "ext-apcu": "Required to use the APC cache driver.",
-                "ext-fileinfo": "Required to use the Filesystem class.",
+                "ext-fileInformation": "Required to use the Filesystem class.",
                 "ext-ftp": "Required to use the Flysystem FTP driver.",
                 "ext-gd": "Required to use Illuminate\\Http\\Testing\\FileFactory::image().",
                 "ext-memcached": "Required to use the memcache cache driver.",
@@ -1587,7 +1587,7 @@
                 "async-aws/simple-s3": "^1.1",
                 "aws/aws-sdk-php": "^3.220.0",
                 "composer/semver": "^3.0",
-                "ext-fileinfo": "*",
+                "ext-fileInformation": "*",
                 "ext-ftp": "*",
                 "ext-zip": "*",
                 "friendsofphp/php-cs-fixer": "^3.5",
@@ -1611,7 +1611,7 @@
             "authors": [
                 {
                     "name": "Frank de Jonge",
-                    "email": "info@frankdejonge.nl"
+                    "email": "Information@frankdejonge.nl"
                 }
             ],
             "description": "File storage abstraction for PHP",
@@ -1659,7 +1659,7 @@
                 "shasum": ""
             },
             "require": {
-                "ext-fileinfo": "*",
+                "ext-fileInformation": "*",
                 "league/flysystem": "^3.0.0",
                 "league/mime-type-detection": "^1.0.0",
                 "php": "^8.0.2"
@@ -1677,7 +1677,7 @@
             "authors": [
                 {
                     "name": "Frank de Jonge",
-                    "email": "info@frankdejonge.nl"
+                    "email": "Information@frankdejonge.nl"
                 }
             ],
             "description": "Local filesystem adapter for Flysystem.",
@@ -1719,7 +1719,7 @@
                 "shasum": ""
             },
             "require": {
-                "ext-fileinfo": "*",
+                "ext-fileInformation": "*",
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
@@ -1740,7 +1740,7 @@
             "authors": [
                 {
                     "name": "Frank de Jonge",
-                    "email": "info@frankdejonge.nl"
+                    "email": "Information@frankdejonge.nl"
                 }
             ],
             "description": "Mime-type detection for Flysystem",
@@ -2371,7 +2371,7 @@
                 "random"
             ],
             "support": {
-                "email": "info@paragonie.com",
+                "email": "Information@paragonie.com",
                 "issues": "https://github.com/paragonie/random_compat/issues",
                 "source": "https://github.com/paragonie/random_compat"
             },
@@ -2960,7 +2960,7 @@
             "authors": [
                 {
                     "name": "Justin Hileman",
-                    "email": "justin@justinhileman.info",
+                    "email": "justin@justinhileman.Information",
                     "homepage": "http://justinhileman.com"
                 }
             ],
@@ -4090,7 +4090,7 @@
                 "phpdocumentor/reflection-docblock": "^3.0|^4.0|^5.0",
                 "symfony/dependency-injection": "^5.4|^6.0",
                 "symfony/property-access": "^5.4|^6.0",
-                "symfony/property-info": "^5.4|^6.0",
+                "symfony/property-Information": "^5.4|^6.0",
                 "symfony/serializer": "^6.2"
             },
             "type": "library",
@@ -4351,7 +4351,7 @@
             "authors": [
                 {
                     "name": "Laurent Bassin",
-                    "email": "laurent@bassin.info"
+                    "email": "laurent@bassin.Information"
                 },
                 {
                     "name": "Trevor Rowbotham",
@@ -4765,7 +4765,7 @@
             "authors": [
                 {
                     "name": "Grégoire Pineau",
-                    "email": "lyrixx@lyrixx.info"
+                    "email": "lyrixx@lyrixx.Information"
                 },
                 {
                     "name": "Symfony Community",
@@ -5335,7 +5335,7 @@
             "authors": [
                 {
                     "name": "Grégoire Pineau",
-                    "email": "lyrixx@lyrixx.info"
+                    "email": "lyrixx@lyrixx.Information"
                 },
                 {
                     "name": "Nicolas Grekas",
@@ -7016,7 +7016,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
+            "description": "Component for reading phar.io manifest Information from a PHP Archive (PHAR)",
             "support": {
                 "issues": "https://github.com/phar-io/manifest/issues",
                 "source": "https://github.com/phar-io/manifest/tree/2.0.3"
@@ -7067,7 +7067,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Library for handling version information and constraints",
+            "description": "Library for handling version Information and constraints",
             "support": {
                 "issues": "https://github.com/phar-io/version/issues",
                 "source": "https://github.com/phar-io/version/tree/3.2.1"
@@ -7177,7 +7177,7 @@
                     "email": "account@ijaap.nl"
                 }
             ],
-            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve Information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
                 "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.3.0"
@@ -7346,7 +7346,7 @@
                     "role": "lead"
                 }
             ],
-            "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
+            "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage Information.",
             "homepage": "https://github.com/sebastianbergmann/php-code-coverage",
             "keywords": [
                 "coverage",
@@ -8807,7 +8807,7 @@
             "authors": [
                 {
                     "name": "Spatie",
-                    "email": "info@spatie.be",
+                    "email": "Information@spatie.be",
                     "role": "Developer"
                 }
             ],
@@ -8899,7 +8899,7 @@
             "authors": [
                 {
                     "name": "Spatie",
-                    "email": "info@spatie.be",
+                    "email": "Information@spatie.be",
                     "role": "Developer"
                 }
             ],
