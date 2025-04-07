@@ -35,7 +35,7 @@ class CollageRegistralController extends Controller
         $profileData = User::find($id);
 
         return view(
-            'collage_registral.collage_registral_profile_view',
+            'register_office.register_office_profile_view',
             compact('profileData')
         );
     }
@@ -61,7 +61,7 @@ class CollageRegistralController extends Controller
         $data->save();
 
         $notification = [
-            'message' => 'Collagedean profile Update Successfully',
+            'message' => 'investigation_leader profile Update Successfully',
             'alert-type' => 'success',
         ];
         return redirect()
@@ -74,7 +74,7 @@ class CollageRegistralController extends Controller
         $id = Auth::user()->id;
         $profileData = User::find($id);
         return view(
-            'collage_registral.collage_registral_change_password',
+            'register_office.register_office_change_password',
             compact('profileData')
         );
     }
@@ -101,17 +101,17 @@ class CollageRegistralController extends Controller
 
     public function CollageRegistralChat()
     {
-        return view('collage_registral.collageregistralchat');
+        return view('register_office.collageregistralchat');
     }
     public function CollageRegistralPosts()
     {
-        return view('collage_registral.posts');
+        return view('register_office.posts');
     }
 
     public function CollageRegistralShowMember()
     {
         $types = User::latest()->get();
-        return view('collage_registral.showmember', compact('types'));
+        return view('register_office.showmember', compact('types'));
     }
     //
 }

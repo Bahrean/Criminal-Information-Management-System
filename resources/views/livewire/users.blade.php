@@ -14,7 +14,7 @@
             $profileData->role == 'admin' ? route('admin.dashboard') : 
             ($profileData->role == 'collage_registral' ? route('collageregistral.dashboard') : 
             ($profileData->role == 'collage_dean' ? route('collagedean.dashboard') : 
-            ($profileData->role == 'department_head' ? route('departmenthead.dashboard') : 
+            ($profileData->role == 'investigator' ? route('departmenthead.dashboard') : 
             ($profileData->role == 'stuff' ? route('stuff.dashboard') : '#'))))
         }}" 
         method="get"

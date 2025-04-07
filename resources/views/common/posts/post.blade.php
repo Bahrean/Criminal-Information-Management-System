@@ -384,7 +384,7 @@
             </div>
             </nav>
 
-        @elseif($profileData->role=='department_head')
+        @elseif($profileData->role=='investigator')
             <nav class="sidebar">
             <div class="sidebar-header">
                 <a href="#" class="sidebar-brand">

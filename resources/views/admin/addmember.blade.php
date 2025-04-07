@@ -60,7 +60,7 @@
 
                 <div class="form-floating mb-3 position-relative">
                     <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                           id="password" name="password" placeholder=" " style="padding-right: 65px;">
+                        id="password" name="password" placeholder=" " style="padding-right: 65px;">
                     <label for="password"><i class="fas fa-lock me-2"></i>Password</label>
                     <button type="button" class="btn btn-link position-absolute end-0 top-50 translate-middle-y" 
                             style="right: 10px;" onclick="togglePassword()">
@@ -107,29 +107,9 @@
                     @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label"><i class="fas fa-university me-2"></i>College</label>
-                    <select class="form-select @error('college') is-invalid @enderror" 
-                            id="collegeSelect" name="collage" required>
-                        <option value="" selected disabled>Select College</option>
-                        <option value="informatics" {{ old('college') == 'informatics' ? 'selected' : '' }}>
-                            Informatics
-                        </option>
-                        <option value="engineering" {{ old('college') == 'engineering' ? 'selected' : '' }}>
-                            Engineering
-                        </option>
-                    </select>
-                    @error('college')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                </div>
+                
 
-                <div class="mb-3">
-                    <label class="form-label"><i class="fas fa-building me-2"></i>Department</label>
-                    <select class="form-select @error('department') is-invalid @enderror" 
-                            id="departmentSelect" name="department" required disabled>
-                        <option value="" selected disabled>Select Department</option>
-                    </select>
-                    @error('department')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                </div>
+
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control @error('address') is-invalid @enderror" 
@@ -143,16 +123,16 @@
                     <select class="form-select @error('role') is-invalid @enderror" name="role">
                         <option value="" selected disabled>Select Role</option>
                         <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                        <option value="collage_dean" {{ old('role') == 'collage_dean' ? 'selected' : '' }}>
-                            College Dean
+                        <option value="investigation_leader" {{ old('role') == 'investigation_leader' ? 'selected' : '' }}>
+                            Investigation Leader
                         </option>
-                        <option value="collage_registral" {{ old('role') == 'collage_registral' ? 'selected' : '' }}>
-                            College Registrar
+                        <option value="investigator" {{ old('role') == 'investigator' ? 'selected' : '' }}>
+                            Investigator
                         </option>
-                        <option value="department_head" {{ old('role') == 'department_head' ? 'selected' : '' }}>
-                            Department Head
+                        <option value="police" {{ old('role') == 'police' ? 'selected' : '' }}>
+                            Police
                         </option>
-                        <option value="stuff" {{ old('role') == 'staff' ? 'selected' : '' }}>Stuff</option>
+                        <option value="register_office" {{ old('role') == 'register_office' ? 'selected' : '' }}>Register Office</option>
                     </select>
                     @error('role')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
@@ -178,41 +158,10 @@
 </div>
 
 <script>
-    // Department Data (fixed typos)
-    const departments = {
-        'informatics': ['IT', 'IS', 'CS', 'Software'],
-        'engineering': [
-            'Architecture', 'Biomedical', 'Chemical', 'Civil', 'COTOM', 
-            'Electrical', 'Fashion', 'Food', 'Garment', 'Hydraulics', 
-            'Industrial', 'Leather', 'Mechanical', 'Mechatronics', 
-            'Textile', 'Water and Irrigation'
-        ]
-    };
+
 
     // Dynamic Department Update
-    document.addEventListener('DOMContentLoaded', function() {
-        const collegeSelect = document.getElementById('collegeSelect');
-        const deptSelect = document.getElementById('departmentSelect');
-        
-        function updateDepartments() {
-            deptSelect.innerHTML = '<option value="" selected disabled>Select Department</option>';
-            deptSelect.disabled = true;
-            
-            if (collegeSelect.value) {
-                deptSelect.disabled = false;
-                const savedDept = "{{ old('department') }}";
-                
-                departments[collegeSelect.value].forEach(dept => {
-                    const option = new Option(dept, dept);
-                    option.selected = (savedDept === dept);
-                    deptSelect.add(option);
-                });
-            }
-        }
 
-        collegeSelect.addEventListener('change', updateDepartments);
-        if ("{{ old('college') }}") updateDepartments();
-    });
 
     // Password Toggle
     function togglePassword() {

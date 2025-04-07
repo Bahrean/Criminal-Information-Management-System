@@ -276,18 +276,18 @@ class PostController extends Controller
     public function CollegeDeanPosts()
     {
         $post = Post::all();
-        return view('collagedean.posts', compact('post'));
+        return view('investigation_leader.posts', compact('post'));
     }
 
     public function DepartmentHeadPosts()
     {
         $post = Post::all();
-        return view('department_head.posts', compact('post'));
+        return view('investigator.posts', compact('post'));
     }
 
     public function DepartmentHeadAddPost()
     {
-        return view('department_head.post.addpost');
+        return view('investigator.post.addpost');
     }
 
     public function DepartmentHeadPostStore(Request $request)
@@ -360,7 +360,7 @@ class PostController extends Controller
     {
         $types = Post::findOrFail($id);
 
-        return view('department_head.post.editpost', compact('types'));
+        return view('investigator.post.editpost', compact('types'));
     }
     public function DepartmentHeadUpdatePost(Request $request)
     {
@@ -385,7 +385,7 @@ class PostController extends Controller
             'alert-type' => 'success',
         ];
         return redirect()
-            ->route('department_head.posts')
+            ->route('investigator.posts')
             ->with($notification);
     }
 

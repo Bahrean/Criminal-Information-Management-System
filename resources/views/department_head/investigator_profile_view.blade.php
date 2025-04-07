@@ -1,5 +1,5 @@
-@extends('collagedean.collage_dean_dashboard')
-@section('collagedean')
+@extends('investigator.investigator_dashboard')
+@section('investigator')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -20,7 +20,7 @@
           </div>
 
         </div>
-        <p>Hi! I'm {{$profileData->name}} the Collage Dean of informatics in KIOT.</p>
+        <p>Hi! I'm {{$profileData->name}} the Collage head of informatics in KIOT.</p>
         <div class="mt-3">
           <label class="tx-11 fw-bolder mb-0 text-uppercase">Name:</label>
           <p class="text-muted">{{$profileData->name}}</p>
@@ -58,9 +58,9 @@
     <div class="card">
               <div class="card-body">
 
-								<h6 class="card-title">Update Collage Dean Profile</h6>
+								<h6 class="card-title">Update Collage Head Profile</h6>
 
-								<form class="forms-sample" method="POST" action="{{route('collagedean.profile.store')}}" enctype='multipart/form-data'>
+								<form class="forms-sample" method="POST" action="{{route('departmenthead.profile.store')}}" enctype='multipart/form-data'>
 								@csrf	
                 <div class="mb-3">
 										<label for="exampleInputUsername1" class="form-label">Username</label>

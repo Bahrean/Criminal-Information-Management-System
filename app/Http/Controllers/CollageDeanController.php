@@ -11,7 +11,9 @@ class CollageDeanController extends Controller
 {
     public function CollageDeanDashboard()
     {
-        return view('collagedean.index');
+        dd(resource_path('views/investigation_leader.index')); // Check if file exists
+
+        return view('investigation_leader.index');
     }
 
     public function CollageDeanLogout(Request $request)
@@ -35,7 +37,7 @@ class CollageDeanController extends Controller
         $profileData = User::find($id);
 
         return view(
-            'collagedean.collage_dean_profile_view',
+            'investigation_leader.investigation_leader_profile_view',
             compact('profileData')
         );
     }
@@ -61,7 +63,7 @@ class CollageDeanController extends Controller
         $data->save();
 
         $notification = [
-            'message' => 'Collagedean profile Update Successfully',
+            'message' => 'investigation_leader profile Update Successfully',
             'alert-type' => 'success',
         ];
         return redirect()
@@ -74,7 +76,7 @@ class CollageDeanController extends Controller
         $id = Auth::user()->id;
         $profileData = User::find($id);
         return view(
-            'collagedean.collage_dean_change_password',
+            'investigation_leader.investigation_leader_change_password',
             compact('profileData')
         );
     }
@@ -101,17 +103,17 @@ class CollageDeanController extends Controller
 
     public function CollagedeanChat()
     {
-        return view('collagedean.collagedeanchat');
+        return view('investigation_leader.collagedeanchat');
     }
     public function CollagedeanPosts()
     {
-        return view('collagedean.posts');
+        return view('investigation_leader.posts');
     }
 
     public function CollegeDeanShowMember()
     {
         $types = User::latest()->get();
-        return view('collagedean.showmember', compact('types'));
+        return view('investigation_leader.showmember', compact('types'));
     }
 
     //

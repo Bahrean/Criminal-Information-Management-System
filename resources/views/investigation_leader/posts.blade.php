@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,152 +33,59 @@
 
 
     <div class="main-wrapper">
-        @include('investigator.body.sidebar')
+        @include('investigation_leader.body.sidebar')
 
         <div class="page-wrapper" style="margin-top: 0; padding: 0;">
             <div class="align-items-start" style="width: 100%;">
                 <div class="posting_place">
-                @foreach($post as $key=>$post)
-                @if ($profileData->department == 'IT')
-<div class="card mb-4 shadow-sm post-container">
-    <!-- Post Header with Author Info -->
-    <div class="card-header bg-transparent d-flex align-items-center">
-        <a href="{{ route('departmenthead.profile') }}" class="d-flex align-items-center text-decoration-none">
-            <img class="rounded-circle me-3 shadow-sm" 
-                 style="width: 45px; height: 45px; object-fit: cover;"
-                 src="{{ (!empty($post->posted_by_photo)) ? url('upload/departmentposts/'.$post->posted_by_photo) : url('upload/no_image.jpg') }}" 
-                 alt="{{ $post->posted_by_name }}'s profile picture">
-            <div>
-                <h6 class="mb-0 fw-bold text-white">{{ $post->posted_by_name }}</h6>
-                <small class="text-muted">{{ $post->created_at->diffForHumans() }}</small>
-            </div>
-        </a>
-    </div>
-
-    <!-- Post Content -->
-    <div class="card-body">
-        <div class="row">
-            <!-- Main Post Content -->
-            <div class="col-lg-8">
-                <h4 class="card-title fw-bold mb-3 text-primary">{{ $post->heading }}</h4>
-                
-                @if($post->photo)
-                <div class="post-image mb-4">
-                    <img src="{{ asset('upload/departmentposts/' . $post->photo) }}" 
-                         class="img-fluid rounded-3 shadow-sm" 
-                         alt="Post image"
-                         style="max-height: 500px; object-fit: cover;">
-                </div>
-                @endif
-
-                <div class="post-content mb-4">
-                    <p class="card-text text-secondary" style="line-height: 1.8;">
-                        {{ $post->description }}
-                    </p>
-                </div>
-
-                <!-- Engagement Metrics -->
-                <div class="d-flex gap-3 mb-4">
-                    <button class="btn btn-outline-primary toggle-comments" data-id="{{ $post->id }}">
-                        <i class="far fa-comment me-2"></i>Show Comments
-                    </button>
-                    <div class="d-flex align-items-center text-muted">
-                        <i class="far fa-thumbs-up me-1"></i> {{ $post->like }}
-                    </div>
-                    <div class="d-flex align-items-center text-muted">
-                        <i class="far fa-thumbs-down me-1"></i> {{ $post->dislike }}
-                    </div>
-   
-                </form>
-
-                </div>
-            </div>
-
-            <!-- Comments Section -->
-            <div class="col-lg-4 comments-section" data-id="{{ $post->id }}" 
-                 style="display: none; max-height: 500px;">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body p-3">
-                        <h6 class="card-subtitle mb-3 text-muted">
-                            <i class="fas fa-comments me-2"></i>Comments
-                        </h6>
-                        <livewire:comments :model="$post" />
-                    </div>
+                    @foreach($post as $key=>$post)
                     
-                </div>
+                        <div style="display:flex;flex-direction:row;gap:10px">
+                            <div class="single_post"  style="width: 60%;margin:5px 0px 0px 45px;padding:5px 0px 10px 40px ">
+                                <div>
+                                    <h5>{{ $post->heading }}</h5>
+                                    <div  class="image-container">
+                                   
+                                    <img src="{{ asset('upload/posts/' . $post->photo) }}" class="wd-70" alt="...">
+                                    </div>
+                                    <div class="description">
+                                        <p>{{ $post->description }}</p>
+                                    </div>
+                                    <button class="toggle-button" data-id="{{ $post->id }}">Comments and Likes</button>
+                                </div>
 
-            </div>
-        </div>
-    </div>
-</div>
-@endif
-@endforeach
 
-<style>
-    .post-container {
-        transition: transform 0.2s ease;
-    }
-    
-    .post-container:hover {
-        transform: translateY(-3px);
-    }
-    
-    .post-image {
-        overflow: hidden;
-        border-radius: 10px;
-    }
-    
-    .toggle-comments {
-        transition: all 0.3s ease;
-    }
-    
-    .toggle-comments[aria-expanded="true"] {
-        background-color: #0d6efd;
-        color: white;
-    }
-    
-    .comments-section {
-        opacity: 0;
-        transition: opacity 0.3s ease, max-height 0.3s ease;
-    }
-    
-    .comments-section.show {
-        opacity: 1;
-        display: block !important;
-    }
-</style>
+                            </div>
+                            <div class="more-content" data-id="{{ $post->id }}" style="overflow-y: auto;max-height: 500px;">
+                                <livewire:comments :model="$post" />
+                            </div>
 
-<script>
-document.querySelectorAll('.toggle-comments').forEach(button => {
-    button.addEventListener('click', function() {
-        const commentsSection = document.querySelector(`.comments-section[data-id="${this.dataset.id}"]`);
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        
-        // Toggle comments section
-        commentsSection.classList.toggle('show');
-        this.setAttribute('aria-expanded', !isExpanded);
-        
-        // Update button text and icon
-        const icon = this.querySelector('i');
-        if (!isExpanded) {
-            this.innerHTML = `<i class="far fa-comment me-2"></i>Hide Comments`;
-            icon.classList.replace('fa-comment', 'fa-comment-slash');
-        } else {
-            this.innerHTML = `<i class="far fa-comment me-2"></i>Show Comments`;
-            icon.classList.replace('fa-comment-slash', 'fa-comment');
-        }
-    });
-});
-</script>
+                        </div>
+
+
+                        <form class="mb-3">
+                            <a href="{{ route('collagedean.profile') }}">
+                                
+                                <img style="width:40px;height:40px" src="{{(!empty($post->posted_by_photo))?url('upload/admin_image/'.$post->posted_by_photo) : url('upload/no_image.jpg') }}" alt="Profile picture" class="rounded-circle">
+                            </a>
+                            <span class="tx-16 fw-bolder">{{ $post->posted_by_name }}</span>
+                        </form>
+                    
+                    @endforeach
                 </div>
 
             </div>
 
             <div class="action-buttons"> 
-                <form action="{{route('departmenthead.adddepartmentpost')}}" class="forms-sample" enctype='multipart/form-data'>
-                    <button style="font-size:20px;font-weight:bold" type="submit" class="btn btn-success">New Post</button>
+                <form action="{{route('departmenthead.addpost')}}" class="forms-sample" enctype='multipart/form-data'>
+                    <button type="submit" class="btn btn-success">New Post</button>
                 </form>
-
+                <form action="{{route('departmenthead.editpost', $post->id)}}">
+                    <button type="submit" class="btn btn-primary">Edit Post</button>
+                </form>
+                <form action="{{route('departmenthead.deletepost', $post->id)}}">
+                    <button type="submit" class="btn btn-danger">Delete Posts</button>
+                </form>
                 
             </div>
         </div>
@@ -293,4 +199,3 @@ document.querySelectorAll('.toggle-comments').forEach(button => {
 </body>
 
 </html>
-

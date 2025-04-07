@@ -1,4 +1,4 @@
-@extends('collage_registral.collage_registral_dashboard')
+@extends('collage_registral.register_office_dashboard')
 @section('collage_registral')
 
 <div class="page-content">

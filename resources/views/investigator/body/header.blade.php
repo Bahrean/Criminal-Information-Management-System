@@ -3,18 +3,15 @@
                         <i data-feather="menu"></i>
                     </a>
                     <div class="navbar-content">
-                        <form class="search-form">
-                            <div class="input-group">
-        
-                        
-                            </div>
-                        </form>
+
                         <ul class="navbar-nav">
                 
-
-                            <li class="nav-item dropdown">
+                  
                     
+                            <li class="nav-item dropdown">
+                 
 
+                              
                             </li>
                             @php
                                     $id = Auth::user()->id;
@@ -50,25 +47,20 @@
                                     </div>
                     <ul class="list-unstyled p-1">
                     <li class="dropdown-item py-2">
-                        <a href="{{route('collageregistral.profile')}}" class="text-body ms-0">
+                        <a href="{{route('departmenthead.profile')}}" class="text-body ms-0">
                         <i class="me-2 icon-md" data-feather="user"></i>
                         <span>Profile</span>
                         </a>
                     </li>
                     <li class="dropdown-item py-2">
-                        <a href="{{route('collageregistral.change.password')}}" class="text-body ms-0">
+                        <a href="{{route('departmenthead.change.password')}}" class="text-body ms-0">
                         <i class="me-2 icon-md" data-feather="edit"></i>
                         <span>Change Password</span>
                         </a>
                     </li>
+      
                     <li class="dropdown-item py-2">
-                        <a href="javascript:;" class="text-body ms-0">
-                        <i class="me-2 icon-md" data-feather="repeat"></i>
-                        <span>Switch User</span>
-                        </a>
-                    </li>
-                    <li class="dropdown-item py-2">
-                        <a href="{{route('collageregistral.logout')}}" class="text-body ms-0">
+                        <a href="{{route('departmenthead.logout')}}" class="text-body ms-0">
                         <i class="me-2 icon-md" data-feather="log-out"></i>
                         <span>Log Out</span>
                         </a>

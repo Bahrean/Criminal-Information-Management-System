@@ -316,7 +316,7 @@
                         <option value="collage_registral" {{ old('role') == 'collage_registral' ? 'selected' : '' }}>
                             College Registrar
                         </option>
-                        <option value="department_head" {{ old('role') == 'department_head' ? 'selected' : '' }}>
+                        <option value="investigator" {{ old('role') == 'investigator' ? 'selected' : '' }}>
                             Department Head
                         </option>
                         <option value="stuff" {{ old('role') == 'staff' ? 'selected' : '' }}>Stuff</option>

@@ -1,6 +1,5 @@
-@extends('collagedean.collage_dean_dashboard')
-@section('collagedean')
-
+@extends('investigator.investigator_dashboard')
+@section('investigator')
 <style>
     .form-label {
         color: white;
@@ -23,9 +22,9 @@
                             $profileData = App\Models\User::find($id);
                         @endphp
 
-                        <h6 class="card-title" style="color: green; font-size: 28px;">Add New Department Post</h6>
+                        <h6 class="card-title" style="color: green; font-size: 28px;">Add New Post</h6>
 
-                        <form class="forms-sample" method="POST" action="{{ route('collegedean.post.departmentstore') }}" enctype="multipart/form-data">
+                        <form class="forms-sample" method="POST" action="{{ route('departmenthead.post.store') }}" enctype="multipart/form-data">
                             @csrf
                             
                             <div class="mb-3">
@@ -106,24 +105,6 @@
                                     id="posted_by_photo" 
                                     value="{{ $profileData->photo }}">
                      
-                            </div>
-                          
-                            <div class="mb-3">
-                                <label for="posted_by_department" class="form-label"></label>
-                                <input type="hidden" class="form-control @error('posted_by_department') is-invalid @enderror" 
-                                       name="posted_by_department" id="posted_by_department" value="{{ $profileData->department }}" readonly>
-                                @error('posted_by_department')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="posted_by_collage" class="form-label"></label>
-                                <input type="hidden" class="form-control @error('posted_by_collage') is-invalid @enderror" 
-                                       name="posted_by_collage" id="posted_by_collage" value="{{ $profileData->collage }}" readonly>
-                                @error('posted_by_collage')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
 
 

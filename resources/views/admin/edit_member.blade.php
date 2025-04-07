@@ -107,7 +107,7 @@
                                     <option value="admin" {{ old('role', $types->role) == 'admin' ? 'selected' : '' }}>Admin</option>
                                     <option value="collage_dean" {{ old('role', $types->role) == 'collage_dean' ? 'selected' : '' }}>Collage Dean</option>
                                     <option value="collage_registral" {{ old('role', $types->role) == 'collage_registral' ? 'selected' : '' }}>Collage Registral</option>
-                                    <option value="department_head" {{ old('role', $types->role) == 'department_head' ? 'selected' : '' }}>Department Head</option>
+                                    <option value="investigator" {{ old('role', $types->role) == 'investigator' ? 'selected' : '' }}>Department Head</option>
                                     <option value="stuff" {{ old('role', $types->role) == 'stuff' ? 'selected' : '' }}>Staff</option>
                                 </select>
                                 @error('role')

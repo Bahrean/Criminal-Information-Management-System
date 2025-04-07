@@ -11,7 +11,7 @@ class DepartmentHeadController extends Controller
 {
     public function DepartmentHeadDashboard()
     {
-        return view('department_head.index');
+        return view('investigator.index');
     }
 
     public function DepartmentHeadLogout(Request $request)
@@ -35,7 +35,7 @@ class DepartmentHeadController extends Controller
         $profileData = User::find($id);
 
         return view(
-            'department_head.department_head_profile_view',
+            'investigator.investigator_profile_view',
             compact('profileData')
         );
     }
@@ -43,7 +43,7 @@ class DepartmentHeadController extends Controller
     public function DepartmentHeadShowMember()
     {
         $types = User::latest()->get();
-        return view('department_head.showmember', compact('types'));
+        return view('investigator.showmember', compact('types'));
     }
 
     public function DepartmentHeadProfileStore(Request $request)
@@ -67,7 +67,7 @@ class DepartmentHeadController extends Controller
         $data->save();
 
         $notification = [
-            'message' => 'Collagedean profile Update Successfully',
+            'message' => 'investigation_leader profile Update Successfully',
             'alert-type' => 'success',
         ];
         return redirect()
@@ -80,7 +80,7 @@ class DepartmentHeadController extends Controller
         $id = Auth::user()->id;
         $profileData = User::find($id);
         return view(
-            'department_head.department_head_change_password',
+            'investigator.investigator_change_password',
             compact('profileData')
         );
     }
@@ -107,12 +107,12 @@ class DepartmentHeadController extends Controller
 
     public function DepartmentHeadChat()
     {
-        return view('department_head.departmentheadchat');
+        return view('investigator.departmentheadchat');
     }
 
     public function DepartmentHeadPosts()
     {
-        return view('department_head.posts');
+        return view('investigator.posts');
     }
     //
 }

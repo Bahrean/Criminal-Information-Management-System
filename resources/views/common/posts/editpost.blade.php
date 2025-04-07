@@ -46,8 +46,8 @@
         @elseif($profileData->role =='collage_dean')
             @include('collagedean.body.sidebar')
 
-        @elseif($profileData->role =='department_head')
-            @include('department_head.body.sidebar')
+        @elseif($profileData->role =='investigator')
+            @include('investigator.body.sidebar')
 
         @elseif($profileData->role =='stuff')
             @include('stuff.body.sidebar')
@@ -69,8 +69,8 @@
             @elseif($profileData->role =='collage_dean')
                 @include('collagedean.body.header')
 
-            @elseif($profileData->role =='department_head')
-                @include('department_head.body.header')
+            @elseif($profileData->role =='investigator')
+                @include('investigator.body.header')
 
             @elseif($profileData->role =='stuff')
                 @include('stuff.body.header')
@@ -157,8 +157,8 @@
             @elseif($profileData->role =='collage_dean')
                 @include('collagedean.body.footer')
 
-            @elseif($profileData->role =='department_head')
-                @include('department_head.body.footer')
+            @elseif($profileData->role =='investigator')
+                @include('investigator.body.footer')
 
             @elseif($profileData->role =='stuff')
                 @include('stuff.body.footer')

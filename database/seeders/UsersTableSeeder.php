@@ -60,7 +60,7 @@ class UsersTableSeeder extends Seeder
                 'username' => 'police',
                 'email' => 'police@gmail.com',
                 'password' => Hash::make('111'),
-               
+            
                 'department' => '',
                 'role' => 'police',
                 'status' => 'active',

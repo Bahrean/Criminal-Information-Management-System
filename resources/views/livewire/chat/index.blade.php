@@ -60,8 +60,8 @@ License: For each use you must have a valid license purchased only from above li
         @include('collage_registral.body.sidebar')
     @elseif ($profileData->role == 'collage_dean')
         @include('collagedean.body.sidebar')
-    @elseif ($profileData->role == 'department_head')
-        @include('department_head.body.sidebar')
+    @elseif ($profileData->role == 'investigator')
+        @include('investigator.body.sidebar')
     @elseif ($profileData->role == 'stuff')
         @include('stuff.body.sidebar')
     @endif

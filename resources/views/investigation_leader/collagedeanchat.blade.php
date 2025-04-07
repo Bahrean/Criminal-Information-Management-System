@@ -1,5 +1,5 @@
-@extends('investigator.investigator_dashboard')
-@section('investigator')
+@extends('investigation_leader')
+@section('investigation_leader')
 
 <div class="page-content">
 

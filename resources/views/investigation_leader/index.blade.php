@@ -1,5 +1,5 @@
-@extends('collagedean.collage_dean_dashboard')
-@section('collagedean')
+@extends('investigation_leader')
+@section('investigation_leader')
 
 <div class="page-content">
     @php

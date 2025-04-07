@@ -367,7 +367,7 @@ Route::middleware(['auth', 'role:collage_registral'])->group(function () {
     ])->name('collageregistral.showmembers');
 });
 
-Route::middleware(['auth', 'role:department_head'])->group(function () {
+Route::middleware(['auth', 'role:investigator'])->group(function () {
     Route::get('/departmenthead/dashboard', [
         DepartmentHeadController::class,
         'DepartmentHeadDashboard',

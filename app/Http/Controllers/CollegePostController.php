@@ -16,12 +16,12 @@ class CollegePostController extends Controller
     public function CollegeDeanCollagePosts()
     {
         $post = CollegePost::all();
-        return view('department_head.post.collegepost', compact('post'));
+        return view('investigator.post.collegepost', compact('post'));
     }
 
     public function CollegeDeanAddCollegePost()
     {
-        return view('department_head.post.addcollegepost');
+        return view('investigator.post.addcollegepost');
     }
 
     public function CollegeDeanCollegePostStore(Request $request)
@@ -90,19 +90,19 @@ class CollegePostController extends Controller
 
         // Redirect to the intended route with a success message
         return redirect()
-            ->route('collagedean.dashboard')
+            ->route('investigation_leader.dashboard')
             ->with($notification);
     }
 
     public function DepartmentHeadCollagePosts()
     {
         $post = CollegePost::all();
-        return view('department_head.post.collegepost', compact('post'));
+        return view('investigator.post.collegepost', compact('post'));
     }
 
     public function DepartmentHeadAddCollegePost()
     {
-        return view('department_head.post.addcollegepost');
+        return view('investigator.post.addcollegepost');
     }
 
     public function DepartmentHeadCollegePostStore(Request $request)

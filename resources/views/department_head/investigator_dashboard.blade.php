@@ -50,18 +50,18 @@ License: For each use you must have a valid license purchased only from above li
 
 		<!-- partial:partials/_sidebar.html -->
 
-            @include('department_head.body.sidebar');
+            @include('investigator.body.sidebar');
             <!-- partial -->
         
             <div class="page-wrapper">
                         
                 <!-- partial:partials/_navbar.html -->
-                @include('department_head.body.header');
+                @include('investigator.body.header');
                 <!-- partial -->
-                @yield('department_head');
+                @yield('investigator');
 
                 <!-- partial:partials/_footer.html -->
-                @include('department_head.body.footer')
+                @include('investigator.body.footer')
                 <!-- partial -->
             
             </div>

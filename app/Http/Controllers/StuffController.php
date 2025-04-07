@@ -57,7 +57,7 @@ class StuffController extends Controller
         $data ->save();
 
         $notification =array(
-            'message'=>'Collagedean profile Update Successfully',
+            'message'=>'investigation_leader profile Update Successfully',
             'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);

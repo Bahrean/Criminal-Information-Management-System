@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-Template Name: NobleUI - HTML Bootstrap 5 collagedean Dashboard Template
+Template Name: NobleUI - HTML Bootstrap 5 Admin Dashboard Template
 Author: NobleUI
 Website: https://www.nobleui.com
 Portfolio: https://themeforest.net/user/nobleui/portfolio
@@ -17,7 +17,7 @@ License: For each use you must have a valid license purchased only from above li
 	<meta name="author" content="NobleUI">
 	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-	<title>Collage Dean Panel For Wollo University Inter-Office Communication</title>
+	<title>Department Head Panel For Wollo University Inter-Office Communication</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,18 +50,18 @@ License: For each use you must have a valid license purchased only from above li
 
 		<!-- partial:partials/_sidebar.html -->
 
-            @include('collagedean.body.sidebar');
+            @include('investigator.body.sidebar');
             <!-- partial -->
         
             <div class="page-wrapper">
                         
                 <!-- partial:partials/_navbar.html -->
-                @include('collagedean.body.header');
+                @include('investigator.body.header');
                 <!-- partial -->
-                @yield('collagedean');
+                @yield('investigator');
 
                 <!-- partial:partials/_footer.html -->
-                @include('collagedean.body.footer')
+                @include('investigator.body.footer')
                 <!-- partial -->
             
             </div>

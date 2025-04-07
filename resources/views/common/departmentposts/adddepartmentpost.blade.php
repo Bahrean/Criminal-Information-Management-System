@@ -1,5 +1,5 @@
-@extends('department_head.department_head_dashboard')
-@section('department_head')
+@extends('investigator.investigator_dashboard')
+@section('investigator')
 
 <style>
     .form-label {

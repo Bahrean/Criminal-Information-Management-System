@@ -10,7 +10,7 @@ class DepartmentPostController extends Controller
     public function CollegeDeanDepartmentposts()
     {
         $post = DepartmentPost::all();
-        return view('collagedean.post.departmentpost', compact('post'));
+        return view('investigation_leader.post.departmentpost', compact('post'));
     }
 
     public function CollegeDeanAddDepartmentPost()
@@ -101,7 +101,7 @@ class DepartmentPostController extends Controller
 
     public function DepartmentHeadAddDepartmentPost()
     {
-        return view('department_head.post.adddepartmentpost');
+        return view('investigator.post.adddepartmentpost');
     }
     public function CommonAddDepartmentPost()
     {

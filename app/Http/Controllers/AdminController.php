@@ -132,7 +132,7 @@ class AdminController extends Controller
             'gender' => 'required|string',
             'photo' => 'nullable|image',
             'phone' => 'nullable|string|max:15',
-            'collage' => 'nullable|string|max:100',
+        
             'department' => 'nullable|string|max:100',
             'address' => 'nullable|string|max:255',
             'role' => 'required|string|max:50',
@@ -164,7 +164,7 @@ class AdminController extends Controller
             'gender' => $request->gender,
             'photo' => $photoPath,
             'phone' => $request->phone,
-            'collage' => $request->collage,
+            
             'department' => $request->department,
             'address' => $request->address,
             'role' => $request->role,

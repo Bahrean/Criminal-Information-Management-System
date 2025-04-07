@@ -1,5 +1,5 @@
-@extends('collagedean.collage_dean_dashboard')
-@section('collagedean')
+@extends('investigation_leader')
+@section('investigation_leader')
 
 <style>
     .form-label {
@@ -23,9 +23,9 @@
                             $profileData = App\Models\User::find($id);
                         @endphp
 
-                        <h6 class="card-title" style="color: green; font-size: 28px;">Add New Post</h6>
+                        <h6 class="card-title" style="color: green; font-size: 28px;">Add New Department Post</h6>
 
-                        <form class="forms-sample" method="POST" action="{{ route('collegedean.post.collegestore') }}" enctype="multipart/form-data">
+                        <form class="forms-sample" method="POST" action="{{ route('collegedean.post.departmentstore') }}" enctype="multipart/form-data">
                             @csrf
                             
                             <div class="mb-3">
