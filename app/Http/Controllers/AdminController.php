@@ -7,9 +7,18 @@ use App\Models\PropertyType;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\reporting;
 
 class AdminController extends Controller
 {
+    public function showReportingForm()
+    {
+        return view('reporting_criminal');
+    }
+
+
+
+
     public function AdminDashboard()
     {
         return view('admin.index');

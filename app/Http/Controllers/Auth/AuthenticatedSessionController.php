@@ -38,16 +38,16 @@ class AuthenticatedSessionController extends Controller
                 case 'admin':
                     $url = 'admin/dashboard';
                     break;
-                case 'collage_registral':
+                case 'investigation_leader':
                     $url = 'collageregistral/dashboard';
                     break;
-                case 'collage_dean':
+                case 'investigator':
                     $url = 'collagedean/dashboard';
                     break;
-                case 'department_head':
+                case 'police':
                     $url = 'departmenthead/dashboard';
                     break;
-                case 'stuff':
+                case 'register_office':
                     $url = 'stuff/dashboard';
                     break;
                 default:

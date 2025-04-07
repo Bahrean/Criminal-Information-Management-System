@@ -18,63 +18,63 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             //admin
             [
-                'name' => 'Abrham Ayanew',
-                'username' => 'abrham',
-                'email' => 'abrham@gmail.com',
+                'name' => 'admin',
+                'username' => 'Admin',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('111'),
-                'collage' => '',
+            
                 'department' => '',
                 'role' => 'admin',
                 'status' => 'active',
             ],
 
-            //informatics collage registral
+        
             [
-                'name' => 'Anduamlak Dilnessa',
-                'username' => 'anduamlak',
-                'email' => 'anduamlak@gmail.com',
+                'name' => 'investigation_leader',
+                'username' => 'investigation_leader',
+                'email' => 'invLeader@gmail.com',
                 'password' => Hash::make('111'),
-                'collage' => 'informatics',
+        
 
                 'department' => '',
-                'role' => 'collage_registral',
+                'role' => 'investigation_leader',
                 'status' => 'active',
             ],
 
-            //informatics collage dean
+    
             [
-                'name' => 'Ashenafi Belay',
-                'username' => 'ashenafi',
-                'email' => 'ashenafi@gmail.com',
+                'name' => 'investigator',
+                'username' => 'investigator',
+                'email' => 'investigator@gmail.com',
                 'password' => Hash::make('111'),
-                'collage' => 'informatics',
+            
 
                 'department' => '',
-                'role' => 'collage_dean',
+                'role' => 'investigator',
                 'status' => 'active',
             ],
 
-            //IT Department Head
+        
             [
-                'name' => 'Mekdes Emagnu',
-                'username' => 'mekdes',
-                'email' => 'mekdes@gmail.com',
+                'name' => 'police',
+                'username' => 'police',
+                'email' => 'police@gmail.com',
                 'password' => Hash::make('111'),
-                'collage' => 'informatics',
-                'department' => 'IT',
-                'role' => 'department_head',
+               
+                'department' => '',
+                'role' => 'police',
                 'status' => 'active',
             ],
 
-            //users                   //admin
+            
             [
-                'name' => 'Tsehay Taso',
-                'username' => 'tsehay',
-                'email' => 'tsehay@gmail.com',
+                'name' => 'register_office',
+                'username' => 'register_office',
+                'email' => 'register_office@gmail.com',
                 'password' => Hash::make('111'),
-                'collage' => 'informatics',
-                'department' => 'IT',
-                'role' => 'stuff',
+            
+                'department' => '',
+                'role' => 'register_office',
                 'status' => 'active',
             ],
         ]);

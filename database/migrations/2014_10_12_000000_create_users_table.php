@@ -20,18 +20,18 @@ return new class extends Migration {
             $table->string('gender')->nullable();
             $table->string('photo')->nullable();
             $table->string('phone')->nullable();
-            $table->string('collage')->nullable();
+            $table->string('teamname')->nullable();
             $table->string('department')->nullable();
             $table->text('address')->nullable();
             $table
                 ->enum('role', [
                     'admin',
-                    'collage_registral',
-                    'collage_dean',
-                    'department_head',
-                    'stuff',
+                    'investigation_leader',
+                    'investigator',
+                    'police',
+                    'register_office',
                 ])
-                ->default('stuff');
+                ->default('police');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->rememberToken();
             $table->timestamps();

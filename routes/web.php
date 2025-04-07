@@ -11,6 +11,7 @@ use App\Http\ControostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CollegePostController;
 use App\Http\Controllers\DepartmentPostController;
+use App\Http\Controllers\ReportController;
 use App\Http\Livewire\Chat\Chat;
 use App\Http\Livewire\Chat\Index;
 use App\Http\Livewire\Users;
@@ -31,6 +32,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 });
+
+// routes/web.php
+
+// GET route for showing the form (consistent naming)
+Route::get('/criminal-reporting', [AdminController::class, 'showReportingForm'])
+     ->name('criminal_reporting.form'); // More descriptive name
+
+// POST route for storing the report (RESTful convention)
+Route::post('/criminal-reporting', [ReportController::class, 'store'])
+     ->name('criminal_reporting.store'); // Simplified name
 
 Route::get('/dashboard', function () {
     return view('dashboard');
