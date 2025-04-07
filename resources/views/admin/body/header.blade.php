@@ -7,7 +7,6 @@
     
                             <li class="nav-item dropdown">
                         
-
                             @php
                                     $id = Auth::user()->id;
                                     $profileData =App\Models\User::find($id);
@@ -61,8 +60,8 @@
                         </a>
                     </li>
                     </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

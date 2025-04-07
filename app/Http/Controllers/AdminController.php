@@ -7,6 +7,7 @@ use App\Models\PropertyType;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Report;
 use App\Models\reporting;
 
 class AdminController extends Controller
@@ -15,9 +16,6 @@ class AdminController extends Controller
     {
         return view('reporting_criminal');
     }
-
-
-
 
     public function AdminDashboard()
     {
@@ -122,6 +120,12 @@ class AdminController extends Controller
         return view('admin.showmember', compact('types'));
     }
 
+    public function AdminShowCriminalReport()
+    {
+        $types = Report::latest()->get();
+        return view('admin.criminalreport', compact('types'));
+    }
+
     public function AdminStore(Request $request)
     {
         $request->validate([
@@ -173,6 +177,59 @@ class AdminController extends Controller
 
         $notification = [
             'message' => 'New member created successfully',
+            'alert-type' => 'success',
+        ];
+        return redirect()
+            ->route('admin.showmember')
+            ->with($notification);
+    }
+
+    public function CriminalStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'nullable|string',
+            'email' => 'nullable|email',
+            'gender' => 'required|string',
+            'photo' => 'nullable|image',
+            'repotext' => 'nullable|string',
+            'phone' => 'nullable|string|max:15',
+        
+            'address' => 'nullable|string|max:255',
+    
+        ]);
+
+    
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = date('YmdHis') . '_' . $file->getClientOriginalName(); // Unique filename
+            $path = public_path('upload/Report/');
+
+            if (!file_exists($path)) {
+                mkdir($path, 0755, true);
+            }
+
+            $file->move($path, $filename);
+            $photoPath = $filename;
+        }
+
+
+        Report::create([
+            'name' => $request->name,
+    
+            'email' => $request->email,
+        
+            'gender' => $request->gender,
+            'photo' => $photoPath,
+            'repotext' => $request->repotext,
+            'phone' => $request->phone,
+            
+            'address' => $request->address,
+    
+        ]);
+
+        $notification = [
+            'message' => 'reportrd  successfully',
             'alert-type' => 'success',
         ];
         return redirect()

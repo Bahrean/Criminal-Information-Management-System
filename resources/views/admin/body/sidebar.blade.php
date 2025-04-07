@@ -97,7 +97,7 @@
                 </a>
             </li>
 
-          <li class="nav-item ">
+            <li class="nav-item ">
                 <a href="{{route('admin.showmember')}}" class="nav-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users link-icon">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -107,14 +107,35 @@
                     <span class="link-title">Show all members</span>
                 </a>
             </li>
-
-            <li class="nav-item nav-category">Guidelines about the system</li>
-            <li class="nav-item">
-                <a href="#" target="_blank" class="nav-link">
-                <i class="link-icon" data-feather="hash"></i>
-                <span class="link-title">Documentation</span>
+            <li class="nav-item ">
+                <a href="{{route('admin.showcriminalreport')}}" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users link-icon">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    </svg>
+                    <span class="link-title">Criminal reports</span>
                 </a>
             </li>
-            </ul>
-        </div>
-        </nav>
+            <li class="nav-item ">
+                <a href="{{route('admin.showmember')}}" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users link-icon">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    </svg>
+                    <span class="link-title">Recorded Criminal</span>
+                </a>
+            </li>
+
+
+          <li class="nav-item nav-category">Guidelines about the system</li>
+          <li class="nav-item">
+              <a href="#" target="_blank" class="nav-link">
+              <i class="link-icon" data-feather="hash"></i>
+              <span class="link-title">Documentation</span>
+              </a>
+          </li>
+        </ul>
+    </div>
+</nav>

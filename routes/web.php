@@ -43,6 +43,10 @@ Route::get('/criminal-reporting', [AdminController::class, 'showReportingForm'])
 Route::post('/criminal-reporting', [ReportController::class, 'store'])
      ->name('criminal_reporting.store'); // Simplified name
 
+Route::post('/criminalstore', [AdminController::class, 'CriminalStore'])->name(
+        'criminalstore'
+    );
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })
@@ -251,6 +255,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         DepartmentPostController::class,
         'AdminUpdateDepartmentPost',
     ])->name('admin.updatedepartmentpost');
+
+    Route::get('/admin/showcriminalreport', [
+        AdminController::class,
+        'AdminShowCriminalReport',
+    ])->name('admin.showcriminalreport');
 });
 
 Route::middleware(['auth', 'role:collage_dean'])->group(function () {

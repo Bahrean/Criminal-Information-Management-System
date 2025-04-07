@@ -3,16 +3,7 @@
 
 <div class="page-content" style="padding: 25px 15px;">
 
-    <!-- Breadcrumb Navigation -->
-    <nav class="page-breadcrumb mb-4">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{{ route('admin.addmember') }}" class="btn btn-outline-success">
-                    <i class="fas fa-user-plus"></i> Add New Member
-                </a>
-            </li>
-        </ol>
-    </nav>
+
 
     <!-- Members Table Section -->
     <div class="row">
@@ -29,17 +20,14 @@
                                 <tr style="background-color: #003f00;">
                                     <th style="font-size: 17px; color: white; font-weight: bold;">ID</th>
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Name</th>
-                                    <th style="font-size: 17px; color: white; font-weight: bold;">Username</th>
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Email</th>
-                                    <th style="font-size: 17px; color: white; font-weight: bold;">Role</th>
-                                    <th style="font-size: 17px; color: white; font-weight: bold;">Photo</th>
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Gender</th>
-                                    <th style="font-size: 17px; color: white; font-weight: bold;">TeamName</th>
-                                    <th style="font-size: 17px; color: white; font-weight: bold;">Department</th>
-                                    <th style="font-size: 17px; color: white; font-weight: bold;">Phone</th>
+                                    <th style="font-size: 17px; color: white; font-weight: bold;">Photo</th>
+                                    <th style="font-size: 17px; color: white; font-weight: bold;">Report(text)</th>
+                                    <th style="font-size: 17px; color: white; font-weight: bold;">phone</th>
+                                    
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Address</th>
-                                    <th style="font-size: 17px; color: white; font-weight: bold;">Status</th>
-                                    <th style="font-size: 17px; color: white; font-weight: bold;">Actions</th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,18 +35,19 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $items->name }}</td>
-                                        <td>{{ $items->username }}</td>
+                                    
                                         <td>{{ $items->email }}</td>
-                                        <td>{{ $items->role }}</td>
+                                        <td>{{ $items->gender }}</td>
                                         <td>
                                             <img class="wd-100 rounded-circle" 
                                                  src="{{ !empty($items->photo) ? url('upload/admin_image/' . $items->photo) : url('upload/no_image.jpg') }}" 
                                                  alt="profile" 
                                                  style="width: 50px; height: 50px;">
                                         </td>
-                                        <td>{{ $items->gender }}</td>
-                                        <td>{{ $items->teamname }}</td>
-                                        <td>{{ $items->department }}</td>
+                                        <td>{{ $items->repotext }}</td>
+
+                                       
+                                
                                         <td>{{ $items->phone }}</td>
                                         <td>{{ $items->address }}</td>
                                         <td>
@@ -72,18 +61,7 @@
                                                 @endif
                                             </form>  
                                         </td>
-                                        <td>
-                                            <div class="d-flex gap-2">
-                                                <a href="{{ route('admin.editmember', $items->id) }}" 
-                                                   class="btn btn-outline-warning btn-sm">
-                                                   <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                                <a href="{{ route('admin.deletemember', $items->id) }}" 
-                                                   class="btn btn-outline-danger btn-sm" id="delete">
-                                                   <i class="fas fa-trash"></i> Delete
-                                                </a>
-                                            </div>
-                                        </td>
+                          
                                     </tr>
                                 @endforeach
                             </tbody>
