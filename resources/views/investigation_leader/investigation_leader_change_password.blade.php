@@ -20,7 +20,7 @@
           </div>
 
         </div>
-        <p>Hi! I'm {{$profileData->name}} the Collage Dean of Informationrmatics in KIOT.</p>
+        <p>Hi! I'm {{$profileData->name}} </p>
         <div class="mt-3">
           <label class="tx-11 fw-bolder mb-0 text-uppercase">Name:</label>
           <p class="text-muted">{{$profileData->name}}</p>
@@ -58,9 +58,9 @@
     <div class="card">
               <div class="card-body">
 
-								<h6 class="card-title">Collage Dean change password</h6>
+								<h6 class="card-title">Change password</h6>
 
-								<form class="forms-sample" method="POST" action="{{route('collagedean.update.password')}}" enctype='multipart/form-data'>
+								<form class="forms-sample" method="POST" action="{{route('InvestigatorLeader.update.password')}}" enctype='multipart/form-data'>
 								@csrf	
           
 									<div class="mb-3">

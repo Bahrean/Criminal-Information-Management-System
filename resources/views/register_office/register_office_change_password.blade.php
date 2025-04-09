@@ -1,5 +1,5 @@
-@extends('investigator.investigator_dashboard')
-@section('investigator')
+@extends('register_office.register_office_dashboard')
+@section('register_office')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -20,7 +20,7 @@
           </div>
 
         </div>
-        <p>Hi! I'm {{$profileData->name}}  </p>
+        <p>Hi! I'm {{$profileData->name}} </p>
         <div class="mt-3">
           <label class="tx-11 fw-bolder mb-0 text-uppercase">Name:</label>
           <p class="text-muted">{{$profileData->name}}</p>
@@ -58,9 +58,9 @@
     <div class="card">
               <div class="card-body">
 
-								<h6 class="card-title"> Change password</h6>
+								<h6 class="card-title">change password</h6>
 
-								<form class="forms-sample" method="POST" action="{{route('Investigator.update.password')}}" enctype='multipart/form-data'>
+								<form class="forms-sample" method="POST" action="{{route('RegisterOffice.update.password')}}" enctype='multipart/form-data'>
 								@csrf	
           
 									<div class="mb-3">

@@ -5,18 +5,15 @@
                     <div class="navbar-content">
                         <form class="search-form">
                             <div class="input-group">
-                <div class="input-group-text">
-                  
-                </div>
-                               
+        
+                        
                             </div>
                         </form>
                         <ul class="navbar-nav">
                 
-              
 
                             <li class="nav-item dropdown">
-                       
+                    
 
                             </li>
                             @php
@@ -53,20 +50,25 @@
                                     </div>
                     <ul class="list-unstyled p-1">
                     <li class="dropdown-item py-2">
-                        <a href="{{route('InvestigatorLeader.profile')}}" class="text-body ms-0">
+                        <a href="{{route('RegisterOffice.profile')}}" class="text-body ms-0">
                         <i class="me-2 icon-md" data-feather="user"></i>
                         <span>Profile</span>
                         </a>
                     </li>
                     <li class="dropdown-item py-2">
-                        <a href="{{route('InvestigatorLeader.change.password')}}" class="text-body ms-0">
+                        <a href="{{route('RegisterOffice.change.password')}}" class="text-body ms-0">
                         <i class="me-2 icon-md" data-feather="edit"></i>
                         <span>Change Password</span>
                         </a>
                     </li>
-
                     <li class="dropdown-item py-2">
-                        <a href="{{route('InvestigatorLeader.logout')}}" class="text-body ms-0">
+                        <a href="javascript:;" class="text-body ms-0">
+                        <i class="me-2 icon-md" data-feather="repeat"></i>
+                        <span>Switch User</span>
+                        </a>
+                    </li>
+                    <li class="dropdown-item py-2">
+                        <a href="{{route('RegisterOffice.logout')}}" class="text-body ms-0">
                         <i class="me-2 icon-md" data-feather="log-out"></i>
                         <span>Log Out</span>
                         </a>

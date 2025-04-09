@@ -7,7 +7,7 @@
             <a href="#" class="sidebar-brand">
             Crime<span style="color: rgb(255, 255, 0);font-size: 20px;">Information</span>
             </a>
-            <div class="sidebar-toggler not-active">
+            <div class="sidebar-toggler not-">
             <span></span>
             <span></span>
             <span></span>
@@ -17,22 +17,17 @@
             <ul class="nav">
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item">
-                <a href="{{route('InvestigatorLeader.dashboard')}}" class="nav-link">
+                <a href="{{route('RegisterOffice.dashboard')}}" class="nav-link">
                 <i class="link-icon" data-feather="box"></i>
                 <span class="link-title">Dashboard</span>
                 </a>
             </li>
         
 
-          </li>
-           
-   
-       
- 
 
- 
 
-  
+
+
 
             <!-- <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="false" aria-controls="emails">
@@ -52,8 +47,6 @@
                 </ul>
                 </div>
             </li> -->
-
-            
 
   
         </div>

@@ -1,5 +1,5 @@
-@extends('investigation_leader.investigation_leader_dashboard')
-@section('investigation_leader')
+@extends('register_office.register_office_dashboard')
+@section('register_office')
 
 <div class="page-content">
     @php
@@ -11,7 +11,7 @@
     <div class="d-flex flex-column align-items-start gap-3">
         <div class="welcome-section text-center mb-4">
             <h3 class="mb-2">
-                Welcome to investigation leader Dashboard, {{$gender}} 
+                Welcome to {{$profileData->name}} Dashboard
                 <span style="color: yellow; font-size: 30px;"></span>
             </h3>
             

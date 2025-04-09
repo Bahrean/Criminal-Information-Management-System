@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CollageDeanController;
-use App\Http\Controllers\CollageRegistralController;
-use App\Http\Controllers\DepartmentHeadController;
+use App\Http\Controllers\InvestigatorLeaderController;
+use App\Http\Controllers\RegisterOfficeController;
+use App\Http\Controllers\InvestigatorController;
 
-use App\Http\Controllers\StuffController;
+use App\Http\Controllers\policeController;
 use App\Http\ControostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CollegePostController;
@@ -162,12 +162,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         AdminController::class,
         'AdminChangePassword',
     ])->name('admin.change.password');
-    Route::get('/admin/chat', [AdminController::class, 'AdminChat'])->name(
-        'admin.chat'
-    );
-    Route::get('/admin/posts', [AdminController::class, 'AdminPosts'])->name(
-        'admin.posts'
-    );
+
+
     Route::post('/admin/update/password', [
         AdminController::class,
         'AdminUpdatePassword',
@@ -195,13 +191,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         AdminController::class,
         'AdminDeleteMember',
     ])->name('admin.deletemember');
-    Route::get('/admin/posts2', [PostController::class, 'AdminPosts2'])->name(
-        'admin.posts2'
-    );
-    Route::get('/admin/postcomment{post}', [
-        PostController::class,
-        'AdminPostComment',
-    ])->name('admin.post.comment');
+
+
     Route::get('/admin/addpost', [PostController::class, 'AdminAddPost'])->name(
         'admin.addpost'
     );
@@ -217,10 +208,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         PostController::class,
         'AdminDeletePost',
     ])->name('admin.deletepost');
-    Route::post('/admin/post/store', [
-        PostController::class,
-        'AdminPostStore',
-    ])->name('admin.post.store');
+
     Route::post('/admin/statuschange{id}', [
         AdminController::class,
         'AdminStatusChange',
@@ -244,7 +232,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/adddepartmentpost', [
         DepartmentPostController::class,
-        'DepartmentHeadAddDepartmentPost',
+        'InvestigatorAddDepartmentPost',
     ])->name('admin.adddepartmentpost');
 
     Route::get('/admin/editdepartmentpost{id}', [
@@ -263,245 +251,230 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:collage_dean'])->group(function () {
-    Route::get('/collagedean/dashboard', [
-        CollageDeanController::class,
-        'CollageDeanDashboard',
-    ])->name('collagedean.dashboard');
-    Route::get('/collagedean/profile', [
-        CollageDeanController::class,
-        'CollageDeanProfile',
-    ])->name('collagedean.profile');
-    Route::get('/collagedean/chat', [
-        CollageDeanController::class,
-        'CollagedeanChat',
-    ])->name('collagedean.chat');
-    Route::get('/collagedean/logout', [
-        CollageDeanController::class,
-        'CollagedeanLogout',
-    ])->name('collagedean.logout');
-    Route::post('/collagedean/profile/store', [
-        CollageDeanController::class,
-        'CollagedeanProfileStore',
-    ])->name('collagedean.profile.store');
-    Route::get('/collagedean/change/password', [
-        CollageDeanController::class,
-        'CollagedeanChangePassword',
-    ])->name('collagedean.change.password');
-    Route::post('/collagedean/update/password', [
-        CollageDeanController::class,
-        'CollagedeanUpdatePassword',
-    ])->name('collagedean.update.password');
-    Route::get('/collegedean/showmembers', [
-        CollageDeanController::class,
-        'CollegeDeanShowMember',
-    ])->name('collegedean.showmembers');
-    Route::get('/collegedean/posts', [
-        PostController::class,
-        'CollegeDeanPosts',
-    ])->name('collegedean.posts');
-    Route::get('/collegedean/showmembers', [
-        CollageDeanController::class,
-        'CollegeDeanShowMember',
-    ])->name('collegedean.showmembers');
+    Route::get('/InvestigatorLeader/dashboard', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderDashboard',
+    ])->name('InvestigatorLeader.dashboard');
+    Route::get('/InvestigatorLeader/profile', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderProfile',
+    ])->name('InvestigatorLeader.profile');
 
-    Route::get('/collegedean/collageposts', [
-        CollegePostController::class,
-        'CollegeDeanCollagePosts',
-    ])->name('collegedean.collageposts');
-    Route::get('/collegedean/addcollegepost', [
-        CollegePostController::class,
-        'CollegeDeanAddCollegePost',
-    ])->name('collegedean.addcollegepost');
-    Route::post('/collegedean/post/collegestore', [
-        CollegePostController::class,
-        'CollegeDeanCollegePostStore',
-    ])->name('collegedean.post.collegestore');
-    Route::get('/collegedean/departmentposts', [
-        DepartmentPostController::class,
-        'CollegeDeanDepartmentposts',
-    ])->name('collegedean.departmentposts');
+    Route::get('/InvestigatorLeader/logout', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderLogout',
+    ])->name('InvestigatorLeader.logout');
+    Route::post('/InvestigatorLeader/profile/store', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderProfileStore',
+    ])->name('InvestigatorLeader.profile.store');
+    Route::get('/InvestigatorLeader/change/password', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderChangePassword',
+    ])->name('InvestigatorLeader.change.password');
+    Route::post('/InvestigatorLeader/update/password', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderUpdatePassword',
+    ])->name('InvestigatorLeader.update.password');
+    Route::get('/InvestigatorLeader/showmembers', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderShowMember',
+    ])->name('InvestigatorLeader.showmembers');
 
-    Route::get('/collegedean/adddepartmentpost', [
-        DepartmentPostController::class,
-        'DepartmentHeadAddDepartmentPost',
-    ])->name('collegedean.adddepartmentpost');
+    Route::get('/InvestigatorLeader/showmembers', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderShowMember',
+    ])->name('InvestigatorLeader.showmembers');
 
-    Route::post('/collegedean/post/departmentstore', [
+    Route::get('/InvestigatorLeader/collageposts', [
+        CollegePostController::class,
+        'InvestigatorLeaderCollagePosts',
+    ])->name('InvestigatorLeader.collageposts');
+    Route::get('/InvestigatorLeader/addcollegepost', [
+        CollegePostController::class,
+        'InvestigatorLeaderAddCollegePost',
+    ])->name('InvestigatorLeader.addcollegepost');
+    Route::post('/InvestigatorLeader/post/collegestore', [
+        CollegePostController::class,
+        'InvestigatorLeaderCollegePostStore',
+    ])->name('InvestigatorLeader.post.collegestore');
+    Route::get('/InvestigatorLeader/departmentposts', [
         DepartmentPostController::class,
-        'CollegeDeanDepartmentPostStore',
-    ])->name('collegedean.post.departmentstore');
+        'InvestigatorLeaderDepartmentposts',
+    ])->name('InvestigatorLeader.departmentposts');
+
+    Route::get('/InvestigatorLeader/adddepartmentpost', [
+        DepartmentPostController::class,
+        'InvestigatorAddDepartmentPost',
+    ])->name('InvestigatorLeader.adddepartmentpost');
+
+    Route::post('/InvestigatorLeader/post/departmentstore', [
+        DepartmentPostController::class,
+        'InvestigatorLeaderDepartmentPostStore',
+    ])->name('InvestigatorLeader.post.departmentstore');
 });
 
 Route::middleware(['auth', 'role:collage_registral'])->group(function () {
-    Route::get('/collageregistral/dashboard', [
-        CollageRegistralController::class,
-        'CollageRegistralDashboard',
-    ])->name('collageregistral.dashboard');
-    Route::get('/collageregistral/profile', [
-        CollageRegistralController::class,
-        'CollageRegistralProfile',
-    ])->name('collageregistral.profile');
-    Route::get('/collageregistral/chat', [
-        CollageRegistralController::class,
-        'CollageRegistralChat',
-    ])->name('collageregistral.chat');
-    Route::get('/collageregistral/logout', [
-        CollageRegistralController::class,
-        'CollageRegistralLogout',
-    ])->name('collageregistral.logout');
-    Route::post('/collageregistral/profile/store', [
-        CollageRegistralController::class,
-        'CollageRegistralProfileStore',
-    ])->name('collageregistral.profile.store');
-    Route::get('/collageregistral/change/password', [
-        CollageRegistralController::class,
-        'CollageRegistralChangePassword',
-    ])->name('collageregistral.change.password');
-    Route::post('/collageregistral/update/password', [
-        CollageRegistralController::class,
-        'CollageRegistralUpdatePassword',
-    ])->name('collageregistral.update.password');
-    Route::get('/collageregistral/posts', [
-        CollageRegistralController::class,
-        'CollageRegistralPosts',
-    ])->name('collageregistral.posts');
+    Route::get('/RegisterOffice/dashboard', [
+        RegisterOfficeController::class,
+        'RegisterOfficeDashboard',
+    ])->name('RegisterOffice.dashboard');
+    Route::get('/RegisterOffice/profile', [
+        RegisterOfficeController::class,
+        'RegisterOfficeProfile',
+    ])->name('RegisterOffice.profile');
+    Route::get('/RegisterOffice/chat', [
+        RegisterOfficeController::class,
+        'RegisterOfficeChat',
+    ])->name('RegisterOffice.chat');
+    Route::get('/RegisterOffice/logout', [
+        RegisterOfficeController::class,
+        'RegisterOfficeLogout',
+    ])->name('RegisterOffice.logout');
+    Route::post('/RegisterOffice/profile/store', [
+        RegisterOfficeController::class,
+        'RegisterOfficeProfileStore',
+    ])->name('RegisterOffice.profile.store');
+    Route::get('/RegisterOffice/change/password', [
+        RegisterOfficeController::class,
+        'RegisterOfficeChangePassword',
+    ])->name('RegisterOffice.change.password');
+    Route::post('/RegisterOffice/update/password', [
+        RegisterOfficeController::class,
+        'RegisterOfficeUpdatePassword',
+    ])->name('RegisterOffice.update.password');
+    Route::get('/RegisterOffice/posts', [
+        RegisterOfficeController::class,
+        'RegisterOfficePosts',
+    ])->name('RegisterOffice.posts');
 
-    Route::get('/collageregistral/adddepartmentpost', [
+    Route::get('/RegisterOffice/adddepartmentpost', [
         DepartmentPostController::class,
-        'DepartmentHeadAddDepartmentPost',
-    ])->name('collageregistral.adddepartmentpost');
-    Route::get('/collageregistral/showmembers', [
-        CollageRegistralController::class,
-        'CollageRegistralShowMember',
-    ])->name('collageregistral.showmembers');
+        'InvestigatorAddDepartmentPost',
+    ])->name('RegisterOffice.adddepartmentpost');
+    Route::get('/RegisterOffice/showmembers', [
+        RegisterOfficeController::class,
+        'RegisterOfficeShowMember',
+    ])->name('RegisterOffice.showmembers');
 });
 
 Route::middleware(['auth', 'role:investigator'])->group(function () {
-    Route::get('/departmenthead/dashboard', [
-        DepartmentHeadController::class,
-        'DepartmentHeadDashboard',
-    ])->name('departmenthead.dashboard');
-    Route::get('/departmenthead/profile', [
-        DepartmentHeadController::class,
-        'DepartmentHeadProfile',
-    ])->name('departmenthead.profile');
-    Route::get('/departmenthead/chat', [
-        DepartmentHeadController::class,
-        'DepartmentHeadChat',
-    ])->name('departmenthead.chat');
-    Route::get('/departmenthead/logout', [
-        DepartmentHeadController::class,
-        'DepartmentHeadLogout',
-    ])->name('departmenthead.logout');
-    Route::get('/departmenthead/showmember', [
-        DepartmentHeadController::class,
-        'DepartmentHeadShowMember',
-    ])->name('departmenthead.showmembers');
-    Route::post('/departmenthead/profile/store', [
-        DepartmentHeadController::class,
-        'DepartmentHeadProfileStore',
-    ])->name('departmenthead.profile.store');
-    Route::get('/departmenthead/change/password', [
-        DepartmentHeadController::class,
-        'DepartmentHeadChangePassword',
-    ])->name('departmenthead.change.password');
-    Route::post('/departmenthead/update/password', [
-        DepartmentHeadController::class,
-        'DepartmentHeadUpdatePassword',
-    ])->name('departmenthead.update.password');
-    Route::get('/departmenthead/posts', [
-        PostController::class,
-        'AdminPosts2',
-    ])->name('departmenthead.posts');
-    Route::get('/departmenthead/addpost', [
+    Route::get('/Investigator/dashboard', [
+        InvestigatorController::class,
+        'InvestigatorDashboard',
+    ])->name('Investigator.dashboard');
+    Route::get('/Investigator/profile', [
+        InvestigatorController::class,
+        'InvestigatorProfile',
+    ])->name('Investigator.profile');
+
+    Route::get('/Investigator/logout', [
+        InvestigatorController::class,
+        'InvestigatorLogout',
+    ])->name('Investigator.logout');
+    Route::get('/Investigator/showmember', [
+        InvestigatorController::class,
+        'InvestigatorShowMember',
+    ])->name('Investigator.showmembers');
+    Route::post('/Investigator/profile/store', [
+        InvestigatorController::class,
+        'InvestigatorProfileStore',
+    ])->name('Investigator.profile.store');
+    Route::get('/Investigator/change/password', [
+        InvestigatorController::class,
+        'InvestigatorChangePassword',
+    ])->name('Investigator.change.password');
+    Route::post('/Investigator/update/password', [
+        InvestigatorController::class,
+        'InvestigatorUpdatePassword',
+    ])->name('Investigator.update.password');
+
+    Route::get('/Investigator/addpost', [
         PostController::class,
         'AdminAddPost',
-    ])->name('departmenthead.addpost');
-    Route::get('/departmenthead/posts/editpost', [
+    ])->name('Investigator.addpost');
+    Route::get('/Investigator/posts/editpost', [
         PostController::class,
-        'DepartmentHeadEditPost',
-    ])->name('departmenthead.post.alleditpost{id}');
-    Route::post('/departmenthead/updatepost', [
+        'InvestigatorEditPost',
+    ])->name('Investigator.post.alleditpost{id}');
+    Route::post('/Investigator/updatepost', [
         PostController::class,
-        'DepartmentHeadUpdatePost',
-    ])->name('departmenthead.updatepost');
-    Route::get('/departmenthead/deletepost', [
+        'InvestigatorUpdatePost',
+    ])->name('Investigator.updatepost');
+    Route::get('/Investigator/deletepost', [
         PostController::class,
-        'DepartmentHeadDeletePost',
-    ])->name('departmenthead.deletepost{id}');
-    Route::post('/departmenthead/post/store', [
-        PostController::class,
-        'DepartmentHeadPostStore',
-    ])->name('departmenthead.post.store');
-    Route::get('/departmenthead/collageposts', [
+        'InvestigatorDeletePost',
+    ])->name('Investigator.deletepost{id}');
+
+    Route::get('/Investigator/collageposts', [
         CollegePostController::class,
-        'DepartmentHeadCollagePosts',
-    ])->name('departmenthead.collageposts');
-    Route::get('/departmenthead/addcollegepost', [
+        'InvestigatorCollagePosts',
+    ])->name('Investigator.collageposts');
+    Route::get('/Investigator/addcollegepost', [
         CollegePostController::class,
-        'DepartmentHeadAddCollegePost',
-    ])->name('departmenthead.addcollegepost');
-    Route::post('/departmenthead/post/collegestore', [
+        'InvestigatorAddCollegePost',
+    ])->name('Investigator.addcollegepost');
+    Route::post('/Investigator/post/collegestore', [
         CollegePostController::class,
-        'DepartmentHeadCollegePostStore',
-    ])->name('departmenthead.post.collegestore');
-    Route::get('/departmenthead/departmentposts', [
+        'InvestigatorCollegePostStore',
+    ])->name('Investigator.post.collegestore');
+    Route::get('/Investigator/departmentposts', [
         DepartmentPostController::class,
-        'DepartmentHeadDepartmentposts',
-    ])->name('departmenthead.departmentposts');
-    Route::get('/departmenthead/adddepartmentpost', [
+        'InvestigatorDepartmentposts',
+    ])->name('Investigator.departmentposts');
+    Route::get('/Investigator/adddepartmentpost', [
         DepartmentPostController::class,
-        'DepartmentHeadAddDepartmentPost',
-    ])->name('departmenthead.adddepartmentpost');
-    Route::post('/departmenthead/post/departmentstore', [
+        'InvestigatorAddDepartmentPost',
+    ])->name('Investigator.adddepartmentpost');
+    Route::post('/Investigator/post/departmentstore', [
         DepartmentPostController::class,
-        'DepartmentHeadDepartmentPostStore',
-    ])->name('departmenthead.post.departmentstore');
+        'InvestigatorDepartmentPostStore',
+    ])->name('Investigator.post.departmentstore');
 });
 
-Route::middleware(['auth', 'role:stuff'])->group(function () {
-    Route::get('/stuff/dashboard', [
-        StuffController::class,
-        'StuffDashboard',
-    ])->name('stuff.dashboard');
-    Route::get('/stuff/profile', [
-        StuffController::class,
-        'StuffProfile',
-    ])->name('stuff.profile');
-    Route::get('/stuff/chat', [StuffController::class, 'StuffChat'])->name(
-        'stuff.chat'
+Route::middleware(['auth', 'role:police'])->group(function () {
+    Route::get('/police/dashboard', [
+        policeController::class,
+        'policeDashboard',
+    ])->name('police.dashboard');
+    Route::get('/police/profile', [
+        policeController::class,
+        'policeProfile',
+    ])->name('police.profile');
+    Route::get('/police/chat', [policeController::class, 'policeChat'])->name(
+        'police.chat'
     );
-    Route::get('/stuff/logout', [StuffController::class, 'StuffLogout'])->name(
-        'stuff.logout'
+    Route::get('/police/logout', [policeController::class, 'policeLogout'])->name(
+        'police.logout'
     );
-    Route::post('/stuff/profile/store', [
-        StuffController::class,
-        'StuffProfileStore',
-    ])->name('stuff.profile.store');
-    Route::get('/stuff/change/password', [
-        StuffController::class,
-        'StuffChangePassword',
-    ])->name('stuff.change.password');
-    Route::post('/stuff/update/password', [
-        StuffController::class,
-        'StuffUpdatePassword',
-    ])->name('stuff.update.password');
-    Route::get('/stuff/posts', [PostController::class, 'StuffPosts'])->name(
-        'stuff.posts'
+    Route::post('/police/profile/store', [
+        policeController::class,
+        'policeProfileStore',
+    ])->name('police.profile.store');
+    Route::get('/police/change/password', [
+        policeController::class,
+        'policeChangePassword',
+    ])->name('police.change.password');
+    Route::post('/police/update/password', [
+        policeController::class,
+        'policeUpdatePassword',
+    ])->name('police.update.password');
+    Route::get('/police/posts', [PostController::class, 'policePosts'])->name(
+        'police.posts'
     );
-    Route::get('/stuff/collageposts', [
+    Route::get('/police/collageposts', [
         CollegePostController::class,
-        'StuffCollagePosts',
-    ])->name('stuff.collageposts');
-    Route::get('/stuff/departmentposts', [
+        'policeCollagePosts',
+    ])->name('police.collageposts');
+    Route::get('/police/departmentposts', [
         DepartmentPostController::class,
-        'StuffDepartmentPosts',
-    ])->name('stuff.departmentposts');
+        'policeDepartmentPosts',
+    ])->name('police.departmentposts');
 
-    Route::get('/stuff/adddepartmentpost', [
+    Route::get('/police/adddepartmentpost', [
         DepartmentPostController::class,
-        'DepartmentHeadAddDepartmentPost',
-    ])->name('stuff.adddepartmentpost');
+        'InvestigatorAddDepartmentPost',
+    ])->name('police.adddepartmentpost');
 });
 
 Route::middleware('auth')->group(function () {

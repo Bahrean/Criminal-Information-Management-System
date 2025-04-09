@@ -39,16 +39,16 @@ class AuthenticatedSessionController extends Controller
                     $url = 'admin/dashboard';
                     break;
                 case 'investigation_leader':
-                    $url = 'collagedean/dashboard';
-                    break;
-                case 'investigator':
-                    $url = 'collageregistral/dashboard';
-                    break;
-                case 'police':
-                    $url = 'departmenthead/dashboard';
+                    $url = 'InvestigatorLeader/dashboard';
                     break;
                 case 'register_office':
-                    $url = 'stuff/dashboard';
+                    $url = 'RegisterOffice/dashboard';
+                    break;
+                case 'investigator':
+                    $url = 'Investigator/dashboard';
+                    break;
+                case 'police':
+                    $url = 'police/dashboard';
                     break;
                 default:
                     $url = 'unauthorized'; // Optionally redirect to an unauthorized page or handle it

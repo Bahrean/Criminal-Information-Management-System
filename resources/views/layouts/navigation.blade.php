@@ -5,7 +5,7 @@
         <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <img style="width:60px;height:60px" src="{{asset('upload/wollo_Information.jpg')}}" alt="" >
+                    <img style="width:60px;height:60px" src="" alt="" >
 
                 </div>
 

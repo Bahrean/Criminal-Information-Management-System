@@ -47,20 +47,20 @@
                                     </div>
                     <ul class="list-unstyled p-1">
                     <li class="dropdown-item py-2">
-                        <a href="{{route('departmenthead.profile')}}" class="text-body ms-0">
+                        <a href="{{route('Investigator.profile')}}" class="text-body ms-0">
                         <i class="me-2 icon-md" data-feather="user"></i>
                         <span>Profile</span>
                         </a>
                     </li>
                     <li class="dropdown-item py-2">
-                        <a href="{{route('departmenthead.change.password')}}" class="text-body ms-0">
+                        <a href="{{route('Investigator.change.password')}}" class="text-body ms-0">
                         <i class="me-2 icon-md" data-feather="edit"></i>
                         <span>Change Password</span>
                         </a>
                     </li>
       
                     <li class="dropdown-item py-2">
-                        <a href="{{route('departmenthead.logout')}}" class="text-body ms-0">
+                        <a href="{{route('Investigator.logout')}}" class="text-body ms-0">
                         <i class="me-2 icon-md" data-feather="log-out"></i>
                         <span>Log Out</span>
                         </a>

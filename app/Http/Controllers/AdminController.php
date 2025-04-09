@@ -99,15 +99,9 @@ class AdminController extends Controller
         return back()->with($notification);
     }
 
-    public function AdminChat()
-    {
-        return view('admin.chat');
-    }
 
-    public function AdminPosts()
-    {
-        return view('admin.posts');
-    }
+
+
 
     public function AdminAddMember()
     {

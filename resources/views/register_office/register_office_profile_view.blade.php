@@ -1,5 +1,5 @@
-@extends('investigation_leader.investigation_leader_dashboard')
-@section('investigation_leader')
+@extends('register_office.register_office_dashboard')
+@section('register_office')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -58,9 +58,9 @@
     <div class="card">
               <div class="card-body">
 
-								<h6 class="card-title">Update  Profile</h6>
+								<h6 class="card-title">Update Profile</h6>
 
-								<form class="forms-sample" method="POST" action="{{route('InvestigatorLeader.profile.store')}}" enctype='multipart/form-data'>
+								<form class="forms-sample" method="POST" action="{{route('RegisterOffice.profile.store')}}" enctype='multipart/form-data'>
 								@csrf	
                 <div class="mb-3">
 										<label for="exampleInputUsername1" class="form-label">Username</label>

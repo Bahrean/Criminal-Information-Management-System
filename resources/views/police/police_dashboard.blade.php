@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-Template Name: NobleUI - HTML Bootstrap 5 InvestigatorLeader Dashboard Template
+Template Name: NobleUI - HTML Bootstrap 5 Admin Dashboard Template
 Author: NobleUI
 Website: https://www.nobleui.com
 Portfolio: https://themeforest.net/user/nobleui/portfolio
@@ -17,7 +17,7 @@ License: For each use you must have a valid license purchased only from above li
 	<meta name="author" content="NobleUI">
 	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-	<title>Collage Dean Panel For Criminal Information  </title>
+	<title>police Panel For Criminal Information </title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,18 +50,18 @@ License: For each use you must have a valid license purchased only from above li
 
 		<!-- partial:partials/_sidebar.html -->
 
-            @include('investigation_leader.body.sidebar');
+            @include('police.body.sidebar');
             <!-- partial -->
         
             <div class="page-wrapper">
                         
                 <!-- partial:partials/_navbar.html -->
-                @include('investigation_leader.body.header');
+                @include('police.body.header');
                 <!-- partial -->
-                @yield('investigation_leader');
+                @yield('police');
 
                 <!-- partial:partials/_footer.html -->
-                @include('investigation_leader.body.footer')
+                @include('police.body.footer')
                 <!-- partial -->
             
             </div>

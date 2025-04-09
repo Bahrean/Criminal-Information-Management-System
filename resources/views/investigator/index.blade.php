@@ -11,7 +11,7 @@
 
     <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
         <div>
-            <h4 class="mb-3 mb-md-0">Welcome to Department Head Dashboard {{$gender}} <span style="color: rgb(255, 255, 0);font-size: 25px;">{{$profileData->name}}</span></h4>
+            <h4 class="mb-3 mb-md-0">Welcome to  {{$gender}} <span style="color: rgb(255, 255, 0);font-size: 25px;">{{$profileData->name}}</span></h4>
         </div>
 
     </div> <!-- row -->
@@ -22,7 +22,7 @@
                     
                    
                     <div class="col-md-4">
-                        <form action="{{route('departmenthead.showmembers')}}" method="GET">
+                        <form action="#" method="GET">
                             <button 
                                 type="submit" 
                                 class="btn btn-success btn-lg w-100 p-4 shadow-sm" 
