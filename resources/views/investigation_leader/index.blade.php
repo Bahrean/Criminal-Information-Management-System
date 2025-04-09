@@ -11,8 +11,8 @@
     <div class="d-flex flex-column align-items-start gap-3">
         <div class="welcome-section text-center mb-4">
             <h3 class="mb-2">
-                Welcome to Collage Dean Dashboard, {{$gender}} 
-                <span style="color: yellow; font-size: 30px;">{{$profileData->name}}</span>
+                Welcome to investigation leader Dashboard, {{$gender}} 
+                <span style="color: yellow; font-size: 30px;"></span>
             </h3>
             
         </div>

@@ -36,6 +36,7 @@
       --light-color: #ccd6f6;
       --alert-color: #ff5555;
       --neon-glow: 0 0 10px rgba(100, 255, 218, 0.7);
+      --report-color: #ff6b6b;
     }
     
     body {
@@ -51,7 +52,6 @@
       margin:0px;
       background: rgba(107, 5, 27, 0.85);
       border-radius: 15px;
- 
       overflow: hidden;
       position: relative;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -74,7 +74,6 @@
     }
     
     .card {
-      
       background-color: rgba(51, 3, 14, 0.85);
       border: none;
       border-radius: 0;
@@ -286,6 +285,55 @@
       font-size: 1.2rem;
     }
     
+    /* Report Button styling */
+    .report-btn {
+      background: linear-gradient(135deg, var(--report-color), #ff8e8e);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 1.5rem;
+      text-decoration: none;
+      text-align: center;
+    }
+    
+    .report-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+      color: white;
+    }
+    
+    .report-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .report-btn:hover::before {
+      left: 100%;
+    }
+    
+    .report-btn i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+    
     /* Remember me checkbox */
     .form-check {
       display: flex;
@@ -415,6 +463,17 @@
       40%, 80% { transform: translateX(5px); }
     }
     
+    /* Pulsing emergency animation */
+    @keyframes pulseEmergency {
+      0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+    }
+    
+    .emergency-pulse {
+      animation: pulseEmergency 2s infinite;
+    }
+    
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .auth-form-wrapper {
@@ -429,7 +488,7 @@
         font-size: 1.1rem;
       }
       
-      .auth-btn {
+      .auth-btn, .report-btn {
         padding: 0.9rem 1.5rem;
       }
     }
@@ -464,8 +523,8 @@
   <!-- Digital particle background -->
   <div class="particles" id="particles"></div>
 
-  <div class="main-wrapper" >
-    <div class="page-wrapper full-page" >
+  <div class="main-wrapper">
+    <div class="page-wrapper full-page">
       <div class="page-content d-flex align-items-center justify-content-center">
         <div class="row w-100 mx-0 auth-page" style="margin: 0px;">
           <div class="col-md-8 col-xl-6 mx-auto" style="margin: 20px;">
@@ -487,7 +546,7 @@
                     <form class="forms-sample" method="POST" action="{{ route('login') }}" id="logInformationrm">
                       @csrf
                       <div class="input-container mb-4">
-                        <label for="login" class="form-label">BADGE ID</label>
+                        <label for="login" class="form-label">Email</label>
                         <input type="text" class="form-control" name="login" id="login" placeholder="Enter your badge or agent ID" required autocomplete="off">
                         <i class="feather icon-user password-toggle"></i>
                       </div>
@@ -495,25 +554,29 @@
                       <div class="input-container mb-4">
                         <label for="password" class="form-label">PASSWORD</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter your secure passcode" required>
-                        <i  id="togglePassword"></i>
+                        <i class="feather icon-eye password-toggle" id="togglePassword"></i>
                         <div class="password-strength">
                           <div class="password-strength-bar" id="passwordStrength"></div>
                         </div>
                       </div>
                       
-  
-                      
                       <button type="submit" class="auth-btn">
-                        <i class="feather icon-log-in mr-1"></i> VERIFY IDENTITY
+                        <i class="feather icon-log-in mr-1"></i> LOGIN
                       </button>
                     </form>
                     
-      
+                    <!-- Emergency Report Button -->
+              
+           
                   </div>
                 </div>
               </div>
+  
             </div>
           </div>
+          <a href="{{ route('criminal_reporting.form') }}" class=" report-btn emergency-pulse" style="width: 400px;height: 60px;">
+                      <i class="feather  mr-1"></i> REPORT Criminal Activity
+                    </a>
         </div>
       </div>
     </div>
@@ -605,7 +668,5 @@
       }
     });
   </script>
-
-
 </body>
 </html>
