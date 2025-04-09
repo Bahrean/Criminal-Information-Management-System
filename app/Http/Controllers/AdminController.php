@@ -120,6 +120,7 @@ class AdminController extends Controller
         return view('admin.criminalreport', compact('types'));
     }
 
+
     public function AdminStore(Request $request)
     {
         $request->validate([

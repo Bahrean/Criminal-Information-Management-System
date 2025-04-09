@@ -12,6 +12,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CollegePostController;
 use App\Http\Controllers\DepartmentPostController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\CriminalRecordController;
 use App\Http\Livewire\Chat\Chat;
 use App\Http\Livewire\Chat\Index;
 use App\Http\Livewire\Users;
@@ -54,93 +55,6 @@ Route::get('/dashboard', function () {
     ->name('dashboard');
 
 require __DIR__ . '/auth.php';
-
-Route::middleware('auth')->group(function () {
-    Route::get('/chat', Index::class)->name('chat.index');
-    Route::get('/chat/{query}', Chat::class)->name('chat');
-
-    Route::get('/users', Users::class)->name('users');
-
-    Route::patch('/posts/{post}/{action}', [
-        PostController::class,
-        'updateFeedback',
-    ]);
-
-    Route::get('/common/posts', [PostController::class, 'AdminPosts2'])->name(
-        'common.posts.post'
-    );
-    Route::get('/common/addpost', [
-        PostController::class,
-        'CommonAddPost',
-    ])->name('common.addpost');
-    Route::post('/common/post/store', [
-        PostController::class,
-        'CommonPostStore',
-    ])->name('common.post.store');
-    Route::get('/common/editpost{id}', [
-        PostController::class,
-        'CommonEditPost',
-    ])->name('common.editpost');
-    Route::post('/common/updatepost', [
-        PostController::class,
-        'CommonUpdatePost',
-    ])->name('common.updatepost');
-    Route::get('/common/deletepost{id}', [
-        PostController::class,
-        'CommonDeletePost',
-    ])->name('common.deletepost');
-
-    Route::get('/common/departmentpost', [
-        DepartmentPostController::class,
-        'CommonDepartmentposts',
-    ])->name('common.posts.departmentpost');
-    Route::get('/common/adddepartmentpost', [
-        DepartmentPostController::class,
-        'CommonAddDepartmentPost',
-    ])->name('common.adddepartmentpost');
-    Route::post('/common/departmentpost/store', [
-        DepartmentPostController::class,
-        'CommonDepartmentPostStore',
-    ])->name('common.departmentpost.store');
-    Route::get('/common/editdepartmentpost{id}', [
-        DepartmentPostController::class,
-        'CommonEditDepartmentPost',
-    ])->name('common.editdepartmentpost');
-    Route::post('/common/updatedepartmentpost', [
-        DepartmentPostController::class,
-        'CommonUpdateDepartmentPost',
-    ])->name('common.updatedepartmentpost');
-    Route::get('/common/deletedepartmentpost{id}', [
-        DepartmentPostController::class,
-        'CommonDeleteDepartmentPost',
-    ])->name('common.deletedepartmentpost');
-
-    Route::get('/common/collegepost', [
-        CollegePostController::class,
-        'CommonCollegePost',
-    ])->name('common.posts.collegepost');
-    Route::get('/common/addcollegepost', [
-        CollegePostController::class,
-        'CommonCollegeAddPost',
-    ])->name('common.addcollegepost');
-    Route::post('/common/collegepost/store', [
-        CollegePostController::class,
-        'CommonCollegePostStore',
-    ])->name('common.collegepost.store');
-
-    Route::get('/common/editcollegepost{id}', [
-        CollegePostController::class,
-        'CommonEditCollegePost',
-    ])->name('common.editcollegepost');
-    Route::post('/common/updatecollegepost', [
-        CollegePostController::class,
-        'CommonUpdateCollegePost',
-    ])->name('common.updatecollegepost');
-    Route::get('/common/deletecollegepost{id}', [
-        CollegePostController::class,
-        'CommonDeleteCollegePost',
-    ])->name('common.deletecollegepost');
-});
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [
@@ -248,6 +162,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         AdminController::class,
         'AdminShowCriminalReport',
     ])->name('admin.showcriminalreport');
+    Route::get('/admin/showrecordedcriminal', [
+        CriminalRecordController::class,
+        'Adminshowrecordedcriminal',
+    ])->name('admin.showrecordedcriminal');
 });
 
 Route::middleware(['auth', 'role:collage_dean'])->group(function () {
@@ -356,6 +274,13 @@ Route::middleware(['auth', 'role:collage_registral'])->group(function () {
         RegisterOfficeController::class,
         'RegisterOfficeShowMember',
     ])->name('RegisterOffice.showmembers');
+    Route::get('/RegisterOffice/recordcriminalinformation', [
+        RegisterOfficeController::class,
+        'RegisterOfficeRecordcriminalinformation',
+    ])->name('RegisterOffice.recordcriminalinformation');
+    Route::post('/registeroffice/storecriminalrecord', [RegisterOfficeController::class, 'RegisterOfficestorecriminalrecord'])->name(
+        'registeroffice.storecriminalrecord'
+    );
 });
 
 Route::middleware(['auth', 'role:investigator'])->group(function () {
