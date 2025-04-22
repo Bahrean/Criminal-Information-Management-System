@@ -43,7 +43,6 @@ Route::get('/criminal-reporting', [AdminController::class, 'showReportingForm'])
 // POST route for storing the report (RESTful convention)
 Route::post('/criminal-reporting', [ReportController::class, 'store'])
      ->name('criminal_reporting.store'); // Simplified name
-    
 
 Route::post('/criminalstore', [AdminController::class, 'CriminalStore'])->name(
         'criminalstore'
