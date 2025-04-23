@@ -113,7 +113,25 @@ class InvestigatorLeaderController extends Controller
     public function InvestigatorLeaderShowCriminalReport()
     {
         $types = Report::latest()->get();
-        return view('admin.criminalreport', compact('types'));
+        return view('investigation_leader.criminalreport', compact('types'));
+    }
+
+    public function InvestigatorLeaderShowAllInvestigator()
+    {
+        $types = User::latest()->get();
+        return view('investigation_leader.showallinvestigator', compact('types'));
+    }
+
+    public function InvestigatorLeaderSendSuspectToInvestigator()
+    {
+        $types = Report::latest()->get();
+        return view('investigation_leader.sendsuspecttoinvestigator', compact('types'));
+    }
+
+    public function InvestigatorLeaderSendToInvestigator($id)
+    {
+        $types = Report::findOrFail($id);
+        return view('investigation_leader.sendtoinvestigator', compact('types'));
     }
 
     //
