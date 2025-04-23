@@ -13,6 +13,7 @@ use App\Http\Controllers\CollegePostController;
 use App\Http\Controllers\DepartmentPostController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CriminalRecordController;
+use App\Http\Controllers\CommonController;
 use App\Http\Livewire\Chat\Chat;
 use App\Http\Livewire\Chat\Index;
 use App\Http\Livewire\Users;
@@ -53,6 +54,15 @@ Route::get('/dashboard', function () {
 })
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/Common/showcriminalreport', [
+        CommonController::class,
+        'CommonShowCriminalReport',
+    ])->name('Common.showcriminalreport');
+
+});
 
 require __DIR__ . '/auth.php';
 
@@ -168,7 +178,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     ])->name('admin.showrecordedcriminal');
 });
 
-Route::middleware(['auth', 'role:collage_dean'])->group(function () {
+Route::middleware(['auth', 'role:investigation_leader'])->group(function () {
     Route::get('/InvestigatorLeader/dashboard', [
         InvestigatorLeaderController::class,
         'InvestigatorLeaderDashboard',
@@ -230,6 +240,11 @@ Route::middleware(['auth', 'role:collage_dean'])->group(function () {
         DepartmentPostController::class,
         'InvestigatorLeaderDepartmentPostStore',
     ])->name('InvestigatorLeader.post.departmentstore');
+
+    Route::get('/InvestigatorLeader/showcriminalreport', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderShowCriminalReport',
+    ])->name('InvestigatorLeader.showcriminalreport');
 });
 
 Route::middleware(['auth', 'role:collage_registral'])->group(function () {
