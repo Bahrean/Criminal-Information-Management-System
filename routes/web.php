@@ -245,6 +245,19 @@ Route::middleware(['auth', 'role:investigation_leader'])->group(function () {
         InvestigatorLeaderController::class,
         'InvestigatorLeaderShowCriminalReport',
     ])->name('InvestigatorLeader.showcriminalreport');
+    Route::get('/InvestigatorLeader/showallinvestigator', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderShowAllInvestigator',
+    ])->name('InvestigatorLeader.showallinvestigator');
+
+    Route::get('/InvestigatorLeader/sendsuspecttoinvestigator', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderSendSuspectToInvestigator',
+    ])->name('InvestigatorLeader.sendsuspecttoinvestigator');
+    Route::get('/InvestigatorLeader/sendtoinvestigator{id}', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderSendToInvestigator',
+    ])->name('InvestigatorLeader.sendtoinvestigator');
 });
 
 Route::middleware(['auth', 'role:collage_registral'])->group(function () {
