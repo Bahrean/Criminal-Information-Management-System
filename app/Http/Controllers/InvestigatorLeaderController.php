@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Report;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -106,6 +108,12 @@ class InvestigatorLeaderController extends Controller
     {
         $types = User::latest()->get();
         return view('investigation_leader.showmember', compact('types'));
+    }
+
+    public function InvestigatorLeaderShowCriminalReport()
+    {
+        $types = Report::latest()->get();
+        return view('admin.criminalreport', compact('types'));
     }
 
     //
