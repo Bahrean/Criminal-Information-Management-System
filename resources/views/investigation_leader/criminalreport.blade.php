@@ -27,7 +27,7 @@
                                     <th style="font-size: 17px; color: white; font-weight: bold;">phone</th>
                                     
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Address</th>
-                                   
+                                
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,12 +46,12 @@
                                         </td>
                                         <td>{{ $items->repotext }}</td>
 
-                                       
+                                    
                                 
                                         <td>{{ $items->phone }}</td>
                                         <td>{{ $items->address }}</td>
                                 
-                          
+                        
                                     </tr>
                                 @endforeach
                             </tbody>
