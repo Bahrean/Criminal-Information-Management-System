@@ -13,6 +13,7 @@ use App\Http\Controllers\CollegePostController;
 use App\Http\Controllers\DepartmentPostController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CriminalRecordController;
+use App\Http\Controllers\InvestigatorLeaderSentToInvestigator;
 use App\Http\Controllers\CommonController;
 use App\Http\Livewire\Chat\Chat;
 use App\Http\Livewire\Chat\Index;
@@ -258,6 +259,10 @@ Route::middleware(['auth', 'role:investigation_leader'])->group(function () {
         InvestigatorLeaderController::class,
         'InvestigatorLeaderSendToInvestigator',
     ])->name('InvestigatorLeader.sendtoinvestigator');
+
+    Route::post('/InvestigatorLeader/senttoinvestigator', [InvestigatorLeaderController::class, 'InvestigatorLeaderSentToInvestigator'])->name(
+        'investigatorLeader.senttoinvestigator'
+    );
 });
 
 Route::middleware(['auth', 'role:collage_registral'])->group(function () {
