@@ -8,16 +8,7 @@
         $profileData = App\Models\User::find($id);
     @endphp
 
-    <!-- Breadcrumb Navigation -->
-    <nav class="page-breadcrumb mb-4">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{{ route('admin.addmember') }}" class="btn btn-outline-success">
-                    <i class="fas fa-user-plus"></i> Add New Member
-                </a>
-            </li>
-        </ol>
-    </nav>
+
 
     <!-- Members Table Section -->
     <div class="row">
