@@ -388,6 +388,10 @@ Route::middleware(['auth', 'role:investigator'])->group(function () {
         DepartmentPostController::class,
         'InvestigatorDepartmentPostStore',
     ])->name('Investigator.post.departmentstore');
+    Route::get('/Investigator/showreportsentfrominvestigatorleader', [
+        InvestigatorController::class,
+        'InvestigatorShowReportSentFromInvestigatorLeader',
+    ])->name('Investigator.showreportsentfrominvestigatorleader');
 });
 
 Route::middleware(['auth', 'role:police'])->group(function () {
