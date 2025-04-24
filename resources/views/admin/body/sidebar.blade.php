@@ -56,7 +56,7 @@
                         <circle cx="12" cy="7" r="4"></circle>
                         <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     </svg>
-                    <span class="link-title">Add New member</span>
+                    <span class="link-title">Register New Staff</span>
                 </a>
             </li>
 
@@ -67,7 +67,7 @@
                         <circle cx="12" cy="7" r="4"></circle>
                         <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     </svg>
-                    <span class="link-title">Show all members</span>
+                    <span class="link-title">Show all Staffs</span>
                 </a>
             </li>
             <li class="nav-item ">
@@ -77,7 +77,7 @@
                         <circle cx="12" cy="7" r="4"></circle>
                         <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     </svg>
-                    <span class="link-title">Criminal reports</span>
+                    <span class="link-title">Suspect reports</span>
                 </a>
             </li>
             <li class="nav-item ">
