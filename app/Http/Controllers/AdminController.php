@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Report;
+use App\Models\Suspect;
 use App\Models\reporting;
 
 class AdminController extends Controller
@@ -116,7 +117,7 @@ class AdminController extends Controller
 
     public function AdminShowCriminalReport()
     {
-        $types = Report::latest()->get();
+        $types = Suspect::latest()->get();
         return view('admin.criminalreport', compact('types'));
     }
 
