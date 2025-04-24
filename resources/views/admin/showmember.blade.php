@@ -8,7 +8,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="{{ route('admin.addmember') }}" class="btn btn-outline-success">
-                    <i class="fas fa-user-plus"></i> Add New Member
+                    <i class="fas fa-user-plus"></i>Register new Staff
                 </a>
             </li>
         </ol>
@@ -20,7 +20,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h6 class="card-title text-center" style="color: yellow; font-size: 20px;">
-                        <i class="fas fa-users"></i> All Members
+                        <i class="fas fa-users"></i> All Staffs
                     </h6>
 
                     <div class="table-responsive">
