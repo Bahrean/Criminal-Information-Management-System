@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\SentToInvestigator;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
@@ -103,6 +104,13 @@ class InvestigatorController extends Controller
             'alert-type' => 'success',
         ];
         return back()->with($notification);
+    }
+
+
+    public function InvestigatorShowReportSentFromInvestigatorLeader()
+    {
+        $types = SentToInvestigator::latest()->get();
+        return view('investigator.receivereport', compact('types'));
     }
 
 
