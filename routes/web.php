@@ -15,6 +15,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CriminalRecordController;
 use App\Http\Controllers\InvestigatorLeaderSentToInvestigator;
 use App\Http\Controllers\CommonController;
+use App\Http\Controllers\SendToInvestigatorLeaderController;
 use App\Http\Livewire\Chat\Chat;
 use App\Http\Livewire\Chat\Index;
 use App\Http\Livewire\Users;
@@ -66,6 +67,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+Route::middleware(['auth', 'no-cache'])->group(function () {
+    return view('login');
+});
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [
@@ -263,9 +268,14 @@ Route::middleware(['auth', 'role:investigation_leader'])->group(function () {
     Route::post('/InvestigatorLeader/senttoinvestigator', [InvestigatorLeaderController::class, 'InvestigatorLeaderSentToInvestigator'])->name(
         'investigatorLeader.senttoinvestigator'
     );
+
+    Route::get('/InvestigatorLeader/ReceivedFromInvestigator', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderReceivedFromInvestigator',
+    ])->name('InvestigatorLeader.receivedfrominvestigator');
 });
 
-Route::middleware(['auth', 'role:collage_registral'])->group(function () {
+Route::middleware(['auth', 'role:register_office'])->group(function () {
     Route::get('/RegisterOffice/dashboard', [
         RegisterOfficeController::class,
         'RegisterOfficeDashboard',
@@ -314,6 +324,11 @@ Route::middleware(['auth', 'role:collage_registral'])->group(function () {
     Route::post('/registeroffice/storecriminalrecord', [RegisterOfficeController::class, 'RegisterOfficestorecriminalrecord'])->name(
         'registeroffice.storecriminalrecord'
     );
+
+    Route::get('/registeroffice/showrecordedcriminal', [
+        RegisterOfficeController::class,
+        'RegisterOfficeShowRecordedCriminal',
+    ])->name('registeroffice.showrecordedcriminal');
 });
 
 Route::middleware(['auth', 'role:investigator'])->group(function () {
@@ -392,6 +407,14 @@ Route::middleware(['auth', 'role:investigator'])->group(function () {
         InvestigatorController::class,
         'InvestigatorShowReportSentFromInvestigatorLeader',
     ])->name('Investigator.showreportsentfrominvestigatorleader');
+    Route::get('/Investigator/sendoverallinvestigation', [
+        InvestigatorController::class,
+        'InvestigatorSendOverAllInvestigation',
+    ])->name('Investigator.sendoverallinvestigation');
+
+    Route::post('/investigator/sentinvestigationreporttoleader', [SendToInvestigatorLeaderController::class, 'SentInvestigationReportToLeader'])->name(
+        'investigator.sentinvestigationreporttoleader'
+    );
 });
 
 Route::middleware(['auth', 'role:police'])->group(function () {

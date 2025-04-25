@@ -194,6 +194,12 @@ class RegisterOfficeController extends Controller
             ->with($notification);
     }
 
+    public function RegisterOfficeShowRecordedCriminal()
+    {
+        $types = CriminalRecord::latest()->get();
+        return view('register_office.showrecordedcriminal', compact('types'));
+    }
+
 
     
     //

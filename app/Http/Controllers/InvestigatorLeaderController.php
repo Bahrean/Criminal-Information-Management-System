@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Report;
 use App\Models\Suspect;
 use App\Models\SentToInvestigator;
+use App\Models\SendToInvestigatorLeader;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -177,7 +178,11 @@ class InvestigatorLeaderController extends Controller
             ->with($notification);
     }
 
-
+    public function InvestigatorLeaderReceivedFromInvestigator()
+    {
+        $types = SendToInvestigatorLeader::latest()->get();
+        return view('investigation_leader.receivedfrominvestigator', compact('types'));
+    }
 
 
 
