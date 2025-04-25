@@ -14,7 +14,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h6 class="card-title text-center" style="color: yellow; font-size: 20px;">
-                        <i class="fas fa-users"></i> All Criminals Information
+                        <i class="fas fa-users"></i> All Crime Information
                     </h6>
 
                     <div class="table-responsive">

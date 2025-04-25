@@ -574,9 +574,7 @@
   
             </div>
           </div>
-          <a href="{{ route('criminal_reporting.form') }}" class=" report-btn emergency-pulse" style="width: 400px;height: 60px;">
-                      <i class="feather  mr-1"></i> REPORT Suspect Activity
-                    </a>
+
         </div>
       </div>
     </div>
