@@ -333,6 +333,22 @@ Route::middleware(['auth', 'role:police'])->group(function () {
         'policeUpdatePassword',
     ])->name('police.update.password');
 
+    Route::get('/police/showrecordedcriminal', [
+        policeController::class,
+        'Policeshowrecordedcriminal',
+    ])->name('police.showrecordedcriminal');
+
+    
+    Route::get('/police/showrecordedcriminalfamilyriminal', [
+        policeController::class,
+        'Policeshowrecordedcriminalfamily',
+    ])->name('police.showrecordedcriminalfamily');
+
+    Route::get('/police/showrecordedcriminaldetail', [
+        policeController::class,
+        'Policeshowrecordedcriminaldetail',
+    ])->name('police.showrecordedcriminaldetail');
+
 
 });
 
