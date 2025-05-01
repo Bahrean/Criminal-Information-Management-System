@@ -14,7 +14,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h6 class="card-title text-center" style="color: yellow; font-size: 20px;">
-                        <i class="fas fa-users"></i> All Crime Information
+                        <i class="fas fa-users"></i> All Criminals Information
                     </h6>
 
                     <div class="table-responsive">
@@ -29,6 +29,12 @@
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Gender</th>
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Photo</th>
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Nationality</th>
+                                    <th style="font-size: 17px; color: white; font-weight: bold;">ID Number</th>
+                                    <th style="font-size: 17px; color: white; font-weight: bold;">Address</th>
+                                    <th style="font-size: 17px; color: white; font-weight: bold;">Record Number</th>
+                                    <th style="font-size: 17px; color: white; font-weight: bold;">Type of criminal</th>
+                                    <th style="font-size: 17px; color: white; font-weight: bold;">Arrest Date</th>
+                                    <th style="font-size: 17px; color: white; font-weight: bold;">Release Date</th>
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Family Name</th>
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Relationship</th>
                                     <th style="font-size: 17px; color: white; font-weight: bold;">ContactInformation</th>
@@ -52,6 +58,12 @@
                                                  style="width: 50px; height: 50px;">
                                         </td>
                                         <td>{{ $items->nationality }}</td>  
+                                        <td>{{ $items->idnumber }}</td>  
+                                        <td>{{ $items->address }}</td>
+                                        <td>{{ $items->recordnumber }}</td>
+                                        <td>{{ $items->typeofcrime }}</td>  
+                                        <td>{{ $items->arrestdate }}</td>
+                                        <td>{{ $items->releasedate }}</td>
                                         <td>{{ $items->familyname }}</td>
                                         <td>{{ $items->relationship }}</td>
                                         <td>{{ $items->contactinfo }}</td>
