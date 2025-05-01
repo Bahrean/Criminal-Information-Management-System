@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\CriminalRecord;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
@@ -90,11 +91,26 @@ class policeController extends Controller
         );
         return back()->with($notification);
 
+        
     }
 
+    public function Policeshowrecordedcriminal()
+    {
+        $types = CriminalRecord::latest()->get();
+        return view('police.showrecordedcriminal', compact('types'));
+    }
 
+    public function Policeshowrecordedcriminalfamily()
+    {
+        $types = CriminalRecord::latest()->get();
+        return view('police.showrecordedcriminalfamily', compact('types'));
+    }
+    public function Policeshowrecordedcriminaldetail()
+    {
+        $types = CriminalRecord::latest()->get();
+        return view('police.showrecordedcriminaldetail', compact('types'));
+    }
 
-  
 
     //
 }
