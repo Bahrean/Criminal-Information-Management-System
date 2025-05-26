@@ -12,10 +12,11 @@
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.comrigin">
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
   
   <!-- Core CSS -->
   <link rel="stylesheet" href="{{ asset('backend/assets/vendors/core/core.css') }}">
@@ -558,27 +559,20 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter your secure passcode" required>
                         <i class="feather icon-eye password-toggle" id="togglePassword"></i>
                         <div class="password-strength">
-                          <div class="password-strength-bar" id="passwordStrength"></div>
-                        </div>
-                      </div>
-                      
-                      <button type="submit" class="auth-btn">
-                        <i class="feather icon-log-in mr-1"></i> LOGIN
-                      </button>
-                    </form>
-                    
-                    <!-- Emergency Report Button -->
-              
-           
-                  </div>
-                </div>
-              </div>
-  
-            </div>
-          </div>
-          <a href="{{ route('criminal_reporting.form') }}" class=" report-btn emergency-pulse" style="width: 400px;height: 60px;">
+               
+ht: 60px;">
+                      <i class="feather  mr-1"></i> REPORT Criminal Activity
+                           <a href="{{ route('criminal_reporting.form') }}" class=" report-btn emergency-pulse" style="width: 400px;height: 60px;">
+                      <i class="feather  mr-1"></i> REPORT Criminal Activity
+                           <a href="{{ route('criminal_reporting.form') }}" class=" report-btn emergency-pulse" style="width: 400px;height: 60px;">
+                      <i class="feather  mr-1"></i> REPORT Criminal Activity
+                    </          <a href="{{ route('criminal_reporting.form') }}" class=" report-btn emergency-pulse" style="width: 400px;height: 60px;">
                       <i class="feather  mr-1"></i> REPORT Criminal Activity
                     </a>
+>
+  </a>
+  </a>
+</a>
         </div>
       </div>
     </div>
