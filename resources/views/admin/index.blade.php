@@ -27,7 +27,7 @@
                             type="submit" 
                             class="btn btn-primary btn-lg w-100 p-4 shadow-sm" 
                             style="height: 150px; font-size: 1.25rem;">
-                            Add New Member
+                            Register New Staff
                         </button>
                     </form>
 
@@ -39,7 +39,7 @@
                                 type="submit" 
                                 class="btn btn-secondary btn-lg w-100 p-4 shadow-sm" 
                                 style="height: 150px; font-size: 1.25rem;">
-                                Edit Member Profile
+                                Edit Staff Profile
                             </button>
                         </form>
                     </div>
@@ -50,7 +50,7 @@
                                 type="submit" 
                                 class="btn btn-danger btn-lg w-100 p-4 shadow-sm" 
                                 style="height: 150px; font-size: 1.25rem;">
-                                Delete Member
+                                Delete Staff
                             </button>
                         </form>
                     </div>
@@ -61,7 +61,7 @@
                                 type="submit" 
                                 class="btn btn-warning btn-lg w-100 p-4 shadow-sm" 
                                 style="height: 150px; font-size: 1.25rem;">
-                                Activate/Deactivate Member
+                                Activate/Deactivate Staff
                             </button>
                         </form>
                     </div>
@@ -71,7 +71,7 @@
                                 type="submit" 
                                 class="btn btn-success btn-lg w-100 p-4 shadow-sm" 
                                 style="height: 150px; font-size: 1.25rem;">
-                                Show All Members
+                                Show All Staffs
                             </button>
                         </form>
                     </div>

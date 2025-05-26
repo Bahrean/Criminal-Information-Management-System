@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Report;
+use App\Models\Suspect;
+use App\Models\SentToInvestigator;
+use App\Models\SendToInvestigatorLeader;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -107,6 +112,79 @@ class InvestigatorLeaderController extends Controller
         $types = User::latest()->get();
         return view('investigation_leader.showmember', compact('types'));
     }
+
+    public function InvestigatorLeaderShowCriminalReport()
+    {
+        $types = Suspect::latest()->get();
+        return view('investigation_leader.criminalreport', compact('types'));
+    }
+
+    public function InvestigatorLeaderShowAllInvestigator()
+    {
+        $types = User::latest()->get();
+        return view('investigation_leader.showallinvestigator', compact('types'));
+    }
+
+    public function InvestigatorLeaderSendSuspectToInvestigator()
+    {
+        $types = Suspect::latest()->get();
+        return view('investigation_leader.sendsuspecttoinvestigator', compact('types'));
+    }
+
+    public function InvestigatorLeaderSendToInvestigator($id)
+    {
+        $types = Suspect::findOrFail($id);
+        return view('investigation_leader.sendtoinvestigator', compact('types'));
+    }
+
+
+    public function InvestigatorLeaderSentToInvestigator(Request $request)
+    {
+        $request->validate([
+            'full_name' => 'nullable',
+            'age' => 'nullable',
+            'gender' => 'nullable',
+            'description' => 'nullable',
+            'address' => 'nullable|string',
+            'last_known_location' => 'nullable',
+            'status' => 'nullable',
+      
+        ]);
+
+        // Handle photo upload
+    
+
+        // Create user with photo path
+        SentToInvestigator::create([
+            'full_name' => $request->full_name,
+            'age' => $request->age,
+            'gender' => $request->gender,
+            
+            'description' => $request->description,
+           
+            'address' => $request->address,
+            
+            'last_known_location' => $request->last_known_location,
+            'status' => $request->status,
+         
+        ]);
+
+        $notification = [
+            'message' => 'New member created successfully',
+            'alert-type' => 'success',
+        ];
+        return redirect()
+            ->route('InvestigatorLeader.sendsuspecttoinvestigator')
+            ->with($notification);
+    }
+
+    public function InvestigatorLeaderReceivedFromInvestigator()
+    {
+        $types = SendToInvestigatorLeader::latest()->get();
+        return view('investigation_leader.receivedfrominvestigator', compact('types'));
+    }
+
+
 
     //
 }

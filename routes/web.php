@@ -8,13 +8,16 @@ use App\Http\Controllers\InvestigatorController;
 
 use App\Http\Controllers\policeController;
 use App\Http\ControostController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\CollegePostController;
-use App\Http\Controllers\DepartmentPostController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CriminalRecordController;
+<<<<<<< HEAD
 use App\Http\Controllers\FirebaseController;
 
+=======
+use App\Http\Controllers\InvestigatorLeaderSentToInvestigator;
+use App\Http\Controllers\CommonController;
+use App\Http\Controllers\SendToInvestigatorLeaderController;
+>>>>>>> 90ffd81aabb54eefbf3d4fe7faf5b41c3025a4d1
 use App\Http\Livewire\Chat\Chat;
 use App\Http\Livewire\Chat\Index;
 use App\Http\Livewire\Users;
@@ -61,7 +64,20 @@ Route::get('/dashboard', function () {
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/Common/showcriminalreport', [
+        CommonController::class,
+        'CommonShowCriminalReport',
+    ])->name('Common.showcriminalreport');
+
+});
+
 require __DIR__ . '/auth.php';
+
+Route::middleware(['auth', 'no-cache'])->group(function () {
+    return view('login');
+});
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [
@@ -114,56 +130,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     ])->name('admin.deletemember');
 
 
-    Route::get('/admin/addpost', [PostController::class, 'AdminAddPost'])->name(
-        'admin.addpost'
-    );
-    Route::get('/admin/editpost{id}', [
-        PostController::class,
-        'AdminEditPost',
-    ])->name('admin.editpost');
-    Route::post('/admin/updatepost', [
-        PostController::class,
-        'AdminUpdatePost',
-    ])->name('admin.updatepost');
-    Route::get('/admin/deletepost{id}', [
-        PostController::class,
-        'AdminDeletePost',
-    ])->name('admin.deletepost');
+
+
 
     Route::post('/admin/statuschange{id}', [
         AdminController::class,
         'AdminStatusChange',
     ])->name('admin.statuschange');
-    Route::get('/admin/collageposts', [
-        CollegePostController::class,
-        'AdminCollagePosts',
-    ])->name('admin.collageposts');
-    Route::get('/admin/departmentposts', [
-        DepartmentPostController::class,
-        'AdminDepartmentPosts',
-    ])->name('admin.departmentposts');
-    Route::get('/admin/deletecollegepost{id}', [
-        CollegePostController::class,
-        'AdminDeleteCollegePost',
-    ])->name('admin.deletecollegepost');
-    Route::get('/admin/deletedepartmentpost{id}', [
-        DepartmentPostController::class,
-        'AdminDeleteDepartmentPost',
-    ])->name('admin.deletedepartmentpost');
 
-    Route::get('/admin/adddepartmentpost', [
-        DepartmentPostController::class,
-        'InvestigatorAddDepartmentPost',
-    ])->name('admin.adddepartmentpost');
 
-    Route::get('/admin/editdepartmentpost{id}', [
-        DepartmentPostController::class,
-        'AdminEditDepartmentPost',
-    ])->name('admin.editdepartmentpost');
-    Route::post('/admin/updatedepartmentpost', [
-        DepartmentPostController::class,
-        'AdminUpdateDepartmentPost',
-    ])->name('admin.updatedepartmentpost');
 
     Route::get('/admin/showcriminalreport', [
         AdminController::class,
@@ -175,7 +150,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     ])->name('admin.showrecordedcriminal');
 });
 
-Route::middleware(['auth', 'role:collage_dean'])->group(function () {
+Route::middleware(['auth', 'role:investigation_leader'])->group(function () {
     Route::get('/InvestigatorLeader/dashboard', [
         InvestigatorLeaderController::class,
         'InvestigatorLeaderDashboard',
@@ -211,35 +186,38 @@ Route::middleware(['auth', 'role:collage_dean'])->group(function () {
         'InvestigatorLeaderShowMember',
     ])->name('InvestigatorLeader.showmembers');
 
-    Route::get('/InvestigatorLeader/collageposts', [
-        CollegePostController::class,
-        'InvestigatorLeaderCollagePosts',
-    ])->name('InvestigatorLeader.collageposts');
-    Route::get('/InvestigatorLeader/addcollegepost', [
-        CollegePostController::class,
-        'InvestigatorLeaderAddCollegePost',
-    ])->name('InvestigatorLeader.addcollegepost');
-    Route::post('/InvestigatorLeader/post/collegestore', [
-        CollegePostController::class,
-        'InvestigatorLeaderCollegePostStore',
-    ])->name('InvestigatorLeader.post.collegestore');
-    Route::get('/InvestigatorLeader/departmentposts', [
-        DepartmentPostController::class,
-        'InvestigatorLeaderDepartmentposts',
-    ])->name('InvestigatorLeader.departmentposts');
 
-    Route::get('/InvestigatorLeader/adddepartmentpost', [
-        DepartmentPostController::class,
-        'InvestigatorAddDepartmentPost',
-    ])->name('InvestigatorLeader.adddepartmentpost');
 
-    Route::post('/InvestigatorLeader/post/departmentstore', [
-        DepartmentPostController::class,
-        'InvestigatorLeaderDepartmentPostStore',
-    ])->name('InvestigatorLeader.post.departmentstore');
+
+    Route::get('/InvestigatorLeader/showcriminalreport', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderShowCriminalReport',
+    ])->name('InvestigatorLeader.showcriminalreport');
+    Route::get('/InvestigatorLeader/showallinvestigator', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderShowAllInvestigator',
+    ])->name('InvestigatorLeader.showallinvestigator');
+
+    Route::get('/InvestigatorLeader/sendsuspecttoinvestigator', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderSendSuspectToInvestigator',
+    ])->name('InvestigatorLeader.sendsuspecttoinvestigator');
+    Route::get('/InvestigatorLeader/sendtoinvestigator{id}', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderSendToInvestigator',
+    ])->name('InvestigatorLeader.sendtoinvestigator');
+
+    Route::post('/InvestigatorLeader/senttoinvestigator', [InvestigatorLeaderController::class, 'InvestigatorLeaderSentToInvestigator'])->name(
+        'investigatorLeader.senttoinvestigator'
+    );
+
+    Route::get('/InvestigatorLeader/ReceivedFromInvestigator', [
+        InvestigatorLeaderController::class,
+        'InvestigatorLeaderReceivedFromInvestigator',
+    ])->name('InvestigatorLeader.receivedfrominvestigator');
 });
 
-Route::middleware(['auth', 'role:collage_registral'])->group(function () {
+Route::middleware(['auth', 'role:register_office'])->group(function () {
     Route::get('/RegisterOffice/dashboard', [
         RegisterOfficeController::class,
         'RegisterOfficeDashboard',
@@ -273,10 +251,7 @@ Route::middleware(['auth', 'role:collage_registral'])->group(function () {
         'RegisterOfficePosts',
     ])->name('RegisterOffice.posts');
 
-    Route::get('/RegisterOffice/adddepartmentpost', [
-        DepartmentPostController::class,
-        'InvestigatorAddDepartmentPost',
-    ])->name('RegisterOffice.adddepartmentpost');
+  
     Route::get('/RegisterOffice/showmembers', [
         RegisterOfficeController::class,
         'RegisterOfficeShowMember',
@@ -288,6 +263,11 @@ Route::middleware(['auth', 'role:collage_registral'])->group(function () {
     Route::post('/registeroffice/storecriminalrecord', [RegisterOfficeController::class, 'RegisterOfficestorecriminalrecord'])->name(
         'registeroffice.storecriminalrecord'
     );
+
+    Route::get('/registeroffice/showrecordedcriminal', [
+        RegisterOfficeController::class,
+        'RegisterOfficeShowRecordedCriminal',
+    ])->name('registeroffice.showrecordedcriminal');
 });
 
 Route::middleware(['auth', 'role:investigator'])->group(function () {
@@ -321,47 +301,18 @@ Route::middleware(['auth', 'role:investigator'])->group(function () {
         'InvestigatorUpdatePassword',
     ])->name('Investigator.update.password');
 
-    Route::get('/Investigator/addpost', [
-        PostController::class,
-        'AdminAddPost',
-    ])->name('Investigator.addpost');
-    Route::get('/Investigator/posts/editpost', [
-        PostController::class,
-        'InvestigatorEditPost',
-    ])->name('Investigator.post.alleditpost{id}');
-    Route::post('/Investigator/updatepost', [
-        PostController::class,
-        'InvestigatorUpdatePost',
-    ])->name('Investigator.updatepost');
-    Route::get('/Investigator/deletepost', [
-        PostController::class,
-        'InvestigatorDeletePost',
-    ])->name('Investigator.deletepost{id}');
+    Route::get('/Investigator/showreportsentfrominvestigatorleader', [
+        InvestigatorController::class,
+        'InvestigatorShowReportSentFromInvestigatorLeader',
+    ])->name('Investigator.showreportsentfrominvestigatorleader');
+    Route::get('/Investigator/sendoverallinvestigation', [
+        InvestigatorController::class,
+        'InvestigatorSendOverAllInvestigation',
+    ])->name('Investigator.sendoverallinvestigation');
 
-    Route::get('/Investigator/collageposts', [
-        CollegePostController::class,
-        'InvestigatorCollagePosts',
-    ])->name('Investigator.collageposts');
-    Route::get('/Investigator/addcollegepost', [
-        CollegePostController::class,
-        'InvestigatorAddCollegePost',
-    ])->name('Investigator.addcollegepost');
-    Route::post('/Investigator/post/collegestore', [
-        CollegePostController::class,
-        'InvestigatorCollegePostStore',
-    ])->name('Investigator.post.collegestore');
-    Route::get('/Investigator/departmentposts', [
-        DepartmentPostController::class,
-        'InvestigatorDepartmentposts',
-    ])->name('Investigator.departmentposts');
-    Route::get('/Investigator/adddepartmentpost', [
-        DepartmentPostController::class,
-        'InvestigatorAddDepartmentPost',
-    ])->name('Investigator.adddepartmentpost');
-    Route::post('/Investigator/post/departmentstore', [
-        DepartmentPostController::class,
-        'InvestigatorDepartmentPostStore',
-    ])->name('Investigator.post.departmentstore');
+    Route::post('/investigator/sentinvestigationreporttoleader', [SendToInvestigatorLeaderController::class, 'SentInvestigationReportToLeader'])->name(
+        'investigator.sentinvestigationreporttoleader'
+    );
 });
 
 Route::middleware(['auth', 'role:police'])->group(function () {
@@ -391,22 +342,24 @@ Route::middleware(['auth', 'role:police'])->group(function () {
         policeController::class,
         'policeUpdatePassword',
     ])->name('police.update.password');
-    Route::get('/police/posts', [PostController::class, 'policePosts'])->name(
-        'police.posts'
-    );
-    Route::get('/police/collageposts', [
-        CollegePostController::class,
-        'policeCollagePosts',
-    ])->name('police.collageposts');
-    Route::get('/police/departmentposts', [
-        DepartmentPostController::class,
-        'policeDepartmentPosts',
-    ])->name('police.departmentposts');
 
-    Route::get('/police/adddepartmentpost', [
-        DepartmentPostController::class,
-        'InvestigatorAddDepartmentPost',
-    ])->name('police.adddepartmentpost');
+    Route::get('/police/showrecordedcriminal', [
+        policeController::class,
+        'Policeshowrecordedcriminal',
+    ])->name('police.showrecordedcriminal');
+
+    
+    Route::get('/police/showrecordedcriminalfamilyriminal', [
+        policeController::class,
+        'Policeshowrecordedcriminalfamily',
+    ])->name('police.showrecordedcriminalfamily');
+
+    Route::get('/police/showrecordedcriminaldetail', [
+        policeController::class,
+        'Policeshowrecordedcriminaldetail',
+    ])->name('police.showrecordedcriminaldetail');
+
+
 });
 
 Route::middleware('auth')->group(function () {

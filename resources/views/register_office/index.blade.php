@@ -22,12 +22,12 @@
                 <h5 class="card-title text-center mb-4">Quick Actions</h5>
                 <div class="row g-4">
                     <div class="col-md-4">
-                        <form action="#" method="GET">
+                        <form action="{{route('RegisterOffice.recordcriminalinformation')}}" method="GET">
                             <button 
                                 type="submit" 
                                 class="btn btn-success btn-lg w-100 p-4 shadow-sm" 
                                 style="height: 150px; font-size: 1.25rem;">
-                                Show All Members
+                                Record Criminal Information
                             </button>
                         </form>
                     </div>

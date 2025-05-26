@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Report;
+use App\Models\Suspect;
 use App\Models\reporting;
 
 class AdminController extends Controller
@@ -25,10 +26,16 @@ class AdminController extends Controller
     public function AdminLogout(Request $request)
     {
         Auth::guard('web')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/');
+        $request->session()->invalidate(); // Destroy the session
+        $request->session()->regenerateToken(); // Regenerate CSRF token
+    
+        // Redirect with headers to prevent caching
+        return redirect('/')
+            ->header('Cache-Control', 'no-cache, no-store, must-revalidate') // HTTP 1.1
+            ->header('Pragma', 'no-cache') // HTTP 1.0
+            ->header('Expires', '0'); // Proxies
     }
+    
 
     public function AdminLogin()
     {
@@ -116,7 +123,7 @@ class AdminController extends Controller
 
     public function AdminShowCriminalReport()
     {
-        $types = Report::latest()->get();
+        $types = Suspect::latest()->get();
         return view('admin.criminalreport', compact('types'));
     }
 

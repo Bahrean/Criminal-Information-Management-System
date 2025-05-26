@@ -23,7 +23,7 @@
     <div class="card">
     <div class="card-body">
     <h4 class="card-title text-success mb-4" style="font-size: 1.75rem; font-weight: 600;">
-        <i class="fas fa-user-plus me-2"></i>Add New Member
+        <i class="fas fa-user-plus me-2"></i>Register New Staff
     </h4>
 
     <form class="forms-sample" method="POST" action="{{route('admin.store')}}" enctype='multipart/form-data' novalidate>
@@ -151,7 +151,7 @@
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
             <button type="submit" class="btn btn-success btn-lg px-4">
-                <i class="fas fa-user-plus me-2"></i>Add Member
+                <i class="fas fa-user-plus me-2"></i>Register Staff
             </button>
         </div>
     </form>
