@@ -30,5 +30,8 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'firebase' => [
+        'credentials' => storage_path('app/flutter-firebase-cloudinary2-firebase-adminsdk-fbsvc-8ed1d3674b.json'),
+    ],
 
 ];

@@ -13,6 +13,8 @@ use App\Http\Controllers\CollegePostController;
 use App\Http\Controllers\DepartmentPostController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CriminalRecordController;
+use App\Http\Controllers\FirebaseController;
+
 use App\Http\Livewire\Chat\Chat;
 use App\Http\Livewire\Chat\Index;
 use App\Http\Livewire\Users;
@@ -47,6 +49,11 @@ Route::post('/criminal-reporting', [ReportController::class, 'store'])
 Route::post('/criminalstore', [AdminController::class, 'CriminalStore'])->name(
         'criminalstore'
     );
+
+    Route::get('/form', [FirebaseController::class, 'showForm'])->name('firebase.form');
+
+Route::post('/form', [FirebaseController::class, 'submitForm'])->name('firebase.store');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
