@@ -560,7 +560,6 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter your secure passcode" required>
                         <i class="feather icon-eye password-toggle" id="togglePassword"></i>
                         <div class="password-strength">
-               
 ht: 60px;">
                       <i class="feather  mr-1"></i> REPORT Criminal Activity
                            <a href="{{ route('criminal_reporting.form') }}" class=" report-btn emergency-pulse" style="width: 400px;height: 60px;">
