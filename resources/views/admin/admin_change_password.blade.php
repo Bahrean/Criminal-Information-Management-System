@@ -79,11 +79,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="mb-3">
-										<label for="exampleInputEmail1" class="form-label">Confirm New Password</label>
-										<input type="password" class="form-control"  name="new_password_confirmation" id="new_password_confirmation" autocomplete="off" placeholder="Username">
-                                    
-                                    </div>
+                             
 
 									<button type="submit" class="btn btn-primary me-2">Save Changes</button>
 		
