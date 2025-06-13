@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('gender')->default('male');
             $table->text('description');
             $table->string('address')->nullable();
+             $table->string('video_path')->nullable();
+            $table->string('audio_path')->nullable();
             $table->string('last_known_location');
             $table->string('status')->default('wanted');
             $table->timestamps();

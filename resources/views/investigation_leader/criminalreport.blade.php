@@ -37,6 +37,8 @@
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Gender</th>
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Description</th>
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Address</th>
+                                    <th style="font-size: 17px; color: white; font-weight: bold;">Video</th>
+                                    <th style="font-size: 17px; color: white; font-weight: bold;">Audio</th>
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Last Known Location</th>
                                     
                                     <th style="font-size: 17px; color: white; font-weight: bold;">Status</th>
@@ -52,7 +54,11 @@
                                         <td>{{ $items->age }}</td>
                                         <td>{{ $items->gender }}</td>
                                         <td>{{ $items->description }}</td>
+                                      
                                         <td>{{ $items->address }}</td>
+
+                                        <td>{{ $items->video_path }}</td>
+                                        <td>{{ $items->audio_path }}</td>
  
                                         <td>{{ $items->last_known_location }}</td>
 

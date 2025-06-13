@@ -559,24 +559,16 @@
                         <label for="password" class="form-label">PASSWORD</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter your secure passcode" required>
                         <i class="feather icon-eye password-toggle" id="togglePassword"></i>
-                        <div class="password-strength">
-ht: 60px;">
-                      <i class="feather  mr-1"></i> REPORT Criminal Activity
-                           <a href="{{ route('criminal_reporting.form') }}" class=" report-btn emergency-pulse" style="width: 400px;height: 60px;">
-                      <i class="feather  mr-1"></i> REPORT Criminal Activity
-                           <a href="{{ route('criminal_reporting.form') }}" class=" report-btn emergency-pulse" style="width: 400px;height: 60px;">
-                      <i class="feather  mr-1"></i> REPORT Criminal Activity
-                    </          <a href="{{ route('criminal_reporting.form') }}" class=" report-btn emergency-pulse" style="width: 400px;height: 60px;">
-                      <i class="feather  mr-1"></i> REPORT Criminal Activity
-                    </a>
->
-  </a>
-  </a>
-</a>
+        
+
+                      </div>
+                      <div class="input-container mb-4">
+                            <input style="font-size:20px;font-weight:bold" type="submit" class="form-control" placeholder="Enter your secure passcode" required value="Login">
+
+                        </div>
+            </div>
         </div>
       </div>
-    </div>
-  </div>
 
   <!-- Core JS -->
   <script src="{{ asset('backend/assets/vendors/core/core.js') }}"></script>

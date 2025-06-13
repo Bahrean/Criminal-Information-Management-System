@@ -10,14 +10,13 @@ use App\Http\Controllers\policeController;
 use App\Http\ControostController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CriminalRecordController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\FirebaseController;
 
-=======
 use App\Http\Controllers\InvestigatorLeaderSentToInvestigator;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\SendToInvestigatorLeaderController;
->>>>>>> 90ffd81aabb54eefbf3d4fe7faf5b41c3025a4d1
+
 use App\Http\Livewire\Chat\Chat;
 use App\Http\Livewire\Chat\Index;
 use App\Http\Livewire\Users;
@@ -128,7 +127,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         AdminController::class,
         'AdminDeleteMember',
     ])->name('admin.deletemember');
-
 
 
 

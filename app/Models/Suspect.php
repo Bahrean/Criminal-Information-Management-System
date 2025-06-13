@@ -14,6 +14,8 @@ class Suspect extends Model
         'age',
         'gender',
         'description',
+        'video_path',
+        'audio_path',
         'address',
         'last_known_location',
         'status'
